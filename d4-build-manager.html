@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>D4 Build Manager - Vitablo.de</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700;900&family=MedievalSharp&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,34 +16,75 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a0a0a 0%, #2d0a0a 50%, #1a0a0a 100%);
-            color: #e0d0c0;
+            background:
+                radial-gradient(ellipse at top, rgba(139, 0, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(20, 0, 0, 0.8) 0%, transparent 70%),
+                linear-gradient(180deg, #0a0505 0%, #1a0808 50%, #0a0505 100%);
+            color: #c8b8a8;
             min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139, 0, 0, 0.03) 2px, rgba(139, 0, 0, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139, 0, 0, 0.03) 2px, rgba(139, 0, 0, 0.03) 4px);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 1;
         }
 
         header {
             text-align: center;
-            padding: 30px 0;
-            border-bottom: 2px solid #8b0000;
+            padding: 40px 0 30px;
+            border-bottom: 3px solid #5a0000;
             margin-bottom: 30px;
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff2200, transparent);
+            box-shadow: 0 0 10px #ff2200;
         }
 
         header h1 {
             font-size: 2.5rem;
-            color: #ff6600;
-            text-shadow: 0 0 20px rgba(255, 102, 0, 0.5);
+            font-family: 'Cinzel Decorative', cursive;
+            color: #ff3300;
+            text-shadow:
+                0 0 10px rgba(255, 51, 0, 0.8),
+                0 0 20px rgba(255, 51, 0, 0.5),
+                0 0 40px rgba(139, 0, 0, 0.3),
+                2px 2px 4px rgba(0, 0, 0, 0.8);
             margin-bottom: 10px;
+            letter-spacing: 2px;
         }
 
         header p {
-            color: #aaa;
+            color: #8a7060;
             font-size: 1rem;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
         }
 
         .main-tabs {
@@ -51,25 +95,51 @@
         }
 
         .main-tab {
-            padding: 15px 30px;
-            background: linear-gradient(145deg, #2a1a1a, #1a0a0a);
-            border: 2px solid #444;
-            border-radius: 12px;
+            padding: 15px 35px;
+            background:
+                linear-gradient(145deg, rgba(30, 10, 10, 0.95), rgba(15, 5, 5, 0.95)),
+                linear-gradient(180deg, #2a1515 0%, #1a0a0a 100%);
+            border: 2px solid #3a1515;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 1.1rem;
             font-weight: bold;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .main-tab:hover {
-            border-color: #ff6600;
+            border-color: #ff2200;
             transform: translateY(-3px);
+            box-shadow:
+                0 5px 20px rgba(255, 34, 0, 0.3),
+                inset 0 0 20px rgba(139, 0, 0, 0.2);
         }
 
         .main-tab.active {
-            border-color: #ff6600;
-            background: linear-gradient(145deg, #3a1a1a, #2a0a0a);
-            color: #ff6600;
+            border-color: #ff2200;
+            background:
+                linear-gradient(145deg, rgba(50, 15, 15, 0.95), rgba(25, 8, 8, 0.95)),
+                linear-gradient(180deg, #3a1a1a 0%, #2a0a0a 100%);
+            color: #ff4400;
+            text-shadow: 0 0 10px rgba(255, 68, 0, 0.5);
+            box-shadow:
+                0 0 20px rgba(255, 34, 0, 0.4),
+                inset 0 0 30px rgba(139, 0, 0, 0.3);
         }
 
         .tab-content {
@@ -88,44 +158,77 @@
         }
 
         .class-card {
-            background: linear-gradient(145deg, #2a1a1a, #1a0a0a);
-            border: 2px solid #444;
-            border-radius: 12px;
+            background:
+                linear-gradient(145deg, rgba(25, 10, 10, 0.9), rgba(12, 5, 5, 0.95)),
+                linear-gradient(180deg, #2a1515 0%, #1a0a0a 100%);
+            border: 2px solid #3a1515;
+            border-radius: 8px;
             padding: 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .class-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at top, rgba(139, 0, 0, 0.1) 0%, transparent 70%),
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(139, 0, 0, 0.02) 10px, rgba(139, 0, 0, 0.02) 20px);
+            pointer-events: none;
         }
 
         .class-card:hover {
-            border-color: #ff6600;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 102, 0, 0.2);
+            border-color: #ff2200;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow:
+                0 8px 30px rgba(255, 34, 0, 0.25),
+                inset 0 0 20px rgba(139, 0, 0, 0.2);
         }
 
         .class-card.active {
-            border-color: #ff6600;
-            background: linear-gradient(145deg, #3a1a1a, #2a0a0a);
+            border-color: #ff2200;
+            background:
+                linear-gradient(145deg, rgba(40, 15, 15, 0.9), rgba(20, 8, 8, 0.95)),
+                linear-gradient(180deg, #3a1a1a 0%, #2a0a0a 100%);
+            box-shadow:
+                0 0 25px rgba(255, 34, 0, 0.4),
+                inset 0 0 30px rgba(139, 0, 0, 0.3);
         }
 
         .class-card .icon {
             font-size: 3rem;
             margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px rgba(139, 0, 0, 0.5));
         }
 
         .class-card h3 {
-            color: #e0d0c0;
+            color: #c8b8a8;
             font-size: 1rem;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 1;
         }
 
         .class-card .count {
-            background: #8b0000;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 10px;
+            background: linear-gradient(135deg, #5a0000, #3a0000);
+            color: #ff8800;
+            padding: 3px 10px;
+            border-radius: 12px;
             font-size: 0.75rem;
-            margin-top: 5px;
+            margin-top: 8px;
             display: inline-block;
+            border: 1px solid #7a0000;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
         }
 
         .warplans-grid {
@@ -135,16 +238,36 @@
         }
 
         .warplan-card {
-            background: linear-gradient(145deg, #2a1a1a, #1a0a0a);
-            border: 2px solid #444;
-            border-radius: 12px;
+            background:
+                linear-gradient(145deg, rgba(25, 10, 10, 0.9), rgba(12, 5, 5, 0.95)),
+                linear-gradient(180deg, #2a1515 0%, #1a0a0a 100%);
+            border: 2px solid #3a1515;
+            border-radius: 8px;
             padding: 20px;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warplan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at top right, rgba(139, 0, 0, 0.08) 0%, transparent 60%),
+                repeating-linear-gradient(-45deg, transparent, transparent 15px, rgba(139, 0, 0, 0.015) 15px, rgba(139, 0, 0, 0.015) 30px);
+            pointer-events: none;
         }
 
         .warplan-card:hover {
-            border-color: #ff6600;
+            border-color: #ff2200;
             transform: translateY(-3px);
+            box-shadow:
+                0 8px 25px rgba(255, 34, 0, 0.2),
+                inset 0 0 20px rgba(139, 0, 0, 0.15);
         }
 
         .warplan-header {
@@ -153,29 +276,41 @@
             gap: 15px;
             margin-bottom: 20px;
             padding-bottom: 15px;
-            border-bottom: 1px solid #444;
+            border-bottom: 2px solid #3a1515;
+            position: relative;
+            z-index: 1;
         }
 
         .warplan-icon {
             font-size: 2.5rem;
+            filter: drop-shadow(0 0 8px rgba(139, 0, 0, 0.6));
         }
 
         .warplan-title {
-            font-size: 1.3rem;
-            color: #ffcc00;
+            font-size: 1.4rem;
+            color: #ffaa00;
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 0 10px rgba(255, 170, 0, 0.3);
+            letter-spacing: 1px;
         }
 
         .warplan-section {
-            background: #1a0a0a;
+            background: rgba(10, 5, 5, 0.8);
+            border: 1px solid #2a1010;
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 6px;
             margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
         }
 
         .warplan-section h4 {
-            color: #ff6600;
-            margin-bottom: 10px;
+            color: #ff4400;
+            margin-bottom: 12px;
             font-size: 1rem;
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 0 8px rgba(255, 68, 0, 0.4);
+            letter-spacing: 0.5px;
         }
 
         .warplan-section ul {
@@ -212,23 +347,54 @@
 
         .section-title {
             font-size: 1.5rem;
-            color: #ff6600;
+            color: #ff4400;
             margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #444;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #3a1515;
+            font-family: 'Cinzel Decorative', cursive;
+            text-shadow: 0 0 15px rgba(255, 68, 0, 0.4);
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, #ff2200, transparent);
+            box-shadow: 0 0 10px #ff2200;
         }
 
         .build-card {
-            background: linear-gradient(145deg, #2a1a1a, #1a0a0a);
-            border: 1px solid #444;
-            border-radius: 12px;
+            background:
+                linear-gradient(145deg, rgba(25, 10, 10, 0.9), rgba(12, 5, 5, 0.95)),
+                linear-gradient(180deg, #2a1515 0%, #1a0a0a 100%);
+            border: 2px solid #3a1515;
+            border-radius: 8px;
             padding: 20px;
             margin-bottom: 15px;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .build-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(139, 0, 0, 0.05) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         .build-card:hover {
-            border-color: #666;
+            border-color: #5a2020;
+            box-shadow: 0 5px 20px rgba(139, 0, 0, 0.15);
         }
 
         .build-header {
@@ -242,34 +408,48 @@
 
         .build-title {
             font-size: 1.2rem;
-            color: #ffcc00;
+            color: #ffaa00;
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 0 8px rgba(255, 170, 0, 0.3);
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 1;
         }
 
         .build-tier {
-            padding: 5px 12px;
-            border-radius: 8px;
+            padding: 6px 14px;
+            border-radius: 6px;
             font-weight: bold;
             font-size: 0.85rem;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            border: 1px solid rgba(0, 0, 0, 0.3);
         }
 
         .tier-s {
-            background: linear-gradient(135deg, #ff6600, #ff3300);
-            color: white;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #1a0a0a;
+            box-shadow:
+                0 0 15px rgba(255, 215, 0, 0.5),
+                inset 0 0 10px rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
         }
 
         .tier-a {
-            background: linear-gradient(135deg, #9900ff, #6600cc);
+            background: linear-gradient(135deg, #aa00ff, #7700cc);
             color: white;
+            box-shadow: 0 0 15px rgba(170, 0, 255, 0.4);
         }
 
         .tier-b {
-            background: linear-gradient(135deg, #0099ff, #0066cc);
+            background: linear-gradient(135deg, #0088ff, #0055bb);
             color: white;
+            box-shadow: 0 0 15px rgba(0, 136, 255, 0.4);
         }
 
         .tier-c {
-            background: linear-gradient(135deg, #666, #444);
-            color: white;
+            background: linear-gradient(135deg, #555, #333);
+            color: #aaa;
         }
 
         .build-meta {
@@ -277,7 +457,8 @@
             gap: 15px;
             margin-bottom: 15px;
             font-size: 0.9rem;
-            color: #aaa;
+            color: #7a6060;
+            flex-wrap: wrap;
         }
 
         .build-meta span {
@@ -295,9 +476,12 @@
         }
 
         .build-content h4 {
-            color: #ff6600;
+            color: #ff4400;
             margin: 15px 0 10px;
             font-size: 1rem;
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 0 8px rgba(255, 68, 0, 0.4);
+            letter-spacing: 0.5px;
         }
 
         .skill-list {
@@ -308,67 +492,104 @@
         }
 
         .skill-item {
-            background: #1a0a0a;
-            padding: 8px 12px;
+            background: rgba(10, 5, 5, 0.8);
+            border: 1px solid #2a1010;
+            padding: 8px 14px;
             border-radius: 6px;
-            border-left: 3px solid #8b0000;
+            border-left: 3px solid #5a0000;
             font-size: 0.85rem;
+            color: #a89888;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: rgba(20, 8, 8, 0.8);
+            border-left-color: #ff2200;
+            color: #c8b8a8;
         }
 
         .warplan-textarea {
             width: 100%;
-            background: #0a0505;
-            border: 1px solid #444;
+            background:
+                linear-gradient(145deg, rgba(10, 4, 4, 0.95), rgba(5, 2, 2, 0.98)),
+                linear-gradient(180deg, #0a0505 0%, #050202 100%);
+            border: 2px solid #2a1010;
             border-radius: 6px;
-            color: #e0d0c0;
+            color: #c8b8a8;
             padding: 12px;
             font-family: inherit;
             resize: vertical;
             min-height: 80px;
+            transition: all 0.3s ease;
         }
 
         .warplan-textarea:focus {
             outline: none;
-            border-color: #ff6600;
+            border-color: #ff2200;
+            box-shadow:
+                0 0 15px rgba(255, 34, 0, 0.25),
+                inset 0 0 15px rgba(139, 0, 0, 0.15);
+            color: #e8d8c8;
+        }
+
+        .warplan-textarea::placeholder {
+            color: #5a4545;
         }
 
         .btn {
-            padding: 8px 16px;
+            padding: 10px 18px;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.9rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
+            font-weight: 600;
         }
 
         .btn-expand {
-            background: #444;
-            color: #e0d0c0;
+            background:
+                linear-gradient(145deg, #3a2020, #2a1515),
+                linear-gradient(180deg, #2a1a1a 0%, #1a0a0a 100%);
+            color: #a89888;
+            border: 1px solid #4a2525;
         }
 
         .btn-expand:hover {
-            background: #555;
+            background:
+                linear-gradient(145deg, #4a2525, #3a1a1a),
+                linear-gradient(180deg, #3a2020 0%, #2a1515 100%);
+            color: #c8b8a8;
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.3);
         }
 
         .btn-save {
-            background: linear-gradient(135deg, #ff6600, #cc3300);
+            background: linear-gradient(135deg, #ff3300, #aa0000);
             color: white;
             margin-top: 10px;
+            border: 1px solid #ff4400;
+            box-shadow: 0 0 15px rgba(255, 51, 0, 0.4);
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
         }
 
         .btn-save:hover {
             transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 51, 0, 0.7);
         }
 
         .btn-copy {
-            background: #0066cc;
-            color: white;
-            font-size: 0.8rem;
-            padding: 5px 10px;
+            background: linear-gradient(135deg, #2a3a5a, #1a2a4a);
+            color: #8aaadd;
+            font-size: 0.75rem;
+            padding: 5px 12px;
+            border: 1px solid #3a4a6a;
+            font-family: 'Cinzel', serif;
         }
 
         .btn-copy:hover {
-            background: #0077ee;
+            background: linear-gradient(135deg, #3a4a7a, #2a3a6a);
+            box-shadow: 0 0 15px rgba(100, 150, 255, 0.3);
         }
 
         .vitalo-link {
@@ -378,36 +599,56 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
+            text-shadow: 0 0 8px rgba(255, 102, 0, 0.3);
+            transition: all 0.3s ease;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
         }
 
         .vitalo-link:hover {
-            text-decoration: underline;
+            text-decoration: none;
+            color: #ff8833;
+            text-shadow: 0 0 15px rgba(255, 102, 0, 0.6);
         }
 
         .stats-bar {
-            background: #1a0a0a;
-            padding: 15px 20px;
+            background:
+                linear-gradient(145deg, rgba(20, 8, 8, 0.95), rgba(10, 4, 4, 0.98)),
+                linear-gradient(180deg, #2a1515 0%, #1a0a0a 100%);
+            border: 2px solid #3a1515;
+            padding: 18px 25px;
             border-radius: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
             gap: 15px;
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.4),
+                inset 0 0 30px rgba(139, 0, 0, 0.1);
         }
 
         .stat-item {
             text-align: center;
+            position: relative;
         }
 
         .stat-value {
-            font-size: 1.5rem;
-            color: #ff6600;
+            font-size: 1.8rem;
+            color: #ff4400;
             font-weight: bold;
+            font-family: 'Cinzel Decorative', cursive;
+            text-shadow:
+                0 0 10px rgba(255, 68, 0, 0.6),
+                0 0 20px rgba(139, 0, 0, 0.4);
         }
 
         .stat-label {
-            font-size: 0.8rem;
-            color: #888;
+            font-size: 0.75rem;
+            color: #7a6060;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .search-box {
@@ -418,155 +659,242 @@
 
         .search-box input {
             width: 100%;
-            padding: 12px 20px;
-            background: #1a0a0a;
-            border: 2px solid #444;
+            padding: 12px 25px;
+            background:
+                linear-gradient(145deg, rgba(20, 8, 8, 0.95), rgba(10, 4, 4, 0.98)),
+                linear-gradient(180deg, #1a0a0a 0%, #0a0505 100%);
+            border: 2px solid #3a1515;
             border-radius: 25px;
-            color: #e0d0c0;
+            color: #c8b8a8;
             font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
         .search-box input:focus {
             outline: none;
-            border-color: #ff6600;
+            border-color: #ff2200;
+            box-shadow:
+                0 0 15px rgba(255, 34, 0, 0.3),
+                inset 0 0 20px rgba(139, 0, 0, 0.2);
+            color: #e8d8c8;
+        }
+
+        .search-box input::placeholder {
+            color: #6a5050;
         }
 
         .filter-tabs {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
 
         .filter-tab {
-            padding: 8px 16px;
-            background: #2a1a1a;
-            border: 1px solid #444;
+            padding: 10px 18px;
+            background:
+                linear-gradient(145deg, rgba(25, 10, 10, 0.9), rgba(12, 5, 5, 0.95)),
+                linear-gradient(180deg, #2a1515 0%, #1a0a0a 100%);
+            border: 2px solid #3a1515;
             border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.85rem;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
+            color: #a89888;
         }
 
-        .filter-tab:hover, .filter-tab.active {
-            background: #ff6600;
-            border-color: #ff6600;
-            color: white;
+        .filter-tab:hover {
+            border-color: #ff2200;
+            color: #c8b8a8;
+            box-shadow: 0 0 15px rgba(255, 34, 0, 0.25);
+        }
+
+        .filter-tab.active {
+            background:
+                linear-gradient(145deg, rgba(50, 15, 15, 0.9), rgba(25, 8, 8, 0.95)),
+                linear-gradient(180deg, #3a1a1a 0%, #2a0a0a 100%);
+            border-color: #ff2200;
+            color: #ff4400;
+            text-shadow: 0 0 8px rgba(255, 68, 0, 0.5);
+            box-shadow:
+                0 0 20px rgba(255, 34, 0, 0.4),
+                inset 0 0 20px rgba(139, 0, 0, 0.2);
         }
 
         .build-actions {
             display: flex;
             gap: 10px;
             margin-top: 15px;
+            flex-wrap: wrap;
         }
 
         .build-notes {
-            background: #1a0a0a;
+            background: rgba(10, 5, 5, 0.6);
+            border: 1px solid #2a1010;
             padding: 12px;
             border-radius: 8px;
             margin-top: 15px;
+            position: relative;
+            z-index: 1;
         }
 
         .build-notes textarea {
             width: 100%;
-            background: #0a0505;
-            border: 1px solid #444;
+            background:
+                linear-gradient(145deg, rgba(10, 4, 4, 0.95), rgba(5, 2, 2, 0.98)),
+                linear-gradient(180deg, #0a0505 0%, #050202 100%);
+            border: 2px solid #2a1010;
             border-radius: 6px;
-            color: #e0d0c0;
+            color: #c8b8a8;
             padding: 10px;
             font-family: inherit;
             resize: vertical;
             min-height: 60px;
             font-size: 0.9rem;
+            transition: all 0.3s ease;
         }
 
         .build-notes textarea:focus {
             outline: none;
-            border-color: #ff6600;
+            border-color: #ff2200;
+            box-shadow:
+                0 0 15px rgba(255, 34, 0, 0.25),
+                inset 0 0 15px rgba(139, 0, 0, 0.15);
+            color: #e8d8c8;
+        }
+
+        .build-notes textarea::placeholder {
+            color: #5a4545;
         }
 
         .saved-indicator {
-            color: #00cc66;
+            color: #44aa66;
             font-size: 0.8rem;
             margin-left: 10px;
+            text-shadow: 0 0 8px rgba(68, 170, 102, 0.4);
+            font-family: 'Cinzel', serif;
         }
 
         .hot-badge {
-            background: #ff0000;
+            background: linear-gradient(135deg, #ff3300, #cc0000);
             color: white;
-            padding: 2px 8px;
-            border-radius: 10px;
+            padding: 3px 10px;
+            border-radius: 12px;
             font-size: 0.7rem;
             font-weight: bold;
-            animation: pulse 2s infinite;
+            animation: pulse-fire 2s infinite;
+            border: 1px solid #ff4400;
+            box-shadow:
+                0 0 10px rgba(255, 51, 0, 0.6),
+                inset 0 0 5px rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        @keyframes pulse-fire {
+            0%, 100% {
+                opacity: 1;
+                box-shadow:
+                    0 0 10px rgba(255, 51, 0, 0.6),
+                    inset 0 0 5px rgba(255, 255, 255, 0.2);
+            }
+            50% {
+                opacity: 0.85;
+                box-shadow:
+                    0 0 20px rgba(255, 51, 0, 0.9),
+                    inset 0 0 10px rgba(255, 255, 255, 0.3);
+            }
         }
 
         .export-section {
-            background: #1a0a0a;
-            padding: 20px;
+            background:
+                linear-gradient(145deg, rgba(20, 8, 8, 0.95), rgba(10, 4, 4, 0.98)),
+                linear-gradient(180deg, #2a1515 0%, #1a0a0a 100%);
+            border: 2px solid #3a1515;
+            padding: 25px;
             border-radius: 10px;
-            margin-top: 30px;
+            margin-top: 35px;
             text-align: center;
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.4),
+                inset 0 0 30px rgba(139, 0, 0, 0.1);
         }
 
         .export-section h3 {
-            color: #ff6600;
-            margin-bottom: 15px;
+            color: #ff4400;
+            margin-bottom: 18px;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 68, 0, 0.4);
         }
 
         .export-btn {
-            background: linear-gradient(135deg, #0099ff, #0066cc);
-            color: white;
-            padding: 10px 20px;
+            background: linear-gradient(135deg, #2a4a7a, #1a3a6a);
+            color: #8aacff;
+            padding: 12px 24px;
             margin: 0 5px;
+            border: 1px solid #3a5a9a;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
         }
 
         .export-btn:hover {
             transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(60, 100, 200, 0.4);
         }
 
         .activity-tag {
             display: inline-block;
-            background: #8b0000;
-            color: white;
-            padding: 3px 10px;
+            background: linear-gradient(135deg, #5a0000, #3a0000);
+            color: #ff8800;
+            padding: 4px 12px;
             border-radius: 15px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             margin-left: 10px;
+            border: 1px solid #7a0000;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         /* Screenshot Styles */
         .screenshot-container {
             margin: 15px 0;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         .screenshot-thumbnail {
             width: 100%;
             max-width: 350px;
             height: auto;
-            border: 2px solid #444;
+            border: 3px solid #3a1515;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.5),
+                inset 0 0 30px rgba(0, 0, 0, 0.3);
         }
 
         .screenshot-thumbnail:hover {
-            border-color: #ff6600;
+            border-color: #ff2200;
             transform: scale(1.02);
-            box-shadow: 0 5px 20px rgba(255, 102, 0, 0.3);
+            box-shadow:
+                0 8px 30px rgba(255, 34, 0, 0.4),
+                inset 0 0 30px rgba(0, 0, 0, 0.3);
         }
 
         .screenshot-label {
-            color: #888;
+            color: #6a5050;
             font-size: 0.8rem;
             margin-top: 8px;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
         }
 
         /* Lightbox */
@@ -577,7 +905,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background:
+                radial-gradient(ellipse at center, rgba(30, 10, 10, 0.95) 0%, rgba(10, 4, 4, 0.98) 100%);
             z-index: 10000;
             justify-content: center;
             align-items: center;
@@ -592,38 +921,50 @@
             max-width: 90%;
             max-height: 90%;
             border-radius: 8px;
-            box-shadow: 0 0 50px rgba(255, 102, 0, 0.3);
+            border: 3px solid #5a0000;
+            box-shadow:
+                0 0 80px rgba(255, 34, 0, 0.5),
+                0 0 40px rgba(139, 0, 0, 0.6),
+                inset 0 0 50px rgba(0, 0, 0, 0.5);
         }
 
         .lightbox-close {
             position: absolute;
             top: 20px;
             right: 30px;
-            color: white;
-            font-size: 2rem;
+            color: #ff4400;
+            font-size: 2.5rem;
             cursor: pointer;
             z-index: 10001;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 20px rgba(255, 68, 0, 0.8);
+            font-family: 'Cinzel', serif;
         }
 
         .lightbox-close:hover {
             color: #ff6600;
+            text-shadow: 0 0 30px rgba(255, 102, 0, 1);
+            transform: scale(1.1);
         }
 
         .lightbox-nav {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            color: white;
-            font-size: 2rem;
+            color: #ff4400;
+            font-size: 2.5rem;
             cursor: pointer;
             padding: 20px;
             z-index: 10001;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 15px rgba(255, 68, 0, 0.6);
+            font-family: 'Cinzel', serif;
         }
 
         .lightbox-nav:hover {
             color: #ff6600;
+            text-shadow: 0 0 25px rgba(255, 102, 0, 0.9);
+            transform: translateY(-50%) scale(1.1);
         }
 
         .lightbox-prev {
@@ -639,14 +980,21 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            color: white;
+            color: #c8b8a8;
             font-size: 1rem;
             z-index: 10001;
+            background: rgba(20, 8, 8, 0.8);
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1px solid #3a1515;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
         }
 
         @media (max-width: 768px) {
             header h1 {
                 font-size: 1.8rem;
+                letter-spacing: 1px;
             }
 
             .class-grid {
@@ -665,6 +1013,14 @@
             .main-tabs {
                 flex-direction: column;
                 gap: 10px;
+            }
+
+            .stats-bar {
+                padding: 12px 15px;
+            }
+
+            .stat-value {
+                font-size: 1.4rem;
             }
         }
     </style>
@@ -952,6 +1308,95 @@
                         skills: ["Pulverisieren", "Bärgestalt", "Erdspalte", "Tornado", "Griff", "Natur resistenz"],
                         paragon: "Werewolf/Bear-Schaden + Erd-Magie",
                         vitabloUrl: "https://vitablo.de/pulverisieren-druide-starter-build/"
+                    }
+                ]
+            },
+            "barbar": {
+                name: "Barbar",
+                icon: "⚔️",
+                builds: [
+                    {
+                        id: "barbar-hota",
+                        name: "Hand des Allerhöchsten (HotA)",
+                        tier: "S",
+                        hot: true,
+                        type: "Endgame",
+                        description: "Der mächtigste Single-Target Build mit massivem Schaden pro Treffer.",
+                        skills: ["Hand des Allerhöchsten", "Kampfgeschrei", "Sprunghieb", "Wut", "Unbesiegbar", "Raserei"],
+                        paragon: "HotA-Schaden + Rüstungsdurchbruch + Wut-Regeneration",
+                        vitabloUrl: "https://vitablo.de/hota-barbar-endgame-build/"
+                    },
+                    {
+                        id: "barbar-wirbelwind",
+                        name: "Wirbelwind (Whirlwind)",
+                        tier: "A",
+                        hot: false,
+                        type: "Leveling",
+                        description: "Klassischer AoE Build für schnelles Leveln und Farmen.",
+                        skills: ["Wirbelwind", "Kampfgeschrei", "Raserei", "Wut", "Unbesiegbar", "Blutrausch"],
+                        paragon: "Whirlwind-Schaden + Bewegungsgeschwindigkeit + AoE",
+                        vitabloUrl: "https://vitablo.de/wirbelwind-barbar-leveling-build/"
+                    },
+                    {
+                        id: "barbar-waffenwechsel",
+                        name: "Waffenwechsel (Weapon Swap)",
+                        tier: "S",
+                        hot: false,
+                        type: "Endgame",
+                        description: "Komplexer High-DPS Build mit Waffenwechsel-Mechanik.",
+                        skills: ["Waffenwechsel", "Todeskuss", "Überrennen", "Kampfrausch", "Grimmige Tollkühnheit", "Stampfer"],
+                        paragon: "Waffenwechsel-Schaden + Crit-Multiplier + Skill Rotation",
+                        vitabloUrl: "https://vitablo.de/waffenwechsel-barbar-endgame-build/"
+                    }
+                ]
+            },
+            "spiritborn": {
+                name: "Spiritborn",
+                icon: "🦅",
+                builds: [
+                    {
+                        id: "spiritborn-stachel",
+                        name: "Stachel (Thorns)",
+                        tier: "S",
+                        hot: true,
+                        type: "Leveling",
+                        description: "Der stärkste Leveling-Build mit Dornen-Mechanik.",
+                        skills: ["Stachel", "Geistform", "Dornenharke", "Jagdinstinkt", "Tötender Biss", "Apex"],
+                        paragon: "Thorns Damage + Spirit Bond + Survivability",
+                        vitabloUrl: "https://vitablo.de/stachel-spiritborn-leveling-build/"
+                    },
+                    {
+                        id: "spiritborn-stachelsalve",
+                        name: "Stachelsalve (Thorn Volley)",
+                        tier: "S",
+                        hot: false,
+                        type: "Endgame",
+                        description: "Mächtiger Dornen-Build fürs Endgame mit hohem DoT-Schaden.",
+                        skills: ["Stachelsalve", "Dornenharke", "Geistform", "Apex", "Tötender Biss", "Überleben"],
+                        paragon: "Thorn Volley Damage + DoT Multipliers + Tankiness",
+                        vitabloUrl: "https://vitablo.de/stachelsalve-spiritborn-endgame-build/"
+                    },
+                    {
+                        id: "spiritborn-zerschmetternde-hand",
+                        name: "Zerschmetternde Hand (Crushing Hand)",
+                        tier: "A",
+                        hot: false,
+                        type: "Endgame",
+                        description: "Starker Single-Target Build mit Gorilla-Spirit.",
+                        skills: ["Zerschmetternde Hand", "Erdspieß", "Geistform", "Apex", "Standhaft", "Urtümliche Kraft"],
+                        paragon: "Crushing Hand Damage + Crowd Control + Survivability",
+                        vitabloUrl: "https://vitablo.de/zerschmetternde-hand-spiritborn-endgame-build/"
+                    },
+                    {
+                        id: "spiritborn-dornen",
+                        name: "Dornen (Thorns) Endgame",
+                        tier: "S",
+                        hot: false,
+                        type: "Endgame",
+                        description: "Der ultimative Dornen-Build fürs Endgame.",
+                        skills: ["Dornen", "Dornenharke", "Stachelsalve", "Geistform", "Apex", "Tötender Biss"],
+                        paragon: "Thorns Damage + Poison Synergy + Max Survivability",
+                        vitabloUrl: "https://vitablo.de/dornen-spiritborn-endgame-build/"
                     }
                 ]
             }
