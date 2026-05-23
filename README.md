@@ -35,6 +35,12 @@ Eine lokale Web-App zur Verwaltung von Diablo 4 Builds und Kriegsplänen.
 - 📤 Daten Export/Import
 - 🖼️ Screenshots mit Lightbox-Vollbildansicht
 - 🔌 **Chrome Extension für automatische Vitablo-Sync**
+- ✨ **Diablo 4 Animationen:**
+  - 🌟 Legendary Glow für S-Tier Builds
+  - 🔥 Subtiles Feuer-Flackern auf Hover
+  - 🌀 Portal-Effekt beim Tab-Wechsel
+  - 💀 Blut-Runen Pulsieren auf Buttons
+  - 👻 Soul Release beim Ausklappen
 
 ## 🚀 Installation & Nutzung
 

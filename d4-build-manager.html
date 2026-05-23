@@ -821,6 +821,101 @@
             }
         }
 
+        /* Legendary Pulse for S-Tier */
+        @keyframes legendary-pulse {
+            0%, 100% {
+                box-shadow:
+                    0 0 20px rgba(255, 215, 0, 0.3),
+                    0 5px 20px rgba(139, 0, 0, 0.15),
+                    inset 0 0 20px rgba(255, 215, 0, 0.1),
+                    inset 0 0 40px rgba(139, 0, 0, 0.15);
+                border-color: #ffd700;
+            }
+            33% {
+                box-shadow:
+                    0 0 30px rgba(255, 215, 0, 0.5),
+                    0 5px 25px rgba(139, 0, 0, 0.2),
+                    inset 0 0 25px rgba(255, 215, 0, 0.15),
+                    inset 0 0 50px rgba(139, 0, 0, 0.2);
+            }
+            66% {
+                box-shadow:
+                    0 0 40px rgba(255, 215, 0, 0.7),
+                    0 5px 30px rgba(255, 136, 0, 0.25),
+                    inset 0 0 30px rgba(255, 215, 0, 0.2),
+                    inset 0 0 60px rgba(255, 136, 0, 0.15);
+            }
+        }
+
+        /* Flame Flicker for Hover */
+        @keyframes flame-flicker {
+            0%, 100% {
+                filter: brightness(1);
+                border-color: #ff2200;
+            }
+            50% {
+                filter: brightness(1.015);
+                border-color: #ff2a00;
+            }
+        }
+
+        /* Portal Swirl for Tab Transitions */
+        @keyframes portal-swirl {
+            0% {
+                transform: scale(0.85) rotate(-8deg);
+                opacity: 0;
+            }
+            40% {
+                transform: scale(1.08) rotate(3deg);
+                opacity: 0.7;
+            }
+            70% {
+                transform: scale(0.98) rotate(-1deg);
+                opacity: 0.95;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        /* Blood Rune Pulse for Buttons */
+        @keyframes blood-rune-pulse {
+            0%, 100% {
+                border-color: #ff3300;
+                box-shadow:
+                    0 0 15px rgba(255, 51, 0, 0.4),
+                    inset 0 0 10px rgba(139, 0, 0, 0.3);
+            }
+            50% {
+                border-color: #ff6600;
+                box-shadow:
+                    0 0 25px rgba(255, 102, 0, 0.7),
+                    inset 0 0 20px rgba(255, 51, 0, 0.4);
+            }
+        }
+
+        /* Soul Release for Expand */
+        @keyframes soul-release {
+            0% {
+                transform: scaleY(0);
+                transform-origin: top;
+                opacity: 0;
+            }
+            30% {
+                transform: scaleY(1.15);
+                opacity: 0.7;
+            }
+            60% {
+                transform: scaleY(0.95);
+                opacity: 1;
+            }
+            100% {
+                transform: scaleY(1);
+                opacity: 1;
+            }
+        }
+
         .export-section {
             background:
                 linear-gradient(145deg, rgba(20, 8, 8, 0.95), rgba(10, 4, 4, 0.98)),
@@ -833,6 +928,74 @@
             box-shadow:
                 0 5px 20px rgba(0, 0, 0, 0.4),
                 inset 0 0 30px rgba(139, 0, 0, 0.1);
+        }
+
+        /* ===== DIABLO 4 ANIMATIONS ===== */
+
+        /* Legendary Glow for S-Tier Builds */
+        .build-card[data-tier="S"] {
+            animation: legendary-pulse 4s ease-in-out infinite;
+            position: relative;
+        }
+
+        .build-card[data-tier="S"]::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffd700, #ffaa00, #ffd700, transparent);
+            border-radius: 50%;
+            filter: blur(3px);
+            animation: legendary-pulse 4s ease-in-out infinite;
+        }
+
+        /* Flame Flicker for Card Hover */
+        .class-card:hover {
+            animation: flame-flicker 0.3s ease-in-out infinite;
+        }
+
+        .build-card:hover {
+            animation: flame-flicker 0.4s ease-in-out infinite;
+        }
+
+        /* Portal Transition for Tabs */
+        .tab-content.portal-enter {
+            animation: portal-swirl 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Blood Rune Pulse for Save Buttons */
+        .btn-save {
+            animation: blood-rune-pulse 2.5s ease-in-out infinite;
+        }
+
+        .btn-save:hover {
+            animation: blood-rune-pulse 1s ease-in-out infinite;
+            transform: scale(1.05);
+        }
+
+        /* Soul Release for Build Content */
+        .build-content.soul-release-enter {
+            animation: soul-release 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Enhanced glow for hot tier cards */
+        .build-card[data-hot="true"] {
+            position: relative;
+        }
+
+        .build-card[data-hot="true"]::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, #ff2200, #ff6600, #ff2200, #ff4400);
+            border-radius: 10px;
+            z-index: -1;
+            opacity: 0.3;
+            animation: flame-flicker 2s ease-in-out infinite;
+            filter: blur(8px);
         }
 
         .export-section h3 {
@@ -3003,14 +3166,22 @@
         // Haupt-Tab wechseln
         function switchMainTab(tab) {
             document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => {
+                c.classList.remove('active', 'portal-enter');
+            });
 
             if (tab === 'builds') {
                 document.querySelector('.main-tab:nth-child(1)').classList.add('active');
-                document.getElementById('tab-builds').classList.add('active');
+                const buildsTab = document.getElementById('tab-builds');
+                buildsTab.classList.add('active');
+                // Portal-Animation starten
+                setTimeout(() => buildsTab.classList.add('portal-enter'), 10);
             } else {
                 document.querySelector('.main-tab:nth-child(2)').classList.add('active');
-                document.getElementById('tab-warplans').classList.add('active');
+                const warplansTab = document.getElementById('tab-warplans');
+                warplansTab.classList.add('active');
+                // Portal-Animation starten
+                setTimeout(() => warplansTab.classList.add('portal-enter'), 10);
             }
         }
 
@@ -3288,10 +3459,15 @@
 
             if (content.classList.contains('expanded')) {
                 content.classList.remove('expanded');
+                content.classList.remove('soul-release-enter');
                 btn.textContent = '▼ Details anzeigen';
             } else {
                 content.classList.add('expanded');
                 btn.textContent = '▲ Details ausblenden';
+
+                // Soul Release Animation starten
+                content.classList.remove('soul-release-enter');
+                setTimeout(() => content.classList.add('soul-release-enter'), 10);
 
                 // Skill-Baum rendern wenn vorhanden
                 const activeClass = document.querySelector('.class-card.active');
