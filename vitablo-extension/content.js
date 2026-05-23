@@ -113,6 +113,45 @@ class VitabloExtractor {
           skill.code = codeMatch[0];
         }
 
+        // Level-Priorität extrahieren
+        // Versuche verschiedene Selektoren für Priority/Level
+        const priorityEl = el.querySelector('[class*="priority"], [class*="level"], [data-level], [data-priority], .skill-level');
+        if (priorityEl) {
+          const priorityMatch = priorityEl.textContent.match(/\d+/);
+          if (priorityMatch) {
+            skill.priority = parseInt(priorityMatch[0]);
+          }
+        }
+
+        // Fallback: Extrahiere aus Skill-Code (z.B. "Ear 15")
+        if (!skill.priority && skill.code) {
+          const codeMatch = skill.code.match(/(\d+)[a-z]?$/i);
+          if (codeMatch) {
+            skill.priority = parseInt(codeMatch[1]);
+          }
+        }
+
+        // Fallback: Extrahiere aus dem Element-Text (z.B. "Skillname 15")
+        if (!skill.priority && name) {
+          const textMatch = name.match(/(\d+)$/);
+          if (textMatch) {
+            const num = parseInt(textMatch[1]);
+            // Nur als Priority übernehmen, wenn es eine sinnvolle Zahl ist (1-99)
+            if (num >= 1 && num <= 99) {
+              skill.priority = num;
+            }
+          }
+        }
+
+        // Max-Level extrahieren
+        const maxLevelEl = el.querySelector('[class*="max-level"], [data-max-level]');
+        if (maxLevelEl) {
+          const maxLevelMatch = maxLevelEl.textContent.match(/\d+/);
+          if (maxLevelMatch) {
+            skill.maxLevel = parseInt(maxLevelMatch[0]);
+          }
+        }
+
         skills.push(skill);
       }
     });
