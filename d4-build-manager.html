@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D4 Build Manager - Vitablo.de</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a0a0a 0%, #2d0a0a 50%, #1a0a0a 100%);
+            color: #e0d0c0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #8b0000;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #ff6600;
+            text-shadow: 0 0 20px rgba(255, 102, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #aaa;
+            font-size: 1rem;
+        }
+
+        .main-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .main-tab {
+            padding: 15px 30px;
+            background: linear-gradient(145deg, #2a1a1a, #1a0a0a);
+            border: 2px solid #444;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .main-tab:hover {
+            border-color: #ff6600;
+            transform: translateY(-3px);
+        }
+
+        .main-tab.active {
+            border-color: #ff6600;
+            background: linear-gradient(145deg, #3a1a1a, #2a0a0a);
+            color: #ff6600;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .class-card {
+            background: linear-gradient(145deg, #2a1a1a, #1a0a0a);
+            border: 2px solid #444;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .class-card:hover {
+            border-color: #ff6600;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 102, 0, 0.2);
+        }
+
+        .class-card.active {
+            border-color: #ff6600;
+            background: linear-gradient(145deg, #3a1a1a, #2a0a0a);
+        }
+
+        .class-card .icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .class-card h3 {
+            color: #e0d0c0;
+            font-size: 1rem;
+        }
+
+        .class-card .count {
+            background: #8b0000;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        .warplans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .warplan-card {
+            background: linear-gradient(145deg, #2a1a1a, #1a0a0a);
+            border: 2px solid #444;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .warplan-card:hover {
+            border-color: #ff6600;
+            transform: translateY(-3px);
+        }
+
+        .warplan-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #444;
+        }
+
+        .warplan-icon {
+            font-size: 2.5rem;
+        }
+
+        .warplan-title {
+            font-size: 1.3rem;
+            color: #ffcc00;
+        }
+
+        .warplan-section {
+            background: #1a0a0a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .warplan-section h4 {
+            color: #ff6600;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .warplan-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .warplan-section li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #ccc;
+            line-height: 1.4;
+        }
+
+        .warplan-section li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #ff6600;
+        }
+
+        .warplan-section li strong {
+            color: #ffcc00;
+        }
+
+        .builds-section {
+            display: none;
+        }
+
+        .builds-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #ff6600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+        }
+
+        .build-card {
+            background: linear-gradient(145deg, #2a1a1a, #1a0a0a);
+            border: 1px solid #444;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .build-card:hover {
+            border-color: #666;
+        }
+
+        .build-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .build-title {
+            font-size: 1.2rem;
+            color: #ffcc00;
+        }
+
+        .build-tier {
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .tier-s {
+            background: linear-gradient(135deg, #ff6600, #ff3300);
+            color: white;
+        }
+
+        .tier-a {
+            background: linear-gradient(135deg, #9900ff, #6600cc);
+            color: white;
+        }
+
+        .tier-b {
+            background: linear-gradient(135deg, #0099ff, #0066cc);
+            color: white;
+        }
+
+        .tier-c {
+            background: linear-gradient(135deg, #666, #444);
+            color: white;
+        }
+
+        .build-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .build-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .build-content {
+            display: none;
+        }
+
+        .build-content.expanded {
+            display: block;
+        }
+
+        .build-content h4 {
+            color: #ff6600;
+            margin: 15px 0 10px;
+            font-size: 1rem;
+        }
+
+        .skill-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .skill-item {
+            background: #1a0a0a;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border-left: 3px solid #8b0000;
+            font-size: 0.85rem;
+        }
+
+        .warplan-textarea {
+            width: 100%;
+            background: #0a0505;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #e0d0c0;
+            padding: 12px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .warplan-textarea:focus {
+            outline: none;
+            border-color: #ff6600;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-expand {
+            background: #444;
+            color: #e0d0c0;
+        }
+
+        .btn-expand:hover {
+            background: #555;
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, #ff6600, #cc3300);
+            color: white;
+            margin-top: 10px;
+        }
+
+        .btn-save:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-copy {
+            background: #0066cc;
+            color: white;
+            font-size: 0.8rem;
+            padding: 5px 10px;
+        }
+
+        .btn-copy:hover {
+            background: #0077ee;
+        }
+
+        .vitalo-link {
+            color: #ff6600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .vitalo-link:hover {
+            text-decoration: underline;
+        }
+
+        .stats-bar {
+            background: #1a0a0a;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            color: #ff6600;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            background: #1a0a0a;
+            border: 2px solid #444;
+            border-radius: 25px;
+            color: #e0d0c0;
+            font-size: 1rem;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #ff6600;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 8px 16px;
+            background: #2a1a1a;
+            border: 1px solid #444;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .filter-tab:hover, .filter-tab.active {
+            background: #ff6600;
+            border-color: #ff6600;
+            color: white;
+        }
+
+        .build-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .build-notes {
+            background: #1a0a0a;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .build-notes textarea {
+            width: 100%;
+            background: #0a0505;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #e0d0c0;
+            padding: 10px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 60px;
+            font-size: 0.9rem;
+        }
+
+        .build-notes textarea:focus {
+            outline: none;
+            border-color: #ff6600;
+        }
+
+        .saved-indicator {
+            color: #00cc66;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+
+        .hot-badge {
+            background: #ff0000;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .export-section {
+            background: #1a0a0a;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .export-section h3 {
+            color: #ff6600;
+            margin-bottom: 15px;
+        }
+
+        .export-btn {
+            background: linear-gradient(135deg, #0099ff, #0066cc);
+            color: white;
+            padding: 10px 20px;
+            margin: 0 5px;
+        }
+
+        .export-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .activity-tag {
+            display: inline-block;
+            background: #8b0000;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            margin-left: 10px;
+        }
+
+        /* Screenshot Styles */
+        .screenshot-container {
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .screenshot-thumbnail {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border: 2px solid #444;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .screenshot-thumbnail:hover {
+            border-color: #ff6600;
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(255, 102, 0, 0.3);
+        }
+
+        .screenshot-label {
+            color: #888;
+            font-size: 0.8rem;
+            margin-top: 8px;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 50px rgba(255, 102, 0, 0.3);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 10001;
+            transition: color 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: #ff6600;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 20px;
+            z-index: 10001;
+            transition: color 0.3s ease;
+        }
+
+        .lightbox-nav:hover {
+            color: #ff6600;
+        }
+
+        .lightbox-prev {
+            left: 10px;
+        }
+
+        .lightbox-next {
+            right: 10px;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1rem;
+            z-index: 10001;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .class-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .build-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .warplans-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-tabs {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚔️ D4 Build Manager</h1>
+            <p>Deine vitablo.de Build-Übersicht für Diablo 4 - Lord of Hatred</p>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-value" id="total-builds">0</div>
+                <div class="stat-label">Builds gesamt</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="s-tier-count">0</div>
+                <div class="stat-label">S-Tier Builds</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="saved-notes">0</div>
+                <div class="stat-label">Deine Notizen</div>
+            </div>
+        </div>
+
+        <!-- Haupt-Tabs -->
+        <div class="main-tabs">
+            <div class="main-tab active" onclick="switchMainTab('builds')">🎮 Klassen-Builds</div>
+            <div class="main-tab" onclick="switchMainTab('warplans')">⚔️ Kriegspläne</div>
+        </div>
+
+        <!-- Klassen-Builds Tab -->
+        <div class="tab-content active" id="tab-builds">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="🔍 Build suchen...">
+            </div>
+
+            <div class="filter-tabs">
+                <div class="filter-tab active" data-filter="all">Alle</div>
+                <div class="filter-tab" data-filter="s-tier">S-Tier</div>
+                <div class="filter-tab" data-filter="a-tier">A-Tier</div>
+                <div class="filter-tab" data-filter="hot">🔥 Hot</div>
+            </div>
+
+            <h2 style="color: #ff6600; margin-bottom: 20px; text-align: center;">Wähle eine Klasse</h2>
+
+            <div class="class-grid" id="class-grid"></div>
+
+            <div id="builds-container"></div>
+        </div>
+
+        <!-- Kriegspläne Tab -->
+        <div class="tab-content" id="tab-warplans">
+            <h2 style="color: #ff6600; margin-bottom: 20px;">Kriegspläne - Endgame Aktivitäten</h2>
+            <div class="warplans-grid" id="warplans-container"></div>
+        </div>
+
+        <!-- Lightbox -->
+        <div class="lightbox" id="lightbox">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <span class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">&#10094;</span>
+            <span class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">&#10095;</span>
+            <img class="lightbox-content" id="lightbox-image" src="" alt="Vollbildansicht">
+            <div class="lightbox-counter" id="lightbox-counter"></div>
+        </div>
+
+        <div class="export-section">
+            <h3>💾 Daten verwalten</h3>
+            <button class="btn export-btn" onclick="exportData()">Daten exportieren</button>
+            <button class="btn export-btn" onclick="importData()">Daten importieren</button>
+            <button class="btn export-btn" onclick="clearData()">Alles löschen</button>
+        </div>
+    </div>
+
+    <script>
+        // D4 Builds Daten (basierend auf vitablo.de Lord of Hatred)
+        const buildsData = {
+            "hexenmeister": {
+                name: "Hexenmeister",
+                icon: "🔮",
+                builds: [
+                    {
+                        id: "warlock-armee-abaddon",
+                        name: "Armee von Abaddon",
+                        tier: "A",
+                        hot: false,
+                        type: "Endgame",
+                        description: "Der etwas andere Beschwörer Build mit unzähligen Dämonen-Dienern und dem gigantischen Dämon Abaddon.",
+                        skills: ["Dämonenbeschwörung", "Abaddon rufen", "Höllenportal", "Dämonenherrschaft", "Teufelsaure", "Fledermauschwarm"],
+                        paragon: "Start mit Dämonen-Baum, dann Abaddon-Fokus für maximale Diener-Schadensmultiplikatoren",
+                        vitabloUrl: "https://vitablo.de/armee-von-abaddon-hexenmeister-endgame-build/"
+                    },
+                    {
+                        id: "warlock-grauensklauen",
+                        name: "Grauensklauen Speed Build",
+                        tier: "S",
+                        hot: true,
+                        type: "Starter + Endgame",
+                        description: "Highspeed Build, der auch in hohen Qualstufen alles dominiert.",
+                        skills: ["Grauensklauen", "Schattenblitz", "Dämonische Geschwindigkeit", "Schattenform", "Todesfuhle", "Klingensturm"],
+                        paragon: "Speed-Fokus: Bewegungsgeschwindigkeit + Klauen-Schaden",
+                        vitabloUrl: "https://vitablo.de/grauensklauen-hexenmeister-starter-endgame-build/"
+                    },
+                    {
+                        id: "warlock-hoellenbruch",
+                        name: "Höllenbruch",
+                        tier: "S",
+                        hot: false,
+                        type: "Starter",
+                        description: "Mächtiger Starter-Build mit Höllenbruch-Mechanik.",
+                        skills: ["Höllenbruch", "Feuerregen", "Schutzgeist", "Inferno", "Phasenverschiebung", "Dämonenpakt"],
+                        paragon: "Feuer-Schaden最大化 + Überleben",
+                        vitabloUrl: "https://vitablo.de/hoellenbruch-hexenmeister-starter-build/"
+                    },
+                    {
+                        id: "warlock-ausweiden",
+                        name: "Ausweiden (Eviscerate)",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Nahkampforientierter Build mit hohem Burst-Schaden.",
+                        skills: ["Ausweiden", "Nahkampfmastery", "Blutdurst", "Todeshauch", "Schleichen", "Mehrfachschlag"],
+                        paragon: "Krit-Schaden + Blut-Effekte",
+                        vitabloUrl: "https://vitablo.de/ausweiden-hexenmeister-starter-build/"
+                    },
+                    {
+                        id: "warlock-daemon-beschwoerer",
+                        name: "Dämon Beschwörer",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Klassischer Dämonen-Beschwörer mit Fokus auf Diener-Massa.",
+                        skills: ["Dämonenbeschwörung", "Diener-Mastery", "Dämonenjäger", "Hordenruf", "Opferung", "Dämonenlord"],
+                        paragon: "Diener-Schaden + Diener-Überleben",
+                        vitabloUrl: "https://vitablo.de/daemon-beschwoerer-hexenmeister-starter-build/"
+                    }
+                ]
+            },
+            "totenbeschwoerer": {
+                name: "Totenbeschwörer",
+                icon: "💀",
+                builds: [
+                    {
+                        id: "necro-skelett-armee",
+                        name: "Skelett-Diener Armee",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Kleines Update für den Level Guide: Jetzt mit Aspekten, Items und Paragonbrettern. Fast 30 Skelette!",
+                        skills: ["Skelett erwecken", "Skelettmagie", "Knochenrüstung", "Knochengeist", "Golem beschwören", "Leichenexplosion"],
+                        paragon: "Skelett-Maximierung + Knochen-Schaden",
+                        vitabloUrl: "https://vitablo.de/skelett-diener-totenbeschwoerer-necro-starter-build/"
+                    }
+                ]
+            },
+            "zauberin": {
+                name: "Zauberin",
+                icon: "✨",
+                builds: [
+                    {
+                        id: "sorcerer-gefrorene-kugel",
+                        name: "Gefrorene Kugel (Frozen Orb)",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Klassischer Frozen Orb Build mit starkem AoE-Schaden.",
+                        skills: ["Frozen Orb", "Eislanze", "Frostnova", "Eisrüstung", "Teleport", "Blizzard"],
+                        paragon: "Kälte-Schaden + Mana-Effizienz",
+                        vitabloUrl: "https://vitablo.de/gefrorene-kugel-zauberin-starter-build/"
+                    },
+                    {
+                        id: "sorcerer-comboblitze",
+                        name: "Comboblitze (Charged Bolts)",
+                        tier: "S",
+                        hot: false,
+                        type: "Starter",
+                        description: "Mächtiger Blitz-Build mit Charged Bolts als Core-Skill.",
+                        skills: ["Charged Bolts", "Blitzfokus", "Kettenblitz", "Teleport", "Blitzrüstung", "Unwetter"],
+                        paragon: "Blitz-Schaden + Crit-Multiplikator",
+                        vitabloUrl: "https://vitablo.de/comboblitze-zauberin-starter-build/"
+                    },
+                    {
+                        id: "sorcerer-kettenblitz",
+                        name: "Kettenblitz (Chain Lightning)",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Kettenblitz für schnellen Trash-Mob Clear.",
+                        skills: ["Kettenblitz", "Elektroschock", "Frostnova", "Teleport", "Mana-Schild", "Blitzschlag"],
+                        paragon: "Ketten-Effekte + Angriffsgeschwindigkeit",
+                        vitabloUrl: "https://vitablo.de/kettenblitz-zauberin-starter-build/"
+                    },
+                    {
+                        id: "sorcerer-orbital-kugelblitz",
+                        name: "Orbital Kugelblitz (Ball Lightning)",
+                        tier: "S",
+                        hot: false,
+                        type: "Starter",
+                        description: "Ball Lightning mit orbitalem Schaden-Muster.",
+                        skills: ["Ball Lightning", "Charged Bolts", "Teleport", "Unwetter", "Blitzmastery", "Überladen"],
+                        paragon: "Blitz-Dauer + Orbit-Damage",
+                        vitabloUrl: "https://vitablo.de/orbital-kugelblitz-zauberin-starter-build/"
+                    },
+                    {
+                        id: "sorcerer-bouncy-feuerball",
+                        name: "Bouncy Feuerball (Fireball)",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Feuerball mit Bounce-Mechanik für hohen AoE-Schaden.",
+                        skills: ["Feuerball", "Feuerregen", "Flammenschlag", "Teleport", "Feuerrüstung", "Meteor"],
+                        paragon: "Feuer-Schaden + Bounce-Effekte",
+                        vitabloUrl: "https://vitablo.de/bouncy-feuerball-zauberin-starter-build/"
+                    }
+                ]
+            },
+            "jaegerin": {
+                name: "Jägerin",
+                icon: "🗡️",
+                builds: [
+                    {
+                        id: "rogue-tanz-messer",
+                        name: "Tanz der Messer (Dance of Knives)",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Nahkampf-Rogue mit Dance of Knives als Hauptskill.",
+                        skills: ["Dance of Knives", "Messerwerfen", "Schatten Schritt", "Ausweichen", "Giftwolke", "Schattenmacht"],
+                        paragon: "Nahkampf-Schaden + AusweichChance",
+                        vitabloUrl: "https://vitablo.de/tanz-der-messer-jaegerin-starter-build/"
+                    },
+                    {
+                        id: "rogue-sperrfeuer",
+                        name: "Sperrfeuer (Barrage)",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Fernkampf-Rogue mit Barrage für massiven Projektil-Schaden.",
+                        skills: ["Barrage", "Pfeilhagel", "Kugelfest", "Falle", "Schatten Schritt", "Präzision"],
+                        paragon: "Projektil-Schaden + Angriffsgeschwindigkeit",
+                        vitabloUrl: "https://vitablo.de/sperrfeuer-jaegerin-starter-build/"
+                    }
+                ]
+            },
+            "paladin": {
+                name: "Paladin",
+                icon: "⚔️",
+                builds: [
+                    {
+                        id: "paladin-richturteil",
+                        name: "Richturteil (Judgement Nuke)",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Mächtiger Judgement-Nuke Build.",
+                        skills: ["Richturteil", "Heiliger Schlag", "Schildwurf", "Flügelschlag", "Heilige Aura", "Göttlicher Schutz"],
+                        paragon: "Heiliger Schaden + Nuke-Multiplikatoren",
+                        vitabloUrl: "https://vitablo.de/richturteil-paladin-starter-build/"
+                    },
+                    {
+                        id: "paladin-hammerdin",
+                        name: "Gesegneter Hammer + Flügelschlag (Hammerdin)",
+                        tier: "S",
+                        hot: false,
+                        type: "Starter",
+                        description: "Klassischer Hammerdin mit Flügelschlag-Mobilität.",
+                        skills: ["Gesegneter Hammer", "Flügelschlag", "Heiliger Zorn", "Schild des Glaubens", "Heilige Aura", "Konzentration"],
+                        paragon: "Hammer-Schaden + Mobilität",
+                        vitabloUrl: "https://vitablo.de/gesegneter-hammer-fluegelschlag-paladin-starter-build/"
+                    }
+                ]
+            },
+            "druide": {
+                name: "Druide",
+                icon: "🐻",
+                builds: [
+                    {
+                        id: "druid-pulverisieren",
+                        name: "Pulverisieren (Pulverize)",
+                        tier: "S",
+                        hot: false,
+                        type: "Starter",
+                        description: "Mächtiger Werebear Build mit Pulverize als Core-Skill.",
+                        skills: ["Pulverisieren", "Bärgestalt", "Erdspalte", "Tornado", "Griff", "Natur resistenz"],
+                        paragon: "Werewolf/Bear-Schaden + Erd-Magie",
+                        vitabloUrl: "https://vitablo.de/pulverisieren-druide-starter-build/"
+                    }
+                ]
+            }
+        };
+
+        // Kriegspläne Daten (von vitablo.de)
+        const screenshots = [
+            "Screenshots/Screenshot 2026-05-23 221214.png",
+            "Screenshots/Screenshot 2026-05-23 221235.png",
+            "Screenshots/Screenshot 2026-05-23 221247.png",
+            "Screenshots/Screenshot 2026-05-23 221255.png",
+            "Screenshots/Screenshot 2026-05-23 221304.png",
+            "Screenshots/Screenshot 2026-05-23 221322.png",
+            "Screenshots/Screenshot 2026-05-23 221331.png"
+        ];
+
+        const warplansData = [
+            {
+                id: "fluesternder-baum",
+                name: "Flüsternder Baum",
+                icon: "🌳",
+                activity: "World Event",
+                screenshot: screenshots[0],
+                description: "Der Flüsternde Baum ist ein wiederkehrendes World Event mit wertvollen Belohnungen.",
+                sections: [
+                    {
+                        title: "Empfohlene Skillungen",
+                        items: [
+                            "<strong>Baum des Überflusses:</strong> Die 4. Auswahl ist sehr gut, da in den Flüsterbaum-Truhen viele starke Belohnungen enthalten sein können.",
+                            "<strong>Flüsternde Erkenntnis:</strong> Perfekt zum Leveln. Mehr Erfahrung ist unschlagbar.",
+                            "<strong>Gunst des Chaos:</strong> Für zusätzliche Chaos-Belohnungen.",
+                            "<strong>Glänzende Gunst:</strong> Die Chance auf prächtige Funken ist besser als die Alternativen am Rand.",
+                            "<strong>Die Verdorbenen Wurzeln:</strong> Sehr nützlich im Endgame für die neue Alptraum-Dungeon Farm-Methode."
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "alptraumdungeons",
+                name: "Alptraumdungeons",
+                icon: "👻",
+                activity: "Dungeon",
+                screenshot: screenshots[1],
+                description: "Alptraumdungeons sind eine der besten Loot-Quellen im Endgame.",
+                sections: [
+                    {
+                        title: "Empfohlene Skillungen",
+                        items: [
+                            "<strong>Erwachte Beute:</strong> Eine zusätzliche Belohnung am Ende, sodass du den Dungeon rushen kannst.",
+                            "<strong>Herausforderung:</strong> Für zusätzlichen Schwierigkeitsgrad und bessere Belohnungen.",
+                            "<strong>Erzfeind:</strong> Erzfeind-Mechanik für steigende Belohnungen.",
+                            "<strong>Furchtlose Hingabe:</strong> Zusammen mit Erzfeind sehr effektiv.",
+                            "<strong>Weitere Punkte im rechten Baum:</strong> Für die Chance aufs Goblin-Portal.",
+                            "<strong>Chance auf Eisbestie:</strong> Spezielle Belohnungen in Alptraum-Dungeons.",
+                            "<strong>Chance auf Astaroth Loot:</strong> Einzigartige Items von Astaroth."
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "hoellenflut",
+                name: "Höllenflut",
+                icon: "🔥",
+                activity: "Endgame",
+                screenshot: screenshots[2],
+                description: "Die Höllenflut bietet intensive Kämpfe mit hohen Belohnungen.",
+                sections: [
+                    {
+                        title: "Empfohlene Skillungen",
+                        items: [
+                            "<strong>Befleckte Schreine:</strong> Verstärkte Schreine für mehr Power.",
+                            "<strong>Verhasste Gegner:</strong> Identifiziere und fokussiere verhasste Ziele.",
+                            "<strong>Infernaler Ritus:</strong> Sehr wichtig, um Monsterstufe zu erhöhen und somit besseren Loot zu erhalten.",
+                            "<strong>Nachtangst:</strong> Zusätzliche Herausforderungen mit Belohnungen.",
+                            "<strong>Weitere Punkte im mittleren Strang:</strong> Für mehr Unterschlupfschlüssel und Bossmaterialien."
+                        ]
+                    },
+                    {
+                        title: "Tipps",
+                        items: [
+                            "Die Belohnungen von Preis der Hölle sind eher enttäuschend, daher gegen den rechten Strang entscheiden.",
+                            "In der Level-Phase könnte man auch Anomale Glut nehmen."
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "unterstadt-kurast",
+                name: "Unterstadt von Kurast",
+                icon: "🏛️",
+                activity: "Zone",
+                screenshot: screenshots[3],
+                description: "Die Unterstadt von Kurast ist eine wertvolle Farm-Zone mit Tribute-Mechanik.",
+                sections: [
+                    {
+                        title: "Empfohlene Skillungen",
+                        items: [
+                            "<strong>Jadene Erkenntnis:</strong> Mehr Erfahrung ist immer unschlagbar.",
+                            "<strong>Endloser Schwarm:</strong> Für mehr Gegner und Loot.",
+                            "<strong>Bedauernswerte Seelen:</strong> Zusätzliche Seelen für Tribute.",
+                            "<strong>Schmutz der Gosse:</strong> Streichbolde erhöhen die Belohnungen am Ende. Bei mythischen Tributen sehr wertvoll.",
+                            "<strong>Die letzten 3 Punkte im mittleren Baum:</strong> Für mehr Tribute der Kriegsausrüstung."
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "unterschlupf-bosse",
+                name: "Unterschlupf-Bosse",
+                icon: "👹",
+                activity: "Boss Content",
+                screenshot: screenshots[4],
+                description: "Unterschlupf-Bosse bieten die Chance auf einzigartige Belohnungen und mythische Items.",
+                sections: [
+                    {
+                        title: "Empfohlene Skillungen",
+                        items: [
+                            "<strong>Zwei und zwei:</strong> Mehr Erfahrung ist immer unschlagbar.",
+                            "<strong>Großer Erzfeind:</strong> Für die Erzfeind-Mechanik mit steigenden Belohnungen.",
+                            "<strong>Ultimativer Erzfeind:</strong> Die Erzfeind-Mechanik steigert sich immer mehr – mit immer besseren Belohnungen am Ende (auch mythische Items möglich).",
+                            "<strong>Erhöhte Monsterstufe:</strong> Für besseren Loot.",
+                            "<strong>Chance auf Eisbestie in Alptraum-Dungeons:</strong> Spezielle Belohnungen.",
+                            "<strong>Chance auf Astaroth Loot in Alptraum-Dungeons:</strong> Einzigartige Items."
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "hoellenhorden",
+                name: "Höllenhorden",
+                icon: "⚔️",
+                activity: "Horde Mode",
+                screenshot: screenshots[5],
+                description: "Der Höllenhorden-Modus ist kooperativ und bietet wertvolle Äther-Belohnungen.",
+                sections: [
+                    {
+                        title: "Empfohlene Skillungen",
+                        items: [
+                            "<strong>Methode und Wahnsinn:</strong> Steigert die Chance auf einen erfolgreichen Run enorm.",
+                            "<strong>Drohendes Unheil:</strong> Viel Bonus-Äther am Ende.",
+                            "<strong>Der schwarze Pakt:</strong> Ebenfalls hilfreich für einen erfolgreichen Run. Achte darauf, den ominösen Altar an einer sinnvollen Stelle zu benutzen.",
+                            "<strong>Anschließend rechter Baum:</strong> Für mehr Äther.",
+                            "<strong>Der 7. Punkt:</strong> Erhöht die Monsterstufe von Bartuc und dem grausamen Rat."
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "grube",
+                name: "Grube",
+                icon: "⏳",
+                activity: "Time Trial",
+                screenshot: screenshots[6],
+                description: "Die Grube ist ein Zeitrennen mit wertvollen Glyphenaufwertungen als Belohnung.",
+                sections: [
+                    {
+                        title: "Empfohlene Skillungen",
+                        items: [
+                            "<strong>Chorons Hast:</strong> Für schnellere Fortschrittskugeln.",
+                            "<strong>Herz aus Stein:</strong> Unbedingt als erstes skillen! Erhöht die Fortschrittskugeln, sodass du schneller fertig wirst und zusätzliche Glyphenaufwertungen erhältst.",
+                            "<strong>Chorons Segen:</strong> Zusätzliche Boni für die Grube.",
+                            "<strong>Grubenschlächter:</strong> Mehr Schaden in der Grube.",
+                            "<strong>Chorons Gunst:</strong> Weitere Verbesserungen.",
+                            "<strong>Chorons Seele:</strong> Noch mehr Bonus XP. Alternativ Chorons Fleisch für mehr Loot.",
+                            "<strong>Verdammte Diebe:</strong> Geben weitere Fortschrittskugeln."
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // localStorage laden
+        let savedData = JSON.parse(localStorage.getItem('d4Builds') || '{}');
+
+        // UI initialisieren
+        function init() {
+            renderClassGrid();
+            renderWarplans();
+            updateStats();
+            setupEventListeners();
+        }
+
+        // Haupt-Tab wechseln
+        function switchMainTab(tab) {
+            document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+            if (tab === 'builds') {
+                document.querySelector('.main-tab:nth-child(1)').classList.add('active');
+                document.getElementById('tab-builds').classList.add('active');
+            } else {
+                document.querySelector('.main-tab:nth-child(2)').classList.add('active');
+                document.getElementById('tab-warplans').classList.add('active');
+            }
+        }
+
+        // Klassen-Grid rendern
+        function renderClassGrid() {
+            const grid = document.getElementById('class-grid');
+            grid.innerHTML = '';
+
+            Object.entries(buildsData).forEach(([key, classData]) => {
+                const card = document.createElement('div');
+                card.className = 'class-card';
+                card.dataset.class = key;
+                card.innerHTML = `
+                    <div class="icon">${classData.icon}</div>
+                    <h3>${classData.name}</h3>
+                    <div class="count">${classData.builds.length} Builds</div>
+                `;
+                card.onclick = () => showBuilds(key);
+                grid.appendChild(card);
+            });
+        }
+
+        // Kriegspläne rendern
+        function renderWarplans() {
+            const container = document.getElementById('warplans-container');
+            container.innerHTML = '';
+
+            warplansData.forEach((warplan, index) => {
+                const savedNote = savedData[`warplan-${warplan.id}`]?.note || '';
+
+                const card = document.createElement('div');
+                card.className = 'warplan-card';
+                card.innerHTML = `
+                    <div class="warplan-header">
+                        <div class="warplan-icon">${warplan.icon}</div>
+                        <div>
+                            <div class="warplan-title">${warplan.name}</div>
+                            <span class="activity-tag">${warplan.activity}</span>
+                        </div>
+                    </div>
+                    <p style="color: #aaa; margin-bottom: 15px;">${warplan.description}</p>
+
+                    <div class="screenshot-container">
+                        <img src="${warplan.screenshot}"
+                             alt="${warplan.name} Screenshot"
+                             class="screenshot-thumbnail"
+                             onclick="openLightbox(${index})">
+                        <div class="screenshot-label">🖼️ Klick für Vollbildansicht</div>
+                    </div>
+                    ${warplan.sections.map(section => `
+                        <div class="warplan-section">
+                            <h4>${section.title}</h4>
+                            <ul>
+                                ${section.items.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `).join('')}
+                    <div class="build-notes">
+                        <textarea id="note-warplan-${warplan.id}" placeholder="Deine eigenen Notizen zu diesem Kriegsplan...">${savedNote}</textarea>
+                    </div>
+                    <div class="build-actions">
+                        <button class="btn btn-save" onclick="saveWarplanNote('${warplan.id}')">💾 Notiz speichern</button>
+                        <span class="saved-indicator" id="saved-warplan-${warplan.id}" style="display: none;">✓ Gespeichert!</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Lightbox Funktionen
+        let currentLightboxIndex = 0;
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const counter = document.getElementById('lightbox-counter');
+
+            lightboxImage.src = screenshots[index];
+            counter.textContent = `${index + 1} / ${screenshots.length}`;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        function navigateLightbox(direction) {
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = screenshots.length - 1;
+            if (currentLightboxIndex >= screenshots.length) currentLightboxIndex = 0;
+
+            document.getElementById('lightbox-image').src = screenshots[currentLightboxIndex];
+            document.getElementById('lightbox-counter').textContent = `${currentLightboxIndex + 1} / ${screenshots.length}`;
+        }
+
+        // Lightbox mit ESC schließen und Pfeiltasten navigieren
+        document.addEventListener('keydown', function(e) {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigateLightbox(-1);
+            if (e.key === 'ArrowRight') navigateLightbox(1);
+        });
+
+        // Lightbox schließen wenn außerhalb des Bildes geklickt wird
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+
+        // Builds anzeigen
+        function showBuilds(classKey) {
+            document.querySelectorAll('.class-card').forEach(card => {
+                card.classList.toggle('active', card.dataset.class === classKey);
+            });
+
+            const classData = buildsData[classKey];
+            const container = document.getElementById('builds-container');
+
+            container.innerHTML = `
+                <div class="builds-section active">
+                    <h2 class="section-title">${classData.icon} ${classData.name} Builds</h2>
+                    <div id="builds-list"></div>
+                </div>
+            `;
+
+            renderBuilds(classKey);
+        }
+
+        // Build-Liste rendern
+        function renderBuilds(classKey) {
+            const classData = buildsData[classKey];
+            const list = document.getElementById('builds-list');
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const activeFilter = document.querySelector('.filter-tab.active').dataset.filter;
+
+            list.innerHTML = '';
+
+            classData.builds.forEach(build => {
+                if (searchTerm && !build.name.toLowerCase().includes(searchTerm)) return;
+                if (activeFilter === 's-tier' && build.tier !== 'S') return;
+                if (activeFilter === 'a-tier' && build.tier !== 'A') return;
+                if (activeFilter === 'hot' && !build.hot) return;
+
+                const savedNote = savedData[build.id]?.note || '';
+                const savedWarplan = savedData[build.id]?.warplan || '';
+
+                const buildEl = document.createElement('div');
+                buildEl.className = 'build-card';
+                buildEl.dataset.tier = build.tier;
+                buildEl.dataset.hot = build.hot;
+                buildEl.innerHTML = `
+                    <div class="build-header">
+                        <div class="build-title">
+                            ${build.hot ? '<span class="hot-badge">HOT</span>' : ''}
+                            ${build.name}
+                        </div>
+                        <div class="build-tier tier-${build.tier.toLowerCase()}">${build.tier}-Tier</div>
+                    </div>
+                    <div class="build-meta">
+                        <span>📋 ${build.type}</span>
+                        <span>🔗 <a href="${build.vitabloUrl}" target="_blank" class="vitalo-link">vitablo.de</a></span>
+                        <button class="btn btn-copy" onclick="copyBuildLink('${build.vitabloUrl}')">📋 Link kopieren</button>
+                    </div>
+                    <p style="color: #aaa; margin-bottom: 10px;">${build.description}</p>
+                    <button class="btn btn-expand" onclick="toggleBuild('${build.id}')">▼ Details anzeigen</button>
+                    <div class="build-content" id="content-${build.id}">
+                        <h4>⚔️ Skills</h4>
+                        <div class="skill-list">
+                            ${build.skills.map(skill => `<div class="skill-item">${skill}</div>`).join('')}
+                        </div>
+
+                        <h4>📊 Paragon / Kriegsplan</h4>
+                        <div class="warplan-section">
+                            <p style="color: #888; margin-bottom: 10px; font-size: 0.9rem;">${build.paragon}</p>
+                            <textarea class="warplan-textarea" id="warplan-${build.id}" placeholder="Deine eigenen Kriegspläne hier notieren...">${savedWarplan}</textarea>
+                        </div>
+
+                        <h4>📝 Deine Notizen</h4>
+                        <div class="build-notes">
+                            <textarea id="note-${build.id}" placeholder="Tipps, Verbesserungen, Item-Notizen...">${savedNote}</textarea>
+                        </div>
+
+                        <div class="build-actions">
+                            <button class="btn btn-save" onclick="saveBuildData('${build.id}')">💾 Speichern</button>
+                            <span class="saved-indicator" id="saved-${build.id}" style="display: none;">✓ Gespeichert!</span>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(buildEl);
+            });
+        }
+
+        // Build ein-/ausblenden
+        function toggleBuild(buildId) {
+            const content = document.getElementById(`content-${buildId}`);
+            const btn = content.previousElementSibling;
+
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                btn.textContent = '▼ Details anzeigen';
+            } else {
+                content.classList.add('expanded');
+                btn.textContent = '▲ Details ausblenden';
+            }
+        }
+
+        // Build-Daten speichern
+        function saveBuildData(buildId) {
+            const note = document.getElementById(`note-${buildId}`).value;
+            const warplan = document.getElementById(`warplan-${buildId}`).value;
+
+            if (!savedData[buildId]) {
+                savedData[buildId] = {};
+            }
+
+            savedData[buildId].note = note;
+            savedData[buildId].warplan = warplan;
+            savedData[buildId].updatedAt = new Date().toISOString();
+
+            localStorage.setItem('d4Builds', JSON.stringify(savedData));
+
+            const indicator = document.getElementById(`saved-${buildId}`);
+            indicator.style.display = 'inline';
+            setTimeout(() => {
+                indicator.style.display = 'none';
+            }, 2000);
+
+            updateStats();
+        }
+
+        // Kriegsplan-Notiz speichern
+        function saveWarplanNote(warplanId) {
+            const note = document.getElementById(`note-warplan-${warplanId}`).value;
+
+            if (!savedData[`warplan-${warplanId}`]) {
+                savedData[`warplan-${warplanId}`] = {};
+            }
+
+            savedData[`warplan-${warplanId}`].note = note;
+            savedData[`warplan-${warplanId}`].updatedAt = new Date().toISOString();
+
+            localStorage.setItem('d4Builds', JSON.stringify(savedData));
+
+            const indicator = document.getElementById(`saved-warplan-${warplanId}`);
+            indicator.style.display = 'inline';
+            setTimeout(() => {
+                indicator.style.display = 'none';
+            }, 2000);
+
+            updateStats();
+        }
+
+        // Link kopieren
+        function copyBuildLink(url) {
+            navigator.clipboard.writeText(url).then(() => {
+                alert('Link in die Zwischenablage kopiert!');
+            });
+        }
+
+        // Statistiken aktualisieren
+        function updateStats() {
+            let totalBuilds = 0;
+            let sTierCount = 0;
+            let savedNotes = 0;
+
+            Object.values(buildsData).forEach(classData => {
+                classData.builds.forEach(build => {
+                    totalBuilds++;
+                    if (build.tier === 'S') sTierCount++;
+                });
+            });
+
+            // Kriegspläne mitzählen
+            totalBuilds += warplansData.length;
+
+            savedNotes = Object.values(savedData).filter(data => data.note).length;
+
+            document.getElementById('total-builds').textContent = totalBuilds;
+            document.getElementById('s-tier-count').textContent = sTierCount;
+            document.getElementById('saved-notes').textContent = savedNotes;
+        }
+
+        // Event Listener
+        function setupEventListeners() {
+            document.getElementById('search-input').addEventListener('input', () => {
+                const activeClass = document.querySelector('.class-card.active');
+                if (activeClass) {
+                    renderBuilds(activeClass.dataset.class);
+                }
+            });
+
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const activeClass = document.querySelector('.class-card.active');
+                    if (activeClass) {
+                        renderBuilds(activeClass.dataset.class);
+                    }
+                });
+            });
+        }
+
+        // Export
+        function exportData() {
+            const dataStr = JSON.stringify(savedData, null, 2);
+            const blob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `d4-builds-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+        }
+
+        // Import
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const imported = JSON.parse(event.target.result);
+                        savedData = {...savedData, ...imported};
+                        localStorage.setItem('d4Builds', JSON.stringify(savedData));
+                        alert('Daten erfolgreich importiert!');
+                        updateStats();
+                    } catch (err) {
+                        alert('Fehler beim Importieren der Datei.');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        // Clear
+        function clearData() {
+            if (confirm('Möchtest du wirklich alle gespeicherten Daten löschen?')) {
+                savedData = {};
+                localStorage.removeItem('d4Builds');
+                updateStats();
+                alert('Alle Daten gelöscht!');
+            }
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>
