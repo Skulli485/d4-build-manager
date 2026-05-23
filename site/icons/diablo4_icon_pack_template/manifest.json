@@ -1,0 +1,2690 @@
+[
+  {
+    "class": "Barbarian",
+    "category": "Basic",
+    "name": "Flay",
+    "file": "icons/barbarian/basic/flay.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Basic",
+    "name": "Frenzy",
+    "file": "icons/barbarian/basic/frenzy.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Basic",
+    "name": "Bash",
+    "file": "icons/barbarian/basic/bash.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Basic",
+    "name": "Lunging Strike",
+    "file": "icons/barbarian/basic/lunging-strike.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Core",
+    "name": "Upheaval",
+    "file": "icons/barbarian/core/upheaval.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Core",
+    "name": "Double Swing",
+    "file": "icons/barbarian/core/double-swing.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Core",
+    "name": "Rend",
+    "file": "icons/barbarian/core/rend.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Core",
+    "name": "Hammer of the Ancients",
+    "file": "icons/barbarian/core/hammer-of-the-ancients.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Core",
+    "name": "Whirlwind",
+    "file": "icons/barbarian/core/whirlwind.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Core",
+    "name": "Endless Fury",
+    "file": "icons/barbarian/core/endless-fury.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Core",
+    "name": "Pressure Point",
+    "file": "icons/barbarian/core/pressure-point.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Core",
+    "name": "Warpath",
+    "file": "icons/barbarian/core/warpath.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Defensive",
+    "name": "Ground Stomp",
+    "file": "icons/barbarian/defensive/ground-stomp.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Defensive",
+    "name": "Rallying Cry",
+    "file": "icons/barbarian/defensive/rallying-cry.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Defensive",
+    "name": "Iron Skin",
+    "file": "icons/barbarian/defensive/iron-skin.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Defensive",
+    "name": "Challenging Shout",
+    "file": "icons/barbarian/defensive/challenging-shout.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Defensive",
+    "name": "Imposing Presence",
+    "file": "icons/barbarian/defensive/imposing-presence.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Defensive",
+    "name": "Outburst",
+    "file": "icons/barbarian/defensive/outburst.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Defensive",
+    "name": "Martial Vigor",
+    "file": "icons/barbarian/defensive/martial-vigor.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Defensive",
+    "name": "Tough as Nails",
+    "file": "icons/barbarian/defensive/tough-as-nails.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Defensive",
+    "name": "Belligerence",
+    "file": "icons/barbarian/defensive/belligerence.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Brawling",
+    "name": "Kick",
+    "file": "icons/barbarian/brawling/kick.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Brawling",
+    "name": "War Cry",
+    "file": "icons/barbarian/brawling/war-cry.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Brawling",
+    "name": "Charge",
+    "file": "icons/barbarian/brawling/charge.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Brawling",
+    "name": "Leap",
+    "file": "icons/barbarian/brawling/leap.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Brawling",
+    "name": "Swiftness",
+    "file": "icons/barbarian/brawling/swiftness.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Brawling",
+    "name": "Booming Voice",
+    "file": "icons/barbarian/brawling/booming-voice.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Brawling",
+    "name": "Aggressive Resistance",
+    "file": "icons/barbarian/brawling/aggressive-resistance.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Brawling",
+    "name": "Battle Fervor",
+    "file": "icons/barbarian/brawling/battle-fervor.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Brawling",
+    "name": "Guttural Yell",
+    "file": "icons/barbarian/brawling/guttural-yell.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Brawling",
+    "name": "Prolific Fury",
+    "file": "icons/barbarian/brawling/prolific-fury.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Brawling",
+    "name": "Raid Leader",
+    "file": "icons/barbarian/brawling/raid-leader.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Brawling",
+    "name": "Quick Impulses",
+    "file": "icons/barbarian/brawling/quick-impulses.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Weapon Mastery",
+    "name": "Rupture",
+    "file": "icons/barbarian/weapon-mastery/rupture.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Weapon Mastery",
+    "name": "Steel Grasp",
+    "file": "icons/barbarian/weapon-mastery/steel-grasp.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Weapon Mastery",
+    "name": "Death Blow",
+    "file": "icons/barbarian/weapon-mastery/death-blow.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Weapon Mastery",
+    "name": "Mighty Throw",
+    "file": "icons/barbarian/weapon-mastery/mighty-throw.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Weapon Mastery",
+    "name": "Pit Fighter",
+    "file": "icons/barbarian/weapon-mastery/pit-fighter.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Weapon Mastery",
+    "name": "Hamstring",
+    "file": "icons/barbarian/weapon-mastery/hamstring.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Weapon Mastery",
+    "name": "Thick Skin",
+    "file": "icons/barbarian/weapon-mastery/thick-skin.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Weapon Mastery",
+    "name": "Cut to the Bone",
+    "file": "icons/barbarian/weapon-mastery/cut-to-the-bone.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Weapon Mastery",
+    "name": "Expose Vulnerability",
+    "file": "icons/barbarian/weapon-mastery/expose-vulnerability.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Weapon Mastery",
+    "name": "No Mercy",
+    "file": "icons/barbarian/weapon-mastery/no-mercy.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Weapon Mastery",
+    "name": "Slaying Strike",
+    "file": "icons/barbarian/weapon-mastery/slaying-strike.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Weapon Mastery",
+    "name": "Counteroffensive",
+    "file": "icons/barbarian/weapon-mastery/counteroffensive.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Weapon Mastery",
+    "name": "Defensive Stance",
+    "file": "icons/barbarian/weapon-mastery/defensive-stance.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Weapon Mastery",
+    "name": "Irrepressible",
+    "file": "icons/barbarian/weapon-mastery/irrepressible.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Ultimate",
+    "name": "Call of the Ancients",
+    "file": "icons/barbarian/ultimate/call-of-the-ancients.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Ultimate",
+    "name": "Iron Maelstrom",
+    "file": "icons/barbarian/ultimate/iron-maelstrom.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Ultimate",
+    "name": "Wrath of the Berserker",
+    "file": "icons/barbarian/ultimate/wrath-of-the-berserker.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Ultimate",
+    "name": "Heavy Handed",
+    "file": "icons/barbarian/ultimate/heavy-handed.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Ultimate",
+    "name": "Wallop",
+    "file": "icons/barbarian/ultimate/wallop.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Ultimate",
+    "name": "Duelist",
+    "file": "icons/barbarian/ultimate/duelist.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Ultimate",
+    "name": "Tempered Fury",
+    "file": "icons/barbarian/ultimate/tempered-fury.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Ultimate",
+    "name": "Brute Force",
+    "file": "icons/barbarian/ultimate/brute-force.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Ultimate",
+    "name": "Concussion",
+    "file": "icons/barbarian/ultimate/concussion.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Ultimate",
+    "name": "Furious Impulse",
+    "file": "icons/barbarian/ultimate/furious-impulse.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Ultimate",
+    "name": "Invigorating Fury",
+    "file": "icons/barbarian/ultimate/invigorating-fury.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Ultimate",
+    "name": "Heavy Hitter",
+    "file": "icons/barbarian/ultimate/heavy-hitter.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Key Passives",
+    "name": "Unconstrained",
+    "file": "icons/barbarian/key-passives/unconstrained.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Key Passives",
+    "name": "Walking Arsenal",
+    "file": "icons/barbarian/key-passives/walking-arsenal.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Key Passives",
+    "name": "Unbridled Rage",
+    "file": "icons/barbarian/key-passives/unbridled-rage.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Key Passives",
+    "name": "Gushing Wounds",
+    "file": "icons/barbarian/key-passives/gushing-wounds.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Barbarian",
+    "category": "Key Passives",
+    "name": "Barbed Carapace",
+    "file": "icons/barbarian/key-passives/barbed-carapace.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Basic",
+    "name": "Invigorating Strike",
+    "file": "icons/rogue/basic/invigorating-strike.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Basic",
+    "name": "Blade Shift",
+    "file": "icons/rogue/basic/blade-shift.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Basic",
+    "name": "Puncture",
+    "file": "icons/rogue/basic/puncture.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Basic",
+    "name": "Heartseeker",
+    "file": "icons/rogue/basic/heartseeker.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Basic",
+    "name": "Forceful Arrow",
+    "file": "icons/rogue/basic/forceful-arrow.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Core",
+    "name": "Penetrating Shot",
+    "file": "icons/rogue/core/penetrating-shot.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Core",
+    "name": "Flurry",
+    "file": "icons/rogue/core/flurry.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Core",
+    "name": "Twisting Blades",
+    "file": "icons/rogue/core/twisting-blades.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Core",
+    "name": "Barrage",
+    "file": "icons/rogue/core/barrage.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Core",
+    "name": "Rapid Fire",
+    "file": "icons/rogue/core/rapid-fire.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Core",
+    "name": "Sturdy",
+    "file": "icons/rogue/core/sturdy.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Core",
+    "name": "Stutter Step",
+    "file": "icons/rogue/core/stutter-step.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Core",
+    "name": "Siphoning Strikes",
+    "file": "icons/rogue/core/siphoning-strikes.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Core",
+    "name": "Target Practice",
+    "file": "icons/rogue/core/target-practice.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Agility",
+    "name": "Dash",
+    "file": "icons/rogue/agility/dash.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Agility",
+    "name": "Caltrops",
+    "file": "icons/rogue/agility/caltrops.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Agility",
+    "name": "Shadow Step",
+    "file": "icons/rogue/agility/shadow-step.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Agility",
+    "name": "Dance of Knives",
+    "file": "icons/rogue/agility/dance-of-knives.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Agility",
+    "name": "Weapon Mastery",
+    "file": "icons/rogue/agility/weapon-mastery.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Agility",
+    "name": "Rapid Gambits",
+    "file": "icons/rogue/agility/rapid-gambits.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Agility",
+    "name": "Rugged",
+    "file": "icons/rogue/agility/rugged.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Agility",
+    "name": "Unstable Elixirs",
+    "file": "icons/rogue/agility/unstable-elixirs.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Agility",
+    "name": "Trick Attacks",
+    "file": "icons/rogue/agility/trick-attacks.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Agility",
+    "name": "Reactive Defense",
+    "file": "icons/rogue/agility/reactive-defense.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Agility",
+    "name": "Balestra",
+    "file": "icons/rogue/agility/balestra.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Subterfuge",
+    "name": "Concealment",
+    "file": "icons/rogue/subterfuge/concealment.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Subterfuge",
+    "name": "Smoke Grenade",
+    "file": "icons/rogue/subterfuge/smoke-grenade.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Subterfuge",
+    "name": "Poison Trap",
+    "file": "icons/rogue/subterfuge/poison-trap.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Subterfuge",
+    "name": "Dark Shroud",
+    "file": "icons/rogue/subterfuge/dark-shroud.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Subterfuge",
+    "name": "Agile",
+    "file": "icons/rogue/subterfuge/agile.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Subterfuge",
+    "name": "Exploit",
+    "file": "icons/rogue/subterfuge/exploit.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Subterfuge",
+    "name": "Malice",
+    "file": "icons/rogue/subterfuge/malice.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Subterfuge",
+    "name": "Mending Obscurity",
+    "file": "icons/rogue/subterfuge/mending-obscurity.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Subterfuge",
+    "name": "Evasive",
+    "file": "icons/rogue/subterfuge/evasive.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Imbuement",
+    "name": "Shadow Imbuement",
+    "file": "icons/rogue/imbuement/shadow-imbuement.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Imbuement",
+    "name": "Poison Imbuement",
+    "file": "icons/rogue/imbuement/poison-imbuement.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Imbuement",
+    "name": "Cold Imbuement",
+    "file": "icons/rogue/imbuement/cold-imbuement.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Imbuement",
+    "name": "Shadow Crash",
+    "file": "icons/rogue/imbuement/shadow-crash.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Imbuement",
+    "name": "Deadly Venom",
+    "file": "icons/rogue/imbuement/deadly-venom.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Imbuement",
+    "name": "Frigid Finesse",
+    "file": "icons/rogue/imbuement/frigid-finesse.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Imbuement",
+    "name": "Alchemical Advantage",
+    "file": "icons/rogue/imbuement/alchemical-advantage.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Imbuement",
+    "name": "Chilling Weight",
+    "file": "icons/rogue/imbuement/chilling-weight.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Imbuement",
+    "name": "Consuming Shadows",
+    "file": "icons/rogue/imbuement/consuming-shadows.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Imbuement",
+    "name": "Debilitating Toxins",
+    "file": "icons/rogue/imbuement/debilitating-toxins.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Imbuement",
+    "name": "Precision Imbuement",
+    "file": "icons/rogue/imbuement/precision-imbuement.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Imbuement",
+    "name": "Deadeye",
+    "file": "icons/rogue/imbuement/deadeye.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Ultimate",
+    "name": "Shadow Clone",
+    "file": "icons/rogue/ultimate/shadow-clone.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Ultimate",
+    "name": "Death Trap",
+    "file": "icons/rogue/ultimate/death-trap.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Ultimate",
+    "name": "Rain of Arrows",
+    "file": "icons/rogue/ultimate/rain-of-arrows.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Ultimate",
+    "name": "Innervation",
+    "file": "icons/rogue/ultimate/innervation.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Ultimate",
+    "name": "Trap Mastery",
+    "file": "icons/rogue/ultimate/trap-mastery.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Ultimate",
+    "name": "Aftermath",
+    "file": "icons/rogue/ultimate/aftermath.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Ultimate",
+    "name": "Adrenaline Rush",
+    "file": "icons/rogue/ultimate/adrenaline-rush.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Ultimate",
+    "name": "Alchemist's Fortune",
+    "file": "icons/rogue/ultimate/alchemists-fortune.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Ultimate",
+    "name": "Haste",
+    "file": "icons/rogue/ultimate/haste.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Ultimate",
+    "name": "Impetus",
+    "file": "icons/rogue/ultimate/impetus.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Ultimate",
+    "name": "Second Wind",
+    "file": "icons/rogue/ultimate/second-wind.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Ultimate",
+    "name": "Unto Dawn",
+    "file": "icons/rogue/ultimate/unto-dawn.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Key Passives",
+    "name": "Momentum",
+    "file": "icons/rogue/key-passives/momentum.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Key Passives",
+    "name": "Close Quarters Combat",
+    "file": "icons/rogue/key-passives/close-quarters-combat.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Key Passives",
+    "name": "Precision",
+    "file": "icons/rogue/key-passives/precision.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Key Passives",
+    "name": "Victimize",
+    "file": "icons/rogue/key-passives/victimize.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Key Passives",
+    "name": "Exposure",
+    "file": "icons/rogue/key-passives/exposure.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Rogue",
+    "category": "Key Passives",
+    "name": "Alchemical Admixture",
+    "file": "icons/rogue/key-passives/alchemical-admixture.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Basic",
+    "name": "Frost Bolt",
+    "file": "icons/sorcerer/basic/frost-bolt.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Basic",
+    "name": "Fire Bolt",
+    "file": "icons/sorcerer/basic/fire-bolt.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Basic",
+    "name": "Arc Lash",
+    "file": "icons/sorcerer/basic/arc-lash.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Basic",
+    "name": "Spark",
+    "file": "icons/sorcerer/basic/spark.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Core",
+    "name": "Frozen Orb",
+    "file": "icons/sorcerer/core/frozen-orb.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Core",
+    "name": "Ice Shards",
+    "file": "icons/sorcerer/core/ice-shards.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Core",
+    "name": "Fireball",
+    "file": "icons/sorcerer/core/fireball.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Core",
+    "name": "Incinerate",
+    "file": "icons/sorcerer/core/incinerate.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Core",
+    "name": "Charged Bolts",
+    "file": "icons/sorcerer/core/charged-bolts.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Core",
+    "name": "Chain Lightning",
+    "file": "icons/sorcerer/core/chain-lightning.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Core",
+    "name": "Potent Warding",
+    "file": "icons/sorcerer/core/potent-warding.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Core",
+    "name": "Devastation",
+    "file": "icons/sorcerer/core/devastation.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Core",
+    "name": "Elemental Dominance",
+    "file": "icons/sorcerer/core/elemental-dominance.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Defensive",
+    "name": "Flame Shield",
+    "file": "icons/sorcerer/defensive/flame-shield.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Defensive",
+    "name": "Teleport",
+    "file": "icons/sorcerer/defensive/teleport.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Defensive",
+    "name": "Ice Armor",
+    "file": "icons/sorcerer/defensive/ice-armor.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Defensive",
+    "name": "Frost Nova",
+    "file": "icons/sorcerer/defensive/frost-nova.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Defensive",
+    "name": "Glass Cannon",
+    "file": "icons/sorcerer/defensive/glass-cannon.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Defensive",
+    "name": "Elemental Attunement",
+    "file": "icons/sorcerer/defensive/elemental-attunement.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Defensive",
+    "name": "Energy Focus",
+    "file": "icons/sorcerer/defensive/energy-focus.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Defensive",
+    "name": "Dampen Layer",
+    "file": "icons/sorcerer/defensive/dampen-layer.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Conjuration",
+    "name": "Ice Blades",
+    "file": "icons/sorcerer/conjuration/ice-blades.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Conjuration",
+    "name": "Hydra",
+    "file": "icons/sorcerer/conjuration/hydra.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Conjuration",
+    "name": "Lightning Spear",
+    "file": "icons/sorcerer/conjuration/lightning-spear.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Conjuration",
+    "name": "Familiar",
+    "file": "icons/sorcerer/conjuration/familiar.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Conjuration",
+    "name": "Precision Magic",
+    "file": "icons/sorcerer/conjuration/precision-magic.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Conjuration",
+    "name": "Align the Elements",
+    "file": "icons/sorcerer/conjuration/align-the-elements.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Conjuration",
+    "name": "Mana Shield",
+    "file": "icons/sorcerer/conjuration/mana-shield.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Conjuration",
+    "name": "Protection",
+    "file": "icons/sorcerer/conjuration/protection.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Conjuration",
+    "name": "Conjuration Mastery",
+    "file": "icons/sorcerer/conjuration/conjuration-mastery.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Conjuration",
+    "name": "Primordial Binding",
+    "file": "icons/sorcerer/conjuration/primordial-binding.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Mastery",
+    "name": "Blizzard",
+    "file": "icons/sorcerer/mastery/blizzard.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Mastery",
+    "name": "Meteor",
+    "file": "icons/sorcerer/mastery/meteor.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Mastery",
+    "name": "Firewall",
+    "file": "icons/sorcerer/mastery/firewall.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Mastery",
+    "name": "Ball Lightning",
+    "file": "icons/sorcerer/mastery/ball-lightning.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Mastery",
+    "name": "Inner Flames",
+    "file": "icons/sorcerer/mastery/inner-flames.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Mastery",
+    "name": "Devouring Blaze",
+    "file": "icons/sorcerer/mastery/devouring-blaze.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Mastery",
+    "name": "Crippling Flames",
+    "file": "icons/sorcerer/mastery/crippling-flames.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Mastery",
+    "name": "Static Discharge",
+    "file": "icons/sorcerer/mastery/static-discharge.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Mastery",
+    "name": "Invigorating Conduit",
+    "file": "icons/sorcerer/mastery/invigorating-conduit.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Mastery",
+    "name": "Shocking Impact",
+    "file": "icons/sorcerer/mastery/shocking-impact.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Mastery",
+    "name": "Icy Veil",
+    "file": "icons/sorcerer/mastery/icy-veil.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Mastery",
+    "name": "Cold Front",
+    "file": "icons/sorcerer/mastery/cold-front.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Mastery",
+    "name": "Snap Freeze",
+    "file": "icons/sorcerer/mastery/snap-freeze.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Inferno",
+    "file": "icons/sorcerer/ultimate/inferno.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Unstable Currents",
+    "file": "icons/sorcerer/ultimate/unstable-currents.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Deep Freeze",
+    "file": "icons/sorcerer/ultimate/deep-freeze.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Elemental Synergies",
+    "file": "icons/sorcerer/ultimate/elemental-synergies.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Evocation",
+    "file": "icons/sorcerer/ultimate/evocation.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Convulsions",
+    "file": "icons/sorcerer/ultimate/convulsions.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Electrocution",
+    "file": "icons/sorcerer/ultimate/electrocution.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Conduction",
+    "file": "icons/sorcerer/ultimate/conduction.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Coursing Currents",
+    "file": "icons/sorcerer/ultimate/coursing-currents.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Warmth",
+    "file": "icons/sorcerer/ultimate/warmth.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Endless Pyre",
+    "file": "icons/sorcerer/ultimate/endless-pyre.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Soulfire",
+    "file": "icons/sorcerer/ultimate/soulfire.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Fiery Surge",
+    "file": "icons/sorcerer/ultimate/fiery-surge.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Frigid Breeze",
+    "file": "icons/sorcerer/ultimate/frigid-breeze.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Icy Touch",
+    "file": "icons/sorcerer/ultimate/icy-touch.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Hoarfrost",
+    "file": "icons/sorcerer/ultimate/hoarfrost.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Ultimate",
+    "name": "Permafrost",
+    "file": "icons/sorcerer/ultimate/permafrost.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Key Passives",
+    "name": "Avalanche",
+    "file": "icons/sorcerer/key-passives/avalanche.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Key Passives",
+    "name": "Shatter",
+    "file": "icons/sorcerer/key-passives/shatter.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Key Passives",
+    "name": "Overflowing Energy",
+    "file": "icons/sorcerer/key-passives/overflowing-energy.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Key Passives",
+    "name": "Vyr's Mastery",
+    "file": "icons/sorcerer/key-passives/vyrs-mastery.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Key Passives",
+    "name": "Esu's Ferocity",
+    "file": "icons/sorcerer/key-passives/esus-ferocity.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Key Passives",
+    "name": "Combustion",
+    "file": "icons/sorcerer/key-passives/combustion.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Sorcerer",
+    "category": "Key Passives",
+    "name": "Enlightenment",
+    "file": "icons/sorcerer/key-passives/enlightenment.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Basic",
+    "name": "Bone Splinters",
+    "file": "icons/necromancer/basic/bone-splinters.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Basic",
+    "name": "Reap",
+    "file": "icons/necromancer/basic/reap.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Basic",
+    "name": "Decompose",
+    "file": "icons/necromancer/basic/decompose.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Basic",
+    "name": "Hemorrhage",
+    "file": "icons/necromancer/basic/hemorrhage.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Core",
+    "name": "Sever",
+    "file": "icons/necromancer/core/sever.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Core",
+    "name": "Blood Lance",
+    "file": "icons/necromancer/core/blood-lance.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Core",
+    "name": "Blood Surge",
+    "file": "icons/necromancer/core/blood-surge.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Core",
+    "name": "Blight",
+    "file": "icons/necromancer/core/blight.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Core",
+    "name": "Bone Spear",
+    "file": "icons/necromancer/core/bone-spear.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Core",
+    "name": "Unliving Energy",
+    "file": "icons/necromancer/core/unliving-energy.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Core",
+    "name": "Hewed Flesh",
+    "file": "icons/necromancer/core/hewed-flesh.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Core",
+    "name": "Imperfectly Balanced",
+    "file": "icons/necromancer/core/imperfectly-balanced.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Corpse/Macabre",
+    "name": "Corpse Tendrils",
+    "file": "icons/necromancer/corpse-macabre/corpse-tendrils.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Corpse/Macabre",
+    "name": "Bone Spirit",
+    "file": "icons/necromancer/corpse-macabre/bone-spirit.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Corpse/Macabre",
+    "name": "Reaper's Pursuit",
+    "file": "icons/necromancer/corpse-macabre/reapers-pursuit.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Corpse/Macabre",
+    "name": "Gruesome Mending",
+    "file": "icons/necromancer/corpse-macabre/gruesome-mending.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Corpse/Macabre",
+    "name": "Necrotic Carapace",
+    "file": "icons/necromancer/corpse-macabre/necrotic-carapace.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Corpse/Macabre",
+    "name": "Serration",
+    "file": "icons/necromancer/corpse-macabre/serration.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Corpse/Macabre",
+    "name": "Fueled by Death",
+    "file": "icons/necromancer/corpse-macabre/fueled-by-death.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Corpse/Macabre",
+    "name": "Transfusion",
+    "file": "icons/necromancer/corpse-macabre/transfusion.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Corpse/Macabre",
+    "name": "Tides of Blood",
+    "file": "icons/necromancer/corpse-macabre/tides-of-blood.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Corpse/Macabre",
+    "name": "Coalesced Blood",
+    "file": "icons/necromancer/corpse-macabre/coalesced-blood.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Corpse/Macabre",
+    "name": "Compound Fracture",
+    "file": "icons/necromancer/corpse-macabre/compound-fracture.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Corpse/Macabre",
+    "name": "Rapid Ossification",
+    "file": "icons/necromancer/corpse-macabre/rapid-ossification.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Corpse/Macabre",
+    "name": "Evulsion",
+    "file": "icons/necromancer/corpse-macabre/evulsion.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Corpse/Macabre",
+    "name": "Gloom",
+    "file": "icons/necromancer/corpse-macabre/gloom.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Corpse/Macabre",
+    "name": "Crippling Darkness",
+    "file": "icons/necromancer/corpse-macabre/crippling-darkness.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Corpse/Macabre",
+    "name": "Terror",
+    "file": "icons/necromancer/corpse-macabre/terror.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Curse",
+    "name": "Iron Maiden",
+    "file": "icons/necromancer/curse/iron-maiden.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Curse",
+    "name": "Decrepify",
+    "file": "icons/necromancer/curse/decrepify.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Curse",
+    "name": "Death's Embrace",
+    "file": "icons/necromancer/curse/deaths-embrace.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Curse",
+    "name": "Skeletal Mage Mastery",
+    "file": "icons/necromancer/curse/skeletal-mage-mastery.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Curse",
+    "name": "Amplify Damage",
+    "file": "icons/necromancer/curse/amplify-damage.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Curse",
+    "name": "Death's Approach",
+    "file": "icons/necromancer/curse/deaths-approach.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Curse",
+    "name": "Precision Decay",
+    "file": "icons/necromancer/curse/precision-decay.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Summoning",
+    "name": "Raise Skeleton",
+    "file": "icons/necromancer/summoning/raise-skeleton.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Summoning",
+    "name": "Golem",
+    "file": "icons/necromancer/summoning/golem.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Summoning",
+    "name": "Drain Vitality",
+    "file": "icons/necromancer/summoning/drain-vitality.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Ultimate",
+    "name": "Blood Wave",
+    "file": "icons/necromancer/ultimate/blood-wave.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Ultimate",
+    "name": "Army of the Dead",
+    "file": "icons/necromancer/ultimate/army-of-the-dead.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Ultimate",
+    "name": "Bone Storm",
+    "file": "icons/necromancer/ultimate/bone-storm.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Ultimate",
+    "name": "Soulrift",
+    "file": "icons/necromancer/ultimate/soulrift.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Ultimate",
+    "name": "Golem Mastery",
+    "file": "icons/necromancer/ultimate/golem-mastery.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Ultimate",
+    "name": "Inspiring Leader",
+    "file": "icons/necromancer/ultimate/inspiring-leader.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Ultimate",
+    "name": "Bonded in Essence",
+    "file": "icons/necromancer/ultimate/bonded-in-essence.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Ultimate",
+    "name": "Stand Alone",
+    "file": "icons/necromancer/ultimate/stand-alone.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Ultimate",
+    "name": "Hellbent Commander",
+    "file": "icons/necromancer/ultimate/hellbent-commander.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Ultimate",
+    "name": "Death's Defense",
+    "file": "icons/necromancer/ultimate/deaths-defense.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Ultimate",
+    "name": "Memento Mori",
+    "file": "icons/necromancer/ultimate/memento-mori.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Ultimate",
+    "name": "Finality",
+    "file": "icons/necromancer/ultimate/finality.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Key Passives",
+    "name": "Ossified Essence",
+    "file": "icons/necromancer/key-passives/ossified-essence.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Key Passives",
+    "name": "Rathma's Vigor",
+    "file": "icons/necromancer/key-passives/rathmas-vigor.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Key Passives",
+    "name": "Shadowblight",
+    "file": "icons/necromancer/key-passives/shadowblight.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Key Passives",
+    "name": "Kalan's Edict",
+    "file": "icons/necromancer/key-passives/kalans-edict.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Necromancer",
+    "category": "Key Passives",
+    "name": "Affliction",
+    "file": "icons/necromancer/key-passives/affliction.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Basic",
+    "name": "Earth Spike",
+    "file": "icons/druid/basic/earth-spike.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Basic",
+    "name": "Wind Shear",
+    "file": "icons/druid/basic/wind-shear.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Basic",
+    "name": "Storm Strike",
+    "file": "icons/druid/basic/storm-strike.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Basic",
+    "name": "Claw",
+    "file": "icons/druid/basic/claw.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Basic",
+    "name": "Maul",
+    "file": "icons/druid/basic/maul.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Core",
+    "name": "Landslide",
+    "file": "icons/druid/core/landslide.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Core",
+    "name": "Lightning Storm",
+    "file": "icons/druid/core/lightning-storm.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Core",
+    "name": "Tornado",
+    "file": "icons/druid/core/tornado.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Core",
+    "name": "Pulverize",
+    "file": "icons/druid/core/pulverize.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Core",
+    "name": "Shred",
+    "file": "icons/druid/core/shred.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Core",
+    "name": "Stone Burst",
+    "file": "icons/druid/core/stone-burst.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Core",
+    "name": "Heart of the Wild",
+    "file": "icons/druid/core/heart-of-the-wild.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Core",
+    "name": "Predatory Instinct",
+    "file": "icons/druid/core/predatory-instinct.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Core",
+    "name": "Wild Impulses",
+    "file": "icons/druid/core/wild-impulses.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Core",
+    "name": "Abundance",
+    "file": "icons/druid/core/abundance.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Core",
+    "name": "Digitigrade Gait",
+    "file": "icons/druid/core/digitigrade-gait.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Core",
+    "name": "Iron Fur",
+    "file": "icons/druid/core/iron-fur.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Defensive",
+    "name": "Earthen Bulwark",
+    "file": "icons/druid/defensive/earthen-bulwark.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Defensive",
+    "name": "Cyclone Armor",
+    "file": "icons/druid/defensive/cyclone-armor.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Defensive",
+    "name": "Blood Howl",
+    "file": "icons/druid/defensive/blood-howl.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Defensive",
+    "name": "Debilitating Roar",
+    "file": "icons/druid/defensive/debilitating-roar.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Defensive",
+    "name": "Ancestral Fortitude",
+    "file": "icons/druid/defensive/ancestral-fortitude.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Defensive",
+    "name": "Vigilance",
+    "file": "icons/druid/defensive/vigilance.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Defensive",
+    "name": "Backlash",
+    "file": "icons/druid/defensive/backlash.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Companion",
+    "name": "Wolves",
+    "file": "icons/druid/companion/wolves.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Companion",
+    "name": "Poison Creeper",
+    "file": "icons/druid/companion/poison-creeper.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Companion",
+    "name": "Ravens",
+    "file": "icons/druid/companion/ravens.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Companion",
+    "name": "Call of the Wild",
+    "file": "icons/druid/companion/call-of-the-wild.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Companion",
+    "name": "Clarity",
+    "file": "icons/druid/companion/clarity.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Companion",
+    "name": "Nature's Reach",
+    "file": "icons/druid/companion/natures-reach.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Companion",
+    "name": "Humanity",
+    "file": "icons/druid/companion/humanity.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Companion",
+    "name": "Feral Aptitude",
+    "file": "icons/druid/companion/feral-aptitude.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Boulder",
+    "file": "icons/druid/wrath/boulder.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Rabies",
+    "file": "icons/druid/wrath/rabies.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Trample",
+    "file": "icons/druid/wrath/trample.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Hurricane",
+    "file": "icons/druid/wrath/hurricane.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Toxic Claws",
+    "file": "icons/druid/wrath/toxic-claws.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Stone Guard",
+    "file": "icons/druid/wrath/stone-guard.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Safeguard",
+    "file": "icons/druid/wrath/safeguard.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Provocation",
+    "file": "icons/druid/wrath/provocation.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Envenom",
+    "file": "icons/druid/wrath/envenom.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Endless Tempest",
+    "file": "icons/druid/wrath/endless-tempest.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Electric Shock",
+    "file": "icons/druid/wrath/electric-shock.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Charged Atmosphere",
+    "file": "icons/druid/wrath/charged-atmosphere.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Bad Omen",
+    "file": "icons/druid/wrath/bad-omen.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Mending",
+    "file": "icons/druid/wrath/mending.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Neurotoxin",
+    "file": "icons/druid/wrath/neurotoxin.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Crushing Earth",
+    "file": "icons/druid/wrath/crushing-earth.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Wrath",
+    "name": "Elemental Exposure",
+    "file": "icons/druid/wrath/elemental-exposure.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Ultimate",
+    "name": "Petrify",
+    "file": "icons/druid/ultimate/petrify.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Ultimate",
+    "name": "Cataclysm",
+    "file": "icons/druid/ultimate/cataclysm.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Ultimate",
+    "name": "Lacerate",
+    "file": "icons/druid/ultimate/lacerate.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Ultimate",
+    "name": "Grizzly Rage",
+    "file": "icons/druid/ultimate/grizzly-rage.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Ultimate",
+    "name": "Defensive Posture",
+    "file": "icons/druid/ultimate/defensive-posture.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Ultimate",
+    "name": "Quickshift",
+    "file": "icons/druid/ultimate/quickshift.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Ultimate",
+    "name": "Defiance",
+    "file": "icons/druid/ultimate/defiance.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Ultimate",
+    "name": "Circle of Life",
+    "file": "icons/druid/ultimate/circle-of-life.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Ultimate",
+    "name": "Heightened Senses",
+    "file": "icons/druid/ultimate/heightened-senses.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Ultimate",
+    "name": "Natural Disaster",
+    "file": "icons/druid/ultimate/natural-disaster.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Ultimate",
+    "name": "Natural Fortitude",
+    "file": "icons/druid/ultimate/natural-fortitude.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Ultimate",
+    "name": "Nature's Resolve",
+    "file": "icons/druid/ultimate/natures-resolve.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Ultimate",
+    "name": "Resonance",
+    "file": "icons/druid/ultimate/resonance.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Ultimate",
+    "name": "Thick Hide",
+    "file": "icons/druid/ultimate/thick-hide.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Ultimate",
+    "name": "Unrestrained",
+    "file": "icons/druid/ultimate/unrestrained.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Ultimate",
+    "name": "Catastrophe",
+    "file": "icons/druid/ultimate/catastrophe.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Key Passives",
+    "name": "Perfect Storm",
+    "file": "icons/druid/key-passives/perfect-storm.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Key Passives",
+    "name": "Nature's Fury",
+    "file": "icons/druid/key-passives/natures-fury.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Key Passives",
+    "name": "Earthen Might",
+    "file": "icons/druid/key-passives/earthen-might.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Key Passives",
+    "name": "Lupine Ferocity",
+    "file": "icons/druid/key-passives/lupine-ferocity.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Key Passives",
+    "name": "Bestial Rampage",
+    "file": "icons/druid/key-passives/bestial-rampage.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Key Passives",
+    "name": "Ursine Strength",
+    "file": "icons/druid/key-passives/ursine-strength.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Druid",
+    "category": "Key Passives",
+    "name": "One With Nature",
+    "file": "icons/druid/key-passives/one-with-nature.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Basic",
+    "name": "Withering Fist",
+    "file": "icons/spiritborn/basic/withering-fist.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Basic",
+    "name": "Thrash",
+    "file": "icons/spiritborn/basic/thrash.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Basic",
+    "name": "Thunderspike",
+    "file": "icons/spiritborn/basic/thunderspike.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Basic",
+    "name": "Rock Splitter",
+    "file": "icons/spiritborn/basic/rock-splitter.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Core",
+    "name": "Crushing Hand",
+    "file": "icons/spiritborn/core/crushing-hand.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Core",
+    "name": "Quill Volley",
+    "file": "icons/spiritborn/core/quill-volley.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Core",
+    "name": "Rake",
+    "file": "icons/spiritborn/core/rake.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Core",
+    "name": "Stinger",
+    "file": "icons/spiritborn/core/stinger.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Core",
+    "name": "Follow Through",
+    "file": "icons/spiritborn/core/follow-through.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Core",
+    "name": "Vigorous",
+    "file": "icons/spiritborn/core/vigorous.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Core",
+    "name": "Balanced Exertion",
+    "file": "icons/spiritborn/core/balanced-exertion.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Core",
+    "name": "Velocity",
+    "file": "icons/spiritborn/core/velocity.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Focus",
+    "name": "Vortex",
+    "file": "icons/spiritborn/focus/vortex.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Focus",
+    "name": "Soar",
+    "file": "icons/spiritborn/focus/soar.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Focus",
+    "name": "Ravager",
+    "file": "icons/spiritborn/focus/ravager.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Focus",
+    "name": "Toxic Skin",
+    "file": "icons/spiritborn/focus/toxic-skin.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Focus",
+    "name": "Mirage",
+    "file": "icons/spiritborn/focus/mirage.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Focus",
+    "name": "Unrestrained Power",
+    "file": "icons/spiritborn/focus/unrestrained-power.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Focus",
+    "name": "Swift",
+    "file": "icons/spiritborn/focus/swift.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Focus",
+    "name": "Focal Point",
+    "file": "icons/spiritborn/focus/focal-point.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Focus",
+    "name": "Apex",
+    "file": "icons/spiritborn/focus/apex.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Focus",
+    "name": "Diminishment",
+    "file": "icons/spiritborn/focus/diminishment.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Defensive",
+    "name": "Armored Hide",
+    "file": "icons/spiritborn/defensive/armored-hide.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Defensive",
+    "name": "Concussive Stomp",
+    "file": "icons/spiritborn/defensive/concussive-stomp.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Defensive",
+    "name": "Counterattack",
+    "file": "icons/spiritborn/defensive/counterattack.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Defensive",
+    "name": "Scourge",
+    "file": "icons/spiritborn/defensive/scourge.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Defensive",
+    "name": "Endurance",
+    "file": "icons/spiritborn/defensive/endurance.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Defensive",
+    "name": "Fueled",
+    "file": "icons/spiritborn/defensive/fueled.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Defensive",
+    "name": "Antivenom",
+    "file": "icons/spiritborn/defensive/antivenom.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Defensive",
+    "name": "Nourishment",
+    "file": "icons/spiritborn/defensive/nourishment.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Defensive",
+    "name": "Patient Guard",
+    "file": "icons/spiritborn/defensive/patient-guard.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Defensive",
+    "name": "Auspicious",
+    "file": "icons/spiritborn/defensive/auspicious.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Defensive",
+    "name": "Bastion",
+    "file": "icons/spiritborn/defensive/bastion.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Defensive",
+    "name": "Perseverance",
+    "file": "icons/spiritborn/defensive/perseverance.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Potency",
+    "name": "Payback",
+    "file": "icons/spiritborn/potency/payback.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Potency",
+    "name": "Razor Wings",
+    "file": "icons/spiritborn/potency/razor-wings.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Potency",
+    "name": "Rushing Claw",
+    "file": "icons/spiritborn/potency/rushing-claw.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Potency",
+    "name": "Touch of Death",
+    "file": "icons/spiritborn/potency/touch-of-death.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Potency",
+    "name": "Vehemence",
+    "file": "icons/spiritborn/potency/vehemence.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Potency",
+    "name": "Potent",
+    "file": "icons/spiritborn/potency/potent.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Potency",
+    "name": "Furnace",
+    "file": "icons/spiritborn/potency/furnace.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Potency",
+    "name": "Ravenous",
+    "file": "icons/spiritborn/potency/ravenous.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Potency",
+    "name": "Oppressive",
+    "file": "icons/spiritborn/potency/oppressive.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Potency",
+    "name": "Resilient",
+    "file": "icons/spiritborn/potency/resilient.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Potency",
+    "name": "Dominant",
+    "file": "icons/spiritborn/potency/dominant.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Potency",
+    "name": "Brilliance",
+    "file": "icons/spiritborn/potency/brilliance.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Potency",
+    "name": "Acceleration",
+    "file": "icons/spiritborn/potency/acceleration.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Ultimate",
+    "name": "The Protector",
+    "file": "icons/spiritborn/ultimate/the-protector.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Ultimate",
+    "name": "The Seeker",
+    "file": "icons/spiritborn/ultimate/the-seeker.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Ultimate",
+    "name": "The Hunter",
+    "file": "icons/spiritborn/ultimate/the-hunter.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Ultimate",
+    "name": "The Devourer",
+    "file": "icons/spiritborn/ultimate/the-devourer.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Ultimate",
+    "name": "Resolution",
+    "file": "icons/spiritborn/ultimate/resolution.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Ultimate",
+    "name": "Spiritual Attunement",
+    "file": "icons/spiritborn/ultimate/spiritual-attunement.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Ultimate",
+    "name": "Sustenance",
+    "file": "icons/spiritborn/ultimate/sustenance.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Ultimate",
+    "name": "Supremacy",
+    "file": "icons/spiritborn/ultimate/supremacy.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Ultimate",
+    "name": "Initiative",
+    "file": "icons/spiritborn/ultimate/initiative.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Ultimate",
+    "name": "Intricacy",
+    "file": "icons/spiritborn/ultimate/intricacy.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Key Passives",
+    "name": "Noxious Resonance",
+    "file": "icons/spiritborn/key-passives/noxious-resonance.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Key Passives",
+    "name": "Prodigy's Tempo",
+    "file": "icons/spiritborn/key-passives/prodigys-tempo.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Key Passives",
+    "name": "Adaptive Stances",
+    "file": "icons/spiritborn/key-passives/adaptive-stances.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  },
+  {
+    "class": "Spiritborn",
+    "category": "Key Passives",
+    "name": "Vital Strikes",
+    "file": "icons/spiritborn/key-passives/vital-strikes.svg",
+    "asset_type": "original_placeholder_svg_not_official_blizzard_asset"
+  }
+]

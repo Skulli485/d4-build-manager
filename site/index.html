@@ -1,0 +1,3663 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D4 Build Manager - Vitablo.de</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700;900&family=MedievalSharp&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background:
+                radial-gradient(ellipse at top, rgba(139, 0, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(20, 0, 0, 0.8) 0%, transparent 70%),
+                linear-gradient(180deg, #0a0505 0%, #1a0808 50%, #0a0505 100%);
+            color: #c8b8a8;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139, 0, 0, 0.03) 2px, rgba(139, 0, 0, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139, 0, 0, 0.03) 2px, rgba(139, 0, 0, 0.03) 4px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-bottom: 3px solid #5a0000;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff2200, transparent);
+            box-shadow: 0 0 10px #ff2200;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-family: 'Cinzel Decorative', cursive;
+            color: #ff3300;
+            text-shadow:
+                0 0 10px rgba(255, 51, 0, 0.8),
+                0 0 20px rgba(255, 51, 0, 0.5),
+                0 0 40px rgba(139, 0, 0, 0.3),
+                2px 2px 4px rgba(0, 0, 0, 0.8);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            color: #8a7060;
+            font-size: 1rem;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+        }
+
+        .main-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .main-tab {
+            padding: 15px 35px;
+            background:
+                linear-gradient(145deg, rgba(30, 10, 10, 0.95), rgba(15, 5, 5, 0.95)),
+                linear-gradient(180deg, #2a1515 0%, #1a0a0a 100%);
+            border: 2px solid #3a1515;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.1rem;
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .main-tab:hover {
+            border-color: #ff2200;
+            transform: translateY(-3px);
+            box-shadow:
+                0 5px 20px rgba(255, 34, 0, 0.3),
+                inset 0 0 20px rgba(139, 0, 0, 0.2);
+        }
+
+        .main-tab.active {
+            border-color: #ff2200;
+            background:
+                linear-gradient(145deg, rgba(50, 15, 15, 0.95), rgba(25, 8, 8, 0.95)),
+                linear-gradient(180deg, #3a1a1a 0%, #2a0a0a 100%);
+            color: #ff4400;
+            text-shadow: 0 0 10px rgba(255, 68, 0, 0.5);
+            box-shadow:
+                0 0 20px rgba(255, 34, 0, 0.4),
+                inset 0 0 30px rgba(139, 0, 0, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .class-card {
+            background:
+                linear-gradient(145deg, rgba(25, 10, 10, 0.9), rgba(12, 5, 5, 0.95)),
+                linear-gradient(180deg, #2a1515 0%, #1a0a0a 100%);
+            border: 2px solid #3a1515;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .class-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at top, rgba(139, 0, 0, 0.1) 0%, transparent 70%),
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(139, 0, 0, 0.02) 10px, rgba(139, 0, 0, 0.02) 20px);
+            pointer-events: none;
+        }
+
+        .class-card:hover {
+            border-color: #ff2200;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow:
+                0 8px 30px rgba(255, 34, 0, 0.25),
+                inset 0 0 20px rgba(139, 0, 0, 0.2);
+        }
+
+        .class-card.active {
+            border-color: #ff2200;
+            background:
+                linear-gradient(145deg, rgba(40, 15, 15, 0.9), rgba(20, 8, 8, 0.95)),
+                linear-gradient(180deg, #3a1a1a 0%, #2a0a0a 100%);
+            box-shadow:
+                0 0 25px rgba(255, 34, 0, 0.4),
+                inset 0 0 30px rgba(139, 0, 0, 0.3);
+        }
+
+        .class-card .icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px rgba(139, 0, 0, 0.5));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 10px;
+        }
+
+        .class-card .icon img.class-icon-img {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(139, 0, 0, 0.5));
+        }
+
+        .class-card h3 {
+            color: #c8b8a8;
+            font-size: 1rem;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .class-card .count {
+            background: linear-gradient(135deg, #5a0000, #3a0000);
+            color: #ff8800;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-top: 8px;
+            display: inline-block;
+            border: 1px solid #7a0000;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .warplans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .warplan-card {
+            background:
+                linear-gradient(145deg, rgba(25, 10, 10, 0.9), rgba(12, 5, 5, 0.95)),
+                linear-gradient(180deg, #2a1515 0%, #1a0a0a 100%);
+            border: 2px solid #3a1515;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warplan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at top right, rgba(139, 0, 0, 0.08) 0%, transparent 60%),
+                repeating-linear-gradient(-45deg, transparent, transparent 15px, rgba(139, 0, 0, 0.015) 15px, rgba(139, 0, 0, 0.015) 30px);
+            pointer-events: none;
+        }
+
+        .warplan-card:hover {
+            border-color: #ff2200;
+            transform: translateY(-3px);
+            box-shadow:
+                0 8px 25px rgba(255, 34, 0, 0.2),
+                inset 0 0 20px rgba(139, 0, 0, 0.15);
+        }
+
+        .warplan-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3a1515;
+            position: relative;
+            z-index: 1;
+        }
+
+        .warplan-icon {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 8px rgba(139, 0, 0, 0.6));
+        }
+
+        .warplan-title {
+            font-size: 1.4rem;
+            color: #ffaa00;
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 0 10px rgba(255, 170, 0, 0.3);
+            letter-spacing: 1px;
+        }
+
+        .warplan-section {
+            background: rgba(10, 5, 5, 0.8);
+            border: 1px solid #2a1010;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .warplan-section h4 {
+            color: #ff4400;
+            margin-bottom: 12px;
+            font-size: 1rem;
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 0 8px rgba(255, 68, 0, 0.4);
+            letter-spacing: 0.5px;
+        }
+
+        .warplan-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .warplan-section li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #ccc;
+            line-height: 1.4;
+        }
+
+        .warplan-section li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #ff6600;
+        }
+
+        .warplan-section li strong {
+            color: #ffcc00;
+        }
+
+        .builds-section {
+            display: none;
+        }
+
+        .builds-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #ff4400;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #3a1515;
+            font-family: 'Cinzel Decorative', cursive;
+            text-shadow: 0 0 15px rgba(255, 68, 0, 0.4);
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, #ff2200, transparent);
+            box-shadow: 0 0 10px #ff2200;
+        }
+
+        .build-card {
+            background:
+                linear-gradient(145deg, rgba(25, 10, 10, 0.9), rgba(12, 5, 5, 0.95)),
+                linear-gradient(180deg, #2a1515 0%, #1a0a0a 100%);
+            border: 2px solid #3a1515;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .build-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(139, 0, 0, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .build-card:hover {
+            border-color: #5a2020;
+            box-shadow: 0 5px 20px rgba(139, 0, 0, 0.15);
+        }
+
+        .build-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .build-title {
+            font-size: 1.2rem;
+            color: #ffaa00;
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 0 8px rgba(255, 170, 0, 0.3);
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .build-tier {
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+        }
+
+        .tier-s {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #1a0a0a;
+            box-shadow:
+                0 0 15px rgba(255, 215, 0, 0.5),
+                inset 0 0 10px rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .tier-a {
+            background: linear-gradient(135deg, #aa00ff, #7700cc);
+            color: white;
+            box-shadow: 0 0 15px rgba(170, 0, 255, 0.4);
+        }
+
+        .tier-b {
+            background: linear-gradient(135deg, #0088ff, #0055bb);
+            color: white;
+            box-shadow: 0 0 15px rgba(0, 136, 255, 0.4);
+        }
+
+        .tier-c {
+            background: linear-gradient(135deg, #555, #333);
+            color: #aaa;
+        }
+
+        .build-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #7a6060;
+            flex-wrap: wrap;
+        }
+
+        .build-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .build-content {
+            display: none;
+        }
+
+        .build-content.expanded {
+            display: block;
+        }
+
+        .build-content h4 {
+            color: #ff4400;
+            margin: 15px 0 10px;
+            font-size: 1rem;
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 0 8px rgba(255, 68, 0, 0.4);
+            letter-spacing: 0.5px;
+        }
+
+        .skill-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .skill-item {
+            background: rgba(10, 5, 5, 0.8);
+            border: 1px solid #2a1010;
+            padding: 8px 14px;
+            border-radius: 6px;
+            border-left: 3px solid #5a0000;
+            font-size: 0.85rem;
+            color: #a89888;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: rgba(20, 8, 8, 0.8);
+            border-left-color: #ff2200;
+            color: #c8b8a8;
+        }
+
+        .warplan-textarea {
+            width: 100%;
+            background:
+                linear-gradient(145deg, rgba(10, 4, 4, 0.95), rgba(5, 2, 2, 0.98)),
+                linear-gradient(180deg, #0a0505 0%, #050202 100%);
+            border: 2px solid #2a1010;
+            border-radius: 6px;
+            color: #c8b8a8;
+            padding: 12px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 80px;
+            transition: all 0.3s ease;
+        }
+
+        .warplan-textarea:focus {
+            outline: none;
+            border-color: #ff2200;
+            box-shadow:
+                0 0 15px rgba(255, 34, 0, 0.25),
+                inset 0 0 15px rgba(139, 0, 0, 0.15);
+            color: #e8d8c8;
+        }
+
+        .warplan-textarea::placeholder {
+            color: #5a4545;
+        }
+
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .btn-expand {
+            background:
+                linear-gradient(145deg, #3a2020, #2a1515),
+                linear-gradient(180deg, #2a1a1a 0%, #1a0a0a 100%);
+            color: #a89888;
+            border: 1px solid #4a2525;
+        }
+
+        .btn-expand:hover {
+            background:
+                linear-gradient(145deg, #4a2525, #3a1a1a),
+                linear-gradient(180deg, #3a2020 0%, #2a1515 100%);
+            color: #c8b8a8;
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.3);
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, #ff3300, #aa0000);
+            color: white;
+            margin-top: 10px;
+            border: 1px solid #ff4400;
+            box-shadow: 0 0 15px rgba(255, 51, 0, 0.4);
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-save:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 51, 0, 0.7);
+        }
+
+        .btn-copy {
+            background: linear-gradient(135deg, #2a3a5a, #1a2a4a);
+            color: #8aaadd;
+            font-size: 0.75rem;
+            padding: 5px 12px;
+            border: 1px solid #3a4a6a;
+            font-family: 'Cinzel', serif;
+        }
+
+        .btn-copy:hover {
+            background: linear-gradient(135deg, #3a4a7a, #2a3a6a);
+            box-shadow: 0 0 15px rgba(100, 150, 255, 0.3);
+        }
+
+        .vitalo-link {
+            color: #ff6600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            text-shadow: 0 0 8px rgba(255, 102, 0, 0.3);
+            transition: all 0.3s ease;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
+        }
+
+        .vitalo-link:hover {
+            text-decoration: none;
+            color: #ff8833;
+            text-shadow: 0 0 15px rgba(255, 102, 0, 0.6);
+        }
+
+        .stats-bar {
+            background:
+                linear-gradient(145deg, rgba(20, 8, 8, 0.95), rgba(10, 4, 4, 0.98)),
+                linear-gradient(180deg, #2a1515 0%, #1a0a0a 100%);
+            border: 2px solid #3a1515;
+            padding: 18px 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.4),
+                inset 0 0 30px rgba(139, 0, 0, 0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            color: #ff4400;
+            font-weight: bold;
+            font-family: 'Cinzel Decorative', cursive;
+            text-shadow:
+                0 0 10px rgba(255, 68, 0, 0.6),
+                0 0 20px rgba(139, 0, 0, 0.4);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #7a6060;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 25px;
+            background:
+                linear-gradient(145deg, rgba(20, 8, 8, 0.95), rgba(10, 4, 4, 0.98)),
+                linear-gradient(180deg, #1a0a0a 0%, #0a0505 100%);
+            border: 2px solid #3a1515;
+            border-radius: 25px;
+            color: #c8b8a8;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #ff2200;
+            box-shadow:
+                0 0 15px rgba(255, 34, 0, 0.3),
+                inset 0 0 20px rgba(139, 0, 0, 0.2);
+            color: #e8d8c8;
+        }
+
+        .search-box input::placeholder {
+            color: #6a5050;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 10px 18px;
+            background:
+                linear-gradient(145deg, rgba(25, 10, 10, 0.9), rgba(12, 5, 5, 0.95)),
+                linear-gradient(180deg, #2a1515 0%, #1a0a0a 100%);
+            border: 2px solid #3a1515;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.85rem;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
+            color: #a89888;
+        }
+
+        .filter-tab:hover {
+            border-color: #ff2200;
+            color: #c8b8a8;
+            box-shadow: 0 0 15px rgba(255, 34, 0, 0.25);
+        }
+
+        .filter-tab.active {
+            background:
+                linear-gradient(145deg, rgba(50, 15, 15, 0.9), rgba(25, 8, 8, 0.95)),
+                linear-gradient(180deg, #3a1a1a 0%, #2a0a0a 100%);
+            border-color: #ff2200;
+            color: #ff4400;
+            text-shadow: 0 0 8px rgba(255, 68, 0, 0.5);
+            box-shadow:
+                0 0 20px rgba(255, 34, 0, 0.4),
+                inset 0 0 20px rgba(139, 0, 0, 0.2);
+        }
+
+        .build-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .build-notes {
+            background: rgba(10, 5, 5, 0.6);
+            border: 1px solid #2a1010;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .build-notes textarea {
+            width: 100%;
+            background:
+                linear-gradient(145deg, rgba(10, 4, 4, 0.95), rgba(5, 2, 2, 0.98)),
+                linear-gradient(180deg, #0a0505 0%, #050202 100%);
+            border: 2px solid #2a1010;
+            border-radius: 6px;
+            color: #c8b8a8;
+            padding: 10px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 60px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .build-notes textarea:focus {
+            outline: none;
+            border-color: #ff2200;
+            box-shadow:
+                0 0 15px rgba(255, 34, 0, 0.25),
+                inset 0 0 15px rgba(139, 0, 0, 0.15);
+            color: #e8d8c8;
+        }
+
+        .build-notes textarea::placeholder {
+            color: #5a4545;
+        }
+
+        .saved-indicator {
+            color: #44aa66;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            text-shadow: 0 0 8px rgba(68, 170, 102, 0.4);
+            font-family: 'Cinzel', serif;
+        }
+
+        .hot-badge {
+            background: linear-gradient(135deg, #ff3300, #cc0000);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            animation: pulse-fire 2s infinite;
+            border: 1px solid #ff4400;
+            box-shadow:
+                0 0 10px rgba(255, 51, 0, 0.6),
+                inset 0 0 5px rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes pulse-fire {
+            0%, 100% {
+                opacity: 1;
+                box-shadow:
+                    0 0 10px rgba(255, 51, 0, 0.6),
+                    inset 0 0 5px rgba(255, 255, 255, 0.2);
+            }
+            50% {
+                opacity: 0.85;
+                box-shadow:
+                    0 0 20px rgba(255, 51, 0, 0.9),
+                    inset 0 0 10px rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        .export-section {
+            background:
+                linear-gradient(145deg, rgba(20, 8, 8, 0.95), rgba(10, 4, 4, 0.98)),
+                linear-gradient(180deg, #2a1515 0%, #1a0a0a 100%);
+            border: 2px solid #3a1515;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 35px;
+            text-align: center;
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.4),
+                inset 0 0 30px rgba(139, 0, 0, 0.1);
+        }
+
+        .export-section h3 {
+            color: #ff4400;
+            margin-bottom: 18px;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 68, 0, 0.4);
+        }
+
+        .export-btn {
+            background: linear-gradient(135deg, #2a4a7a, #1a3a6a);
+            color: #8aacff;
+            padding: 12px 24px;
+            margin: 0 5px;
+            border: 1px solid #3a5a9a;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
+        }
+
+        .export-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(60, 100, 200, 0.4);
+        }
+
+        .activity-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #5a0000, #3a0000);
+            color: #ff8800;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            margin-left: 10px;
+            border: 1px solid #7a0000;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Screenshot Styles */
+        .screenshot-container {
+            margin: 15px 0;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .screenshot-thumbnail {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border: 3px solid #3a1515;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.5),
+                inset 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .screenshot-thumbnail:hover {
+            border-color: #ff2200;
+            transform: scale(1.02);
+            box-shadow:
+                0 8px 30px rgba(255, 34, 0, 0.4),
+                inset 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .screenshot-label {
+            color: #6a5050;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at center, rgba(30, 10, 10, 0.95) 0%, rgba(10, 4, 4, 0.98) 100%);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            border: 3px solid #5a0000;
+            box-shadow:
+                0 0 80px rgba(255, 34, 0, 0.5),
+                0 0 40px rgba(139, 0, 0, 0.6),
+                inset 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #ff4400;
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 10001;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 20px rgba(255, 68, 0, 0.8);
+            font-family: 'Cinzel', serif;
+        }
+
+        .lightbox-close:hover {
+            color: #ff6600;
+            text-shadow: 0 0 30px rgba(255, 102, 0, 1);
+            transform: scale(1.1);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ff4400;
+            font-size: 2.5rem;
+            cursor: pointer;
+            padding: 20px;
+            z-index: 10001;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 15px rgba(255, 68, 0, 0.6);
+            font-family: 'Cinzel', serif;
+        }
+
+        .lightbox-nav:hover {
+            color: #ff6600;
+            text-shadow: 0 0 25px rgba(255, 102, 0, 0.9);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 10px;
+        }
+
+        .lightbox-next {
+            right: 10px;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #c8b8a8;
+            font-size: 1rem;
+            z-index: 10001;
+            background: rgba(20, 8, 8, 0.8);
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1px solid #3a1515;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+                letter-spacing: 1px;
+            }
+
+            .class-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .build-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .warplans-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-tabs {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .stats-bar {
+                padding: 12px 15px;
+            }
+
+            .stat-value {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Skill Tree Styles */
+        .skill-tree-container {
+            background: rgba(10, 5, 5, 0.6);
+            border: 2px solid #2a1010;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-tree-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #3a1515;
+        }
+
+        .skill-tree-header h4 {
+            color: #ff4400;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            text-shadow: 0 0 8px rgba(255, 68, 0, 0.4);
+        }
+
+        .skill-tree-toggle {
+            background: linear-gradient(135deg, #3a2020, #2a1515);
+            color: #a89888;
+            border: 1px solid #4a2525;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tree-toggle:hover {
+            background: linear-gradient(135deg, #4a2525, #3a1a1a);
+            border-color: #ff2200;
+            color: #ff4400;
+        }
+
+        .skill-tree {
+            display: none;
+        }
+
+        .skill-tree.active {
+            display: block;
+        }
+
+        .skill-branch {
+            margin-left: 0;
+            position: relative;
+        }
+
+        .skill-node {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            margin: 8px 0;
+            background: rgba(15, 8, 8, 0.8);
+            border: 1px solid #2a1515;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .skill-node:hover {
+            background: rgba(25, 12, 12, 0.9);
+            border-color: #5a2020;
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(139, 0, 0, 0.2);
+        }
+
+        .skill-node.root-node {
+            background: linear-gradient(135deg, rgba(90, 30, 0, 0.3), rgba(40, 15, 5, 0.8));
+            border-color: #5a3020;
+            border-width: 2px;
+        }
+
+        .skill-node.root-node .skill-icon {
+            font-size: 2rem;
+            filter: drop-shadow(0 0 10px rgba(255, 136, 0, 0.5));
+        }
+
+        .skill-node.child-node {
+            margin-left: 40px;
+            position: relative;
+        }
+
+        .skill-node.child-node::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, #3a1515, #5a2020);
+        }
+
+        .skill-node.child-node::after {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: -50%;
+            width: 2px;
+            height: calc(100% + 20px);
+            background: linear-gradient(180deg, #3a1515, #5a2020);
+        }
+
+        .skill-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .skill-icon img.skill-icon-svg {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 5px rgba(139, 0, 0, 0.5));
+        }
+
+        .skill-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .skill-name {
+            color: #c8b8a8;
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .skill-name-english {
+            color: #7a6060;
+            font-size: 0.75rem;
+            font-style: italic;
+        }
+
+        .skill-level-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            flex-shrink: 0;
+        }
+
+        .level-priority {
+            background: linear-gradient(135deg, #2a4a2a, #1a3a1a);
+            color: #88cc88;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            min-width: 35px;
+            text-align: center;
+            border: 1px solid #3a5a3a;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .level-priority.priority-early {
+            background: linear-gradient(135deg, #2a4a2a, #1a3a1a);
+            color: #88cc88;
+            border-color: #3a5a3a;
+        }
+
+        .level-priority.priority-mid {
+            background: linear-gradient(135deg, #2a2a5a, #1a1a4a);
+            color: #8888ff;
+            border-color: #3a3a6a;
+        }
+
+        .level-priority.priority-late {
+            background: linear-gradient(135deg, #5a4a20, #3a3a15);
+            color: #ffcc66;
+            border-color: #7a6a30;
+        }
+
+        .level-max {
+            font-size: 0.65rem;
+            color: #6a5050;
+            font-family: 'Cinzel', serif;
+        }
+
+        .skill-tree-tooltip {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(30, 15, 15, 0.98), rgba(15, 8, 8, 0.98));
+            border: 2px solid #5a2020;
+            border-radius: 8px;
+            padding: 15px;
+            z-index: 1000;
+            min-width: 200px;
+            max-width: 300px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .skill-tree-tooltip.active {
+            opacity: 1;
+        }
+
+        .tooltip-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #3a1515;
+        }
+
+        .tooltip-icon {
+            font-size: 2rem;
+        }
+
+        .tooltip-title {
+            color: #ffaa00;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+        }
+
+        .tooltip-subtitle {
+            color: #7a6060;
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        .tooltip-info {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 8px 15px;
+            font-size: 0.85rem;
+        }
+
+        .tooltip-label {
+            color: #7a6060;
+        }
+
+        .tooltip-value {
+            color: #c8b8a8;
+        }
+
+        /* Skill Editor Modal */
+        .skill-editor-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .skill-editor-modal.active {
+            display: flex;
+        }
+
+        .skill-editor-content {
+            background: linear-gradient(145deg, rgba(25, 10, 10, 0.95), rgba(12, 5, 5, 0.98));
+            border: 2px solid #5a2020;
+            border-radius: 10px;
+            padding: 25px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .skill-editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3a1515;
+        }
+
+        .skill-editor-header h3 {
+            color: #ff4400;
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+        }
+
+        .skill-editor-close {
+            background: none;
+            border: none;
+            color: #ff6600;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            line-height: 1;
+        }
+
+        .skill-editor-close:hover {
+            color: #ff8833;
+        }
+
+        .skill-editor-field {
+            margin-bottom: 15px;
+        }
+
+        .skill-editor-field label {
+            display: block;
+            color: #a89888;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            font-family: 'Cinzel', serif;
+        }
+
+        .skill-editor-field input,
+        .skill-editor-field textarea {
+            width: 100%;
+            padding: 10px;
+            background: rgba(10, 5, 5, 0.9);
+            border: 2px solid #2a1515;
+            border-radius: 6px;
+            color: #c8b8a8;
+            font-family: inherit;
+        }
+
+        .skill-editor-field input:focus,
+        .skill-editor-field textarea:focus {
+            outline: none;
+            border-color: #ff2200;
+        }
+
+        .skill-editor-field input[type="range"] {
+            padding: 0;
+        }
+
+        .skill-editor-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #3a1515;
+        }
+
+        .priority-groups {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .priority-group-btn {
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            font-family: 'Cinzel', serif;
+        }
+
+        .priority-group-btn.early {
+            background: linear-gradient(135deg, #2a4a2a, #1a3a1a);
+            color: #88cc88;
+            border-color: #3a5a3a;
+        }
+
+        .priority-group-btn.mid {
+            background: linear-gradient(135deg, #2a2a5a, #1a1a4a);
+            color: #8888ff;
+            border-color: #3a3a6a;
+        }
+
+        .priority-group-btn.late {
+            background: linear-gradient(135deg, #5a4a20, #3a3a15);
+            color: #ffcc66;
+            border-color: #7a6a30;
+        }
+
+        .priority-group-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚔️ D4 Build Manager</h1>
+            <p>Deine vitablo.de Build-Übersicht für Diablo 4 - Lord of Hatred</p>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-value" id="total-builds">0</div>
+                <div class="stat-label">Builds gesamt</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="s-tier-count">0</div>
+                <div class="stat-label">S-Tier Builds</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="saved-notes">0</div>
+                <div class="stat-label">Deine Notizen</div>
+            </div>
+        </div>
+
+        <!-- Haupt-Tabs -->
+        <div class="main-tabs">
+            <div class="main-tab active" onclick="switchMainTab('builds')">🎮 Klassen-Builds</div>
+            <div class="main-tab" onclick="switchMainTab('warplans')">⚔️ Kriegspläne</div>
+        </div>
+
+        <!-- Klassen-Builds Tab -->
+        <div class="tab-content active" id="tab-builds">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="🔍 Build suchen...">
+            </div>
+
+            <div class="filter-tabs">
+                <div class="filter-tab active" data-filter="all">Alle</div>
+                <div class="filter-tab" data-filter="s-tier">S-Tier</div>
+                <div class="filter-tab" data-filter="a-tier">A-Tier</div>
+                <div class="filter-tab" data-filter="hot">🔥 Hot</div>
+            </div>
+
+            <h2 style="color: #ff6600; margin-bottom: 20px; text-align: center;">Wähle eine Klasse</h2>
+
+            <div class="class-grid" id="class-grid"></div>
+
+            <div id="builds-container"></div>
+        </div>
+
+        <!-- Kriegspläne Tab -->
+        <div class="tab-content" id="tab-warplans">
+            <h2 style="color: #ff6600; margin-bottom: 20px;">Kriegspläne - Endgame Aktivitäten</h2>
+            <div class="warplans-grid" id="warplans-container"></div>
+        </div>
+
+        <!-- Lightbox -->
+        <div class="lightbox" id="lightbox">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <span class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">&#10094;</span>
+            <span class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">&#10095;</span>
+            <img class="lightbox-content" id="lightbox-image" src="" alt="Vollbildansicht">
+            <div class="lightbox-counter" id="lightbox-counter"></div>
+        </div>
+
+        <!-- Skill-Editor Modal -->
+        <div class="skill-editor-modal" id="skill-editor-modal">
+            <div class="skill-editor-content">
+                <div class="skill-editor-header">
+                    <h3>✏️ Skill Editor</h3>
+                    <button class="skill-editor-close" onclick="closeSkillEditor()">&times;</button>
+                </div>
+
+                <div class="skill-editor-field">
+                    <label>Skill Icon</label>
+                    <input type="text" id="edit-skill-icon" placeholder="🌿" maxlength="2">
+                </div>
+
+                <div class="skill-editor-field">
+                    <label>Skill Name (Deutsch)</label>
+                    <input type="text" id="edit-skill-name" placeholder="Erdspieß">
+                </div>
+
+                <div class="skill-editor-field">
+                    <label>Skill Name (Englisch)</label>
+                    <input type="text" id="edit-skill-english" placeholder="Earthen Spike">
+                </div>
+
+                <div class="skill-editor-field">
+                    <label>Priority Level: <span id="priority-value">1</span></label>
+                    <input type="range" id="edit-skill-priority" min="1" max="99" value="1" oninput="document.getElementById('priority-value').textContent = this.value">
+                    <div class="priority-groups">
+                        <button class="priority-group-btn early" onclick="setPriority(1)">Early (1)</button>
+                        <button class="priority-group-btn early" onclick="setPriority(5)">Early (5)</button>
+                        <button class="priority-group-btn mid" onclick="setPriority(7)">Mid (7)</button>
+                        <button class="priority-group-btn mid" onclick="setPriority(12)">Mid (12)</button>
+                        <button class="priority-group-btn late" onclick="setPriority(15)">Late (15)</button>
+                        <button class="priority-group-btn late" onclick="setPriority(50)">Late (50)</button>
+                    </div>
+                </div>
+
+                <div class="skill-editor-field">
+                    <label>Max Level</label>
+                    <input type="number" id="edit-skill-maxLevel" min="1" max="99" value="15">
+                </div>
+
+                <div class="skill-editor-actions">
+                    <button class="btn btn-save" onclick="saveSkillEditor()">💾 Speichern</button>
+                    <button class="btn btn-expand" onclick="closeSkillEditor()">Abbrechen</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="export-section">
+            <h3>💾 Daten verwalten</h3>
+            <button class="btn export-btn" onclick="exportData()">Daten exportieren</button>
+            <button class="btn export-btn" onclick="importData()">Daten importieren</button>
+            <button class="btn export-btn" onclick="clearData()">Alles löschen</button>
+        </div>
+    </div>
+
+    <script>
+        // D4 Builds Daten (basierend auf vitablo.de Lord of Hatred)
+        const buildsData = {
+            "hexenmeister": {
+                name: "Hexenmeister",
+                icon: "🔮",
+                iconPath: "icons/warlock-icon-diablo-4-wiki-guide-32px.png",
+                builds: [
+                    {
+                        id: "warlock-armee-abaddon",
+                        name: "Armee von Abaddon",
+                        tier: "A",
+                        hot: false,
+                        type: "Endgame",
+                        description: "Der etwas andere Beschwörer Build mit unzähligen Dämonen-Dienern und dem gigantischen Dämon Abaddon.",
+                        skills: ["Dämonenbeschwörung", "Abaddon rufen", "Höllenportal", "Dämonenherrschaft", "Teufelsaure", "Fledermauschwarm"],
+                        paragon: "Start mit Dämonen-Baum, dann Abaddon-Fokus für maximale Diener-Schadensmultiplikatoren",
+                        vitabloUrl: "https://vitablo.de/armee-von-abaddon-hexenmeister-endgame-build/",
+                        skillTree: {
+                            id: "daemonenbeschwörung",
+                            name: "Dämonenbeschwörung",
+                            icon: "😈",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Dämonenbeschwörung",
+                            english: "Demon Summoning",
+                            children: [
+                                { id: "abaddon-rufen", name: "Abaddon rufen", icon: "👹", priority: 1, maxLevel: 5, german: "Abaddon rufen", english: "Call of Abaddon" },
+                                { id: "hoellenportal", name: "Höllenportal", icon: "🚪", priority: 7, maxLevel: 3, german: "Höllenportal", english: "Hell Portal" },
+                                { id: "daemonenherrschaft", name: "Dämonenherrschaft", icon: "👑", priority: 7, maxLevel: 5, german: "Dämonenherrschaft", english: "Demon Lordship" },
+                                { id: "teufelsaure", name: "Teufelsaure", icon: "☠️", priority: 12, maxLevel: 5, german: "Teufelsaure", english: "Devil's Acid" },
+                                { id: "fledermauschwarm", name: "Fledermauschwarm", icon: "🦇", priority: 15, maxLevel: 5, german: "Fledermauschwarm", english: "Bat Swarm" }
+                            ]
+                        }
+                    },
+                    {
+                        id: "warlock-grauensklauen",
+                        name: "Grauensklauen Speed Build",
+                        tier: "S",
+                        hot: true,
+                        type: "Starter + Endgame",
+                        description: "Highspeed Build, der auch in hohen Qualstufen alles dominiert.",
+                        skills: ["Grauensklauen", "Schattenblitz", "Dämonische Geschwindigkeit", "Schattenform", "Todesfuhle", "Klingensturm"],
+                        paragon: "Speed-Fokus: Bewegungsgeschwindigkeit + Klauen-Schaden",
+                        vitabloUrl: "https://vitablo.de/grauensklauen-hexenmeister-starter-endgame-build/",
+                        skillTree: {
+                            id: "grauensklauen",
+                            name: "Grauensklauen",
+                            icon: "🐱",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Grauensklauen",
+                            english: "Razorclaws",
+                            children: [
+                                { id: "schattenblitz", name: "Schattenblitz", icon: "⚡", priority: 1, maxLevel: 5, german: "Schattenblitz", english: "Shadow Bolt" },
+                                { id: "daemonische-geschwindigkeit", name: "Dämonische Geschwindigkeit", icon: "💨", priority: 7, maxLevel: 3, german: "Dämonische Geschwindigkeit", english: "Demonic Speed" },
+                                { id: "schattenform", name: "Schattenform", icon: "👤", priority: 7, maxLevel: 5, german: "Schattenform", english: "Shadow Form" },
+                                { id: "todesfuhle", name: "Todesfuhle", icon: "💀", priority: 12, maxLevel: 3, german: "Todesfuhle", english: "Death's Embrace" },
+                                { id: "klingensturm", name: "Klingensturm", icon: "⚔️", priority: 15, maxLevel: 5, german: "Klingensturm", english: "Blade Storm" }
+                            ]
+                        }
+                    },
+                    {
+                        id: "warlock-hoellenbruch",
+                        name: "Höllenbruch",
+                        tier: "S",
+                        hot: false,
+                        type: "Starter",
+                        description: "Mächtiger Starter-Build mit Höllenbruch-Mechanik.",
+                        skills: ["Höllenbruch", "Feuerregen", "Schutzgeist", "Inferno", "Phasenverschiebung", "Dämonenpakt"],
+                        paragon: "Feuer-Schaden最大化 + Überleben",
+                        vitabloUrl: "https://vitablo.de/hoellenbruch-hexenmeister-starter-build/",
+                        skillTree: {
+                            id: "hoellenbruch",
+                            name: "Höllenbruch",
+                            icon: "🔥",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Höllenbruch",
+                            english: "Hell Rift",
+                            children: [
+                                { id: "feuerregen", name: "Feuerregen", icon: "☔", priority: 1, maxLevel: 5, german: "Feuerregen", english: "Fire Rain" },
+                                { id: "schutzgeist", name: "Schutzgeist", icon: "👻", priority: 7, maxLevel: 3, german: "Schutzgeist", english: "Guardian Spirit" },
+                                { id: "inferno", name: "Inferno", icon: "🔥", priority: 12, maxLevel: 5, german: "Inferno", english: "Inferno" },
+                                { id: "phasenverschiebung", name: "Phasenverschiebung", icon: "✨", priority: 12, maxLevel: 3, german: "Phasenverschiebung", english: "Phase Shift" },
+                                { id: "daemonenpakt", name: "Dämonenpakt", icon: "😈", priority: 15, maxLevel: 5, german: "Dämonenpakt", english: "Demon Pact" }
+                            ]
+                        }
+                    },
+                    {
+                        id: "warlock-ausweiden",
+                        name: "Ausweiden (Eviscerate)",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Nahkampforientierter Build mit hohem Burst-Schaden.",
+                        skills: ["Ausweiden", "Nahkampfmastery", "Blutdurst", "Todeshauch", "Schleichen", "Mehrfachschlag"],
+                        paragon: "Krit-Schaden + Blut-Effekte",
+                        vitabloUrl: "https://vitablo.de/ausweiden-hexenmeister-starter-build/",
+                        skillTree: {
+                            id: "ausweiden",
+                            name: "Ausweiden",
+                            icon: "🗡️",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Ausweiden",
+                            english: "Eviscerate",
+                            children: [
+                                { id: "nahkampfmastery", name: "Nahkampfmastery", icon: "⚔️", priority: 1, maxLevel: 5, german: "Nahkampfmastery", english: "Melee Mastery" },
+                                { id: "blutdurst", name: "Blutdurst", icon: "🩸", priority: 7, maxLevel: 3, german: "Blutdurst", english: "Blood Thirst" },
+                                { id: "todeshauch", name: "Todeshauch", icon: "💀", priority: 12, maxLevel: 5, german: "Todeshauch", english: "Death Breath" },
+                                { id: "schleichen", name: "Schleichen", icon: "👤", priority: 12, maxLevel: 3, german: "Schleichen", english: "Stealth" },
+                                { id: "mehrfachschlag", name: "Mehrfachschlag", icon: "⚡", priority: 15, maxLevel: 5, german: "Mehrfachschlag", english: "Multi Strike" }
+                            ]
+                        }
+                    },
+                    {
+                        id: "warlock-daemon-beschwoerer",
+                        name: "Dämon Beschwörer",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Klassischer Dämonen-Beschwörer mit Fokus auf Diener-Massa.",
+                        skills: ["Dämonenbeschwörung", "Diener-Mastery", "Dämonenjäger", "Hordenruf", "Opferung", "Dämonenlord"],
+                        paragon: "Diener-Schaden + Diener-Überleben",
+                        vitabloUrl: "https://vitablo.de/daemon-beschwoerer-hexenmeister-starter-build/",
+                        skillTree: {
+                            id: "daemonenbeschwörung",
+                            name: "Dämonenbeschwörung",
+                            icon: "😈",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Dämonenbeschwörung",
+                            english: "Demon Summoning",
+                            children: [
+                                { id: "diener-mastery", name: "Diener-Mastery", icon: "🎯", priority: 1, maxLevel: 5, german: "Diener-Mastery", english: "Minion Mastery" },
+                                { id: "daemonenjaeger", name: "Dämonenjäger", icon: "🏹", priority: 7, maxLevel: 3, german: "Dämonenjäger", english: "Demon Hunter" },
+                                { id: "hordenruf", name: "Hordenruf", icon: "📢", priority: 7, maxLevel: 5, german: "Hordenruf", english: "Horde Call" },
+                                { id: "opferung", name: "Opferung", icon: "🔥", priority: 12, maxLevel: 3, german: "Opferung", english: "Sacrifice" },
+                                { id: "daemonenlord", name: "Dämonenlord", icon: "👑", priority: 15, maxLevel: 5, german: "Dämonenlord", english: "Demon Lord" }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "totenbeschwoerer": {
+                name: "Totenbeschwörer",
+                icon: "💀",
+                iconPath: "icons/d4-classes-icon-necromancer-32.png",
+                builds: [
+                    {
+                        id: "necro-skelett-armee",
+                        name: "Skelett-Diener Armee",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Kleines Update für den Level Guide: Jetzt mit Aspekten, Items und Paragonbrettern. Fast 30 Skelette!",
+                        skills: ["Skelett erwecken", "Skelettmagie", "Knochenrüstung", "Knochengeist", "Golem beschwören", "Leichenexplosion"],
+                        paragon: "Skelett-Maximierung + Knochen-Schaden",
+                        vitabloUrl: "https://vitablo.de/skelett-diener-totenbeschwoerer-necro-starter-build/",
+                        skillTree: {
+                            id: "skelett-erwecken",
+                            name: "Skelett erwecken",
+                            icon: "💀",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Skelett erwecken",
+                            english: "Raise Skeleton",
+                            children: [
+                                { id: "skelettmagie", name: "Skelettmagie", icon: "✨", priority: 1, maxLevel: 5, german: "Skelettmagie", english: "Skeleton Magic" },
+                                { id: "knochenruestung", name: "Knochenrüstung", icon: "🛡️", priority: 7, maxLevel: 3, german: "Knochenrüstung", english: "Bone Armor" },
+                                { id: "knochengeist", name: "Knochengeist", icon: "👻", priority: 7, maxLevel: 5, german: "Knochengeist", english: "Bone Spirit" },
+                                { id: "golem-beschwoeren", name: "Golem beschwören", icon: "🗿", priority: 12, maxLevel: 5, german: "Golem beschwören", english: "Raise Golem" },
+                                { id: "leichenexplosion", name: "Leichenexplosion", icon: "💥", priority: 15, maxLevel: 5, german: "Leichenexplosion", english: "Corpse Explosion" }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "zauberin": {
+                name: "Zauberin",
+                icon: "✨",
+                iconPath: "icons/d4-classes-icon-sorcerer-32.png",
+                builds: [
+                    {
+                        id: "sorcerer-gefrorene-kugel",
+                        name: "Gefrorene Kugel (Frozen Orb)",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Klassischer Frozen Orb Build mit starkem AoE-Schaden.",
+                        skills: ["Frozen Orb", "Eislanze", "Frostnova", "Eisrüstung", "Teleport", "Blizzard"],
+                        paragon: "Kälte-Schaden + Mana-Effizienz",
+                        vitabloUrl: "https://vitablo.de/gefrorene-kugel-zauberin-starter-build/",
+                        skillTree: {
+                            id: "frozen-orb",
+                            name: "Gefrorene Kugel",
+                            icon: "❄️",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Gefrorene Kugel",
+                            english: "Frozen Orb",
+                            children: [
+                                { id: "eislanze", name: "Eislanze", icon: "🔱", priority: 1, maxLevel: 5, german: "Eislanze", english: "Ice Spear" },
+                                { id: "frostnova", name: "Frostnova", icon: "❄️", priority: 7, maxLevel: 3, german: "Frostnova", english: "Frost Nova" },
+                                { id: "eisruestung", name: "Eisrüstung", icon: "🛡️", priority: 7, maxLevel: 5, german: "Eisrüstung", english: "Ice Armor" },
+                                { id: "teleport-eis", name: "Teleport", icon: "✨", priority: 12, maxLevel: 5, german: "Teleport", english: "Teleport" },
+                                { id: "blizzard", name: "Blizzard", icon: "🌨️", priority: 15, maxLevel: 5, german: "Blizzard", english: "Blizzard" }
+                            ]
+                        }
+                    },
+                    {
+                        id: "sorcerer-comboblitze",
+                        name: "Comboblitze (Charged Bolts)",
+                        tier: "S",
+                        hot: false,
+                        type: "Starter",
+                        description: "Mächtiger Blitz-Build mit Charged Bolts als Core-Skill.",
+                        skills: ["Charged Bolts", "Blitzfokus", "Kettenblitz", "Teleport", "Blitzrüstung", "Unwetter"],
+                        paragon: "Blitz-Schaden + Crit-Multiplikator",
+                        vitabloUrl: "https://vitablo.de/comboblitze-zauberin-starter-build/",
+                        skillTree: {
+                            id: "charged-bolts",
+                            name: "Comboblitze",
+                            icon: "⚡",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Comboblitze",
+                            english: "Charged Bolts",
+                            children: [
+                                { id: "blitzfokus", name: "Blitzfokus", icon: "🎯", priority: 1, maxLevel: 5, german: "Blitzfokus", english: "Lightning Focus" },
+                                { id: "kettenblitz-cb", name: "Kettenblitz", icon: "⚡", priority: 7, maxLevel: 3, german: "Kettenblitz", english: "Chain Lightning" },
+                                { id: "teleport-blitz", name: "Teleport", icon: "✨", priority: 7, maxLevel: 5, german: "Teleport", english: "Teleport" },
+                                { id: "blitzruestung", name: "Blitzrüstung", icon: "⚡", priority: 12, maxLevel: 5, german: "Blitzrüstung", english: "Lightning Armor" },
+                                { id: "unwetter", name: "Unwetter", icon: "🌩️", priority: 15, maxLevel: 5, german: "Unwetter", english: "Storm" }
+                            ]
+                        }
+                    },
+                    {
+                        id: "sorcerer-kettenblitz",
+                        name: "Kettenblitz (Chain Lightning)",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Kettenblitz für schnellen Trash-Mob Clear.",
+                        skills: ["Kettenblitz", "Elektroschock", "Frostnova", "Teleport", "Mana-Schild", "Blitzschlag"],
+                        paragon: "Ketten-Effekte + Angriffsgeschwindigkeit",
+                        vitabloUrl: "https://vitablo.de/kettenblitz-zauberin-starter-build/",
+                        skillTree: {
+                            id: "kettenblitz",
+                            name: "Kettenblitz",
+                            icon: "⚡",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Kettenblitz",
+                            english: "Chain Lightning",
+                            children: [
+                                { id: "elektroschock", name: "Elektroschock", icon: "⚡", priority: 1, maxLevel: 5, german: "Elektroschock", english: "Electro Shock" },
+                                { id: "frostnova-kl", name: "Frostnova", icon: "❄️", priority: 7, maxLevel: 3, german: "Frostnova", english: "Frost Nova" },
+                                { id: "teleport-kl", name: "Teleport", icon: "✨", priority: 7, maxLevel: 5, german: "Teleport", english: "Teleport" },
+                                { id: "mana-schild", name: "Mana-Schild", icon: "🔵", priority: 12, maxLevel: 5, german: "Mana-Schild", english: "Mana Shield" },
+                                { id: "blitzschlag", name: "Blitzschlag", icon: "🌩️", priority: 15, maxLevel: 5, german: "Blitzschlag", english: "Lightning Strike" }
+                            ]
+                        }
+                    },
+                    {
+                        id: "sorcerer-orbital-kugelblitz",
+                        name: "Orbital Kugelblitz (Ball Lightning)",
+                        tier: "S",
+                        hot: false,
+                        type: "Starter",
+                        description: "Ball Lightning mit orbitalem Schaden-Muster.",
+                        skills: ["Ball Lightning", "Charged Bolts", "Teleport", "Unwetter", "Blitzmastery", "Überladen"],
+                        paragon: "Blitz-Dauer + Orbit-Damage",
+                        vitabloUrl: "https://vitablo.de/orbital-kugelblitz-zauberin-starter-build/",
+                        skillTree: {
+                            id: "ball-lightning",
+                            name: "Kugelblitz",
+                            icon: "⚡",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Kugelblitz",
+                            english: "Ball Lightning",
+                            children: [
+                                { id: "charged-bolts-orb", name: "Charged Bolts", icon: "⚡", priority: 1, maxLevel: 5, german: "Charged Bolts", english: "Charged Bolts" },
+                                { id: "teleport-orb", name: "Teleport", icon: "✨", priority: 7, maxLevel: 5, german: "Teleport", english: "Teleport" },
+                                { id: "unwetter-orb", name: "Unwetter", icon: "🌩️", priority: 12, maxLevel: 5, german: "Unwetter", english: "Storm" },
+                                { id: "blitzmastery", name: "Blitzmastery", icon: "⚡", priority: 12, maxLevel: 3, german: "Blitzmastery", english: "Lightning Mastery" },
+                                { id: "ueberladen", name: "Überladen", icon: "🔌", priority: 15, maxLevel: 5, german: "Überladen", english: "Overcharge" }
+                            ]
+                        }
+                    },
+                    {
+                        id: "sorcerer-bouncy-feuerball",
+                        name: "Bouncy Feuerball (Fireball)",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Feuerball mit Bounce-Mechanik für hohen AoE-Schaden.",
+                        skills: ["Feuerball", "Feuerregen", "Flammenschlag", "Teleport", "Feuerrüstung", "Meteor"],
+                        paragon: "Feuer-Schaden + Bounce-Effekte",
+                        vitabloUrl: "https://vitablo.de/bouncy-feuerball-zauberin-starter-build/",
+                        skillTree: {
+                            id: "feuerball",
+                            name: "Feuerball",
+                            icon: "🔥",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Feuerball",
+                            english: "Fireball",
+                            children: [
+                                { id: "feuerregen-fb", name: "Feuerregen", icon: "☔", priority: 1, maxLevel: 5, german: "Feuerregen", english: "Fire Rain" },
+                                { id: "flammenschlag", name: "Flammenschlag", icon: "🔥", priority: 7, maxLevel: 3, german: "Flammenschlag", english: "Flame Slash" },
+                                { id: "teleport-fb", name: "Teleport", icon: "✨", priority: 7, maxLevel: 5, german: "Teleport", english: "Teleport" },
+                                { id: "feuerruestung", name: "Feuerrüstung", icon: "🛡️", priority: 12, maxLevel: 5, german: "Feuerrüstung", english: "Fire Armor" },
+                                { id: "meteor", name: "Meteor", icon: "☄️", priority: 15, maxLevel: 5, german: "Meteor", english: "Meteor" }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "jaegerin": {
+                name: "Jägerin",
+                icon: "🗡️",
+                iconPath: "icons/d4-classes-icon-rogue-32.png",
+                builds: [
+                    {
+                        id: "rogue-tanz-messer",
+                        name: "Tanz der Messer (Dance of Knives)",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Nahkampf-Rogue mit Dance of Knives als Hauptskill.",
+                        skills: ["Dance of Knives", "Messerwerfen", "Schatten Schritt", "Ausweichen", "Giftwolke", "Schattenmacht"],
+                        paragon: "Nahkampf-Schaden + AusweichChance",
+                        vitabloUrl: "https://vitablo.de/tanz-der-messer-jaegerin-starter-build/",
+                        skillTree: {
+                            id: "dance-of-knives",
+                            name: "Tanz der Messer",
+                            icon: "🗡️",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Tanz der Messer",
+                            english: "Dance of Knives",
+                            children: [
+                                { id: "messerwerfen", name: "Messerwerfen", icon: "🔪", priority: 1, maxLevel: 5, german: "Messerwerfen", english: "Knife Throw" },
+                                { id: "schatten-schritt", name: "Schatten Schritt", icon: "👤", priority: 7, maxLevel: 3, german: "Schatten Schritt", english: "Shadow Step" },
+                                { id: "ausweichen", name: "Ausweichen", icon: "💨", priority: 7, maxLevel: 5, german: "Ausweichen", english: "Evasion" },
+                                { id: "giftwolke", name: "Giftwolke", icon: "☠️", priority: 12, maxLevel: 5, german: "Giftwolke", english: "Poison Cloud" },
+                                { id: "schattenmacht", name: "Schattenmacht", icon: "🌑", priority: 15, maxLevel: 5, german: "Schattenmacht", english: "Shadow Power" }
+                            ]
+                        }
+                    },
+                    {
+                        id: "rogue-sperrfeuer",
+                        name: "Sperrfeuer (Barrage)",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Fernkampf-Rogue mit Barrage für massiven Projektil-Schaden.",
+                        skills: ["Barrage", "Pfeilhagel", "Kugelfest", "Falle", "Schatten Schritt", "Präzision"],
+                        paragon: "Projektil-Schaden + Angriffsgeschwindigkeit",
+                        vitabloUrl: "https://vitablo.de/sperrfeuer-jaegerin-starter-build/",
+                        skillTree: {
+                            id: "barrage",
+                            name: "Sperrfeuer",
+                            icon: "🏹",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Sperrfeuer",
+                            english: "Barrage",
+                            children: [
+                                { id: "pfeilhagel", name: "Pfeilhagel", icon: "🏹", priority: 1, maxLevel: 5, german: "Pfeilhagel", english: "Arrow Volley" },
+                                { id: "kugelfest", name: "Kugelfest", icon: "🛡️", priority: 7, maxLevel: 3, german: "Kugelfest", english: "Bulletproof" },
+                                { id: "falle", name: "Falle", icon: "⚙️", priority: 7, maxLevel: 5, german: "Falle", english: "Trap" },
+                                { id: "schatten-schritt-barrage", name: "Schatten Schritt", icon: "👤", priority: 12, maxLevel: 5, german: "Schatten Schritt", english: "Shadow Step" },
+                                { id: "praezision", name: "Präzision", icon: "🎯", priority: 15, maxLevel: 5, german: "Präzision", english: "Precision" }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "paladin": {
+                name: "Paladin",
+                icon: "⚔️",
+                iconPath: "icons/d4-classes-icon-paladin-32.png",
+                builds: [
+                    {
+                        id: "paladin-richturteil",
+                        name: "Richturteil (Judgement Nuke)",
+                        tier: "A",
+                        hot: false,
+                        type: "Starter",
+                        description: "Mächtiger Judgement-Nuke Build.",
+                        skills: ["Richturteil", "Heiliger Schlag", "Schildwurf", "Flügelschlag", "Heilige Aura", "Göttlicher Schutz"],
+                        paragon: "Heiliger Schaden + Nuke-Multiplikatoren",
+                        vitabloUrl: "https://vitablo.de/richturteil-paladin-starter-build/",
+                        skillTree: {
+                            id: "richturteil",
+                            name: "Richturteil",
+                            icon: "⚖️",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Richturteil",
+                            english: "Judgement",
+                            children: [
+                                { id: "heiliger-schlag", name: "Heiliger Schlag", icon: "✝️", priority: 1, maxLevel: 5, german: "Heiliger Schlag", english: "Holy Strike" },
+                                { id: "schildwurf", name: "Schildwurf", icon: "🛡️", priority: 7, maxLevel: 3, german: "Schildwurf", english: "Shield Throw" },
+                                { id: "fluegelschlag-rt", name: "Flügelschlag", icon: "🪽", priority: 7, maxLevel: 5, german: "Flügelschlag", english: "Wing Strike" },
+                                { id: "heilige-aura", name: "Heilige Aura", icon: "✨", priority: 12, maxLevel: 5, german: "Heilige Aura", english: "Holy Aura" },
+                                { id: "goettlicher-schutz", name: "Göttlicher Schutz", icon: "🛡️", priority: 15, maxLevel: 5, german: "Göttlicher Schutz", english: "Divine Protection" }
+                            ]
+                        }
+                    },
+                    {
+                        id: "paladin-hammerdin",
+                        name: "Gesegneter Hammer + Flügelschlag (Hammerdin)",
+                        tier: "S",
+                        hot: false,
+                        type: "Starter",
+                        description: "Klassischer Hammerdin mit Flügelschlag-Mobilität.",
+                        skills: ["Gesegneter Hammer", "Flügelschlag", "Heiliger Zorn", "Schild des Glaubens", "Heilige Aura", "Konzentration"],
+                        paragon: "Hammer-Schaden + Mobilität",
+                        vitabloUrl: "https://vitablo.de/gesegneter-hammer-fluegelschlag-paladin-starter-build/",
+                        skillTree: {
+                            id: "gesegneter-hammer",
+                            name: "Gesegneter Hammer",
+                            icon: "🔨",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Gesegneter Hammer",
+                            english: "Blessed Hammer",
+                            children: [
+                                { id: "fluegelschlag-hammer", name: "Flügelschlag", icon: "🪽", priority: 1, maxLevel: 5, german: "Flügelschlag", english: "Wing Strike" },
+                                { id: "heiliger-zorn", name: "Heiliger Zorn", icon: "😠", priority: 7, maxLevel: 3, german: "Heiliger Zorn", english: "Holy Wrath" },
+                                { id: "schild-des-glaubens", name: "Schild des Glaubens", icon: "🛡️", priority: 7, maxLevel: 5, german: "Schild des Glaubens", english: "Shield of Faith" },
+                                { id: "heilige-aura-hammer", name: "Heilige Aura", icon: "✨", priority: 12, maxLevel: 5, german: "Heilige Aura", english: "Holy Aura" },
+                                { id: "konzentration", name: "Konzentration", icon: "🎯", priority: 15, maxLevel: 5, german: "Konzentration", english: "Concentration" }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "druide": {
+                name: "Druide",
+                icon: "🐻",
+                iconPath: "icons/d4-classes-icon-druid-32.png",
+                builds: [
+                    {
+                        id: "druid-pulverisieren",
+                        name: "Pulverisieren (Pulverize)",
+                        tier: "S",
+                        hot: false,
+                        type: "Starter",
+                        description: "Mächtiger Werebear Build mit Pulverize als Core-Skill.",
+                        skills: ["Pulverisieren", "Bärgestalt", "Erdspalte", "Tornado", "Griff", "Natur resistenz"],
+                        paragon: "Werewolf/Bear-Schaden + Erd-Magie",
+                        vitabloUrl: "https://vitablo.de/pulverisieren-druide-starter-build/",
+                        skillTree: {
+                            id: "pulverisieren",
+                            name: "Pulverisieren",
+                            icon: "🐻",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Pulverisieren",
+                            english: "Pulverize",
+                            children: [
+                                { id: "baergestalt", name: "Bärgestalt", icon: "🐻", priority: 1, maxLevel: 5, german: "Bärgestalt", english: "Werebear Form" },
+                                { id: "erdspalte", name: "Erdspalte", icon: "🌍", priority: 7, maxLevel: 3, german: "Erdspalte", english: "Earth Rupture" },
+                                { id: "tornado", name: "Tornado", icon: "🌪️", priority: 7, maxLevel: 5, german: "Tornado", english: "Tornado" },
+                                { id: "griff", name: "Griff", icon: "🦅", priority: 12, maxLevel: 5, german: "Griff", english: "Rake" },
+                                { id: "natur-resistenz", name: "Natur resistenz", icon: "🛡️", priority: 15, maxLevel: 5, german: "Natur resistenz", english: "Nature Resistance" }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "barbar": {
+                name: "Barbar",
+                icon: "⚔️",
+                iconPath: "icons/d4-classes-icon-barbarian-32.png",
+                builds: [
+                    {
+                        id: "barbar-hota",
+                        name: "Hand des Allerhöchsten (HotA)",
+                        tier: "S",
+                        hot: true,
+                        type: "Endgame",
+                        description: "Der mächtigste Single-Target Build mit massivem Schaden pro Treffer.",
+                        skills: ["Hand des Allerhöchsten", "Kampfgeschrei", "Sprunghieb", "Wut", "Unbesiegbar", "Raserei"],
+                        paragon: "HotA-Schaden + Rüstungsdurchbruch + Wut-Regeneration",
+                        vitabloUrl: "https://vitablo.de/hota-barbar-endgame-build/",
+                        skillTree: {
+                            id: "hand-des-allerhoechsten",
+                            name: "Hand des Allerhöchsten",
+                            icon: "👆",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Hand des Allerhöchsten",
+                            english: "Hand of the Highest",
+                            children: [
+                                { id: "kampfgeschrei-hota", name: "Kampfgeschrei", icon: "📢", priority: 1, maxLevel: 5, german: "Kampfgeschrei", english: "War Cry" },
+                                { id: "sprunghieb", name: "Sprunghieb", icon: "⬆️", priority: 7, maxLevel: 3, german: "Sprunghieb", english: "Leap" },
+                                { id: "wut-hota", name: "Wut", icon: "😤", priority: 7, maxLevel: 5, german: "Wut", english: "Fury" },
+                                { id: "unbesiegbar", name: "Unbesiegbar", icon: "🛡️", priority: 12, maxLevel: 5, german: "Unbesiegbar", english: "Unconquerable" },
+                                { id: "raserei-hota", name: "Raserei", icon: "😡", priority: 15, maxLevel: 5, german: "Raserei", english: "Frenzy" }
+                            ]
+                        }
+                    },
+                    {
+                        id: "barbar-wirbelwind",
+                        name: "Wirbelwind (Whirlwind)",
+                        tier: "A",
+                        hot: false,
+                        type: "Leveling",
+                        description: "Klassischer AoE Build für schnelles Leveln und Farmen.",
+                        skills: ["Wirbelwind", "Kampfgeschrei", "Raserei", "Wut", "Unbesiegbar", "Blutrausch"],
+                        paragon: "Whirlwind-Schaden + Bewegungsgeschwindigkeit + AoE",
+                        vitabloUrl: "https://vitablo.de/wirbelwind-barbar-leveling-build/",
+                        skillTree: {
+                            id: "wirbelwind",
+                            name: "Wirbelwind",
+                            icon: "🌪️",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Wirbelwind",
+                            english: "Whirlwind",
+                            children: [
+                                { id: "kampfgeschrei-ww", name: "Kampfgeschrei", icon: "📢", priority: 1, maxLevel: 5, german: "Kampfgeschrei", english: "War Cry" },
+                                { id: "raserei-ww", name: "Raserei", icon: "😡", priority: 7, maxLevel: 3, german: "Raserei", english: "Frenzy" },
+                                { id: "wut-ww", name: "Wut", icon: "😤", priority: 7, maxLevel: 5, german: "Wut", english: "Fury" },
+                                { id: "unbesiegbar-ww", name: "Unbesiegbar", icon: "🛡️", priority: 12, maxLevel: 5, german: "Unbesiegbar", english: "Unconquerable" },
+                                { id: "blutrausch", name: "Blutrausch", icon: "🩸", priority: 15, maxLevel: 5, german: "Blutrausch", english: "Blood Frenzy" }
+                            ]
+                        }
+                    },
+                    {
+                        id: "barbar-waffenwechsel",
+                        name: "Waffenwechsel (Weapon Swap)",
+                        tier: "S",
+                        hot: false,
+                        type: "Endgame",
+                        description: "Komplexer High-DPS Build mit Waffenwechsel-Mechanik.",
+                        skills: ["Waffenwechsel", "Todeskuss", "Überrennen", "Kampfrausch", "Grimmige Tollkühnheit", "Stampfer"],
+                        paragon: "Waffenwechsel-Schaden + Crit-Multiplier + Skill Rotation",
+                        vitabloUrl: "https://vitablo.de/waffenwechsel-barbar-endgame-build/",
+                        skillTree: {
+                            id: "waffenwechsel",
+                            name: "Waffenwechsel",
+                            icon: "⚔️",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Waffenwechsel",
+                            english: "Weapon Swap",
+                            children: [
+                                { id: "todeskuss", name: "Todeskuss", icon: "💀", priority: 1, maxLevel: 5, german: "Todeskuss", english: "Death Kiss" },
+                                { id: "ueberrennen", name: "Überrennen", icon: "🏃", priority: 7, maxLevel: 3, german: "Überrennen", english: "Charge" },
+                                { id: "kampfrausch", name: "Kampfrausch", icon: "⚔️", priority: 7, maxLevel: 5, german: "Kampfrausch", english: "Battle Rage" },
+                                { id: "grimmige-tollkuehnheit", name: "Grimmige Tollkühnheit", icon: "😤", priority: 12, maxLevel: 5, german: "Grimmige Tollkühnheit", english: "Ferocity" },
+                                { id: "stampfer", name: "Stampfer", icon: "🦶", priority: 15, maxLevel: 5, german: "Stampfer", english: "Stomp" }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "spiritborn": {
+                name: "Spiritborn",
+                icon: "🦅",
+                iconPath: "icons/spiritborn-icon-diablo-4-wiki-guide-removebg-preview-32px.png",
+                builds: [
+                    {
+                        id: "spiritborn-stachel",
+                        name: "Stachel (Thorns)",
+                        tier: "S",
+                        hot: true,
+                        type: "Leveling",
+                        description: "Der stärkste Leveling-Build mit Dornen-Mechanik.",
+                        skills: ["Stachel", "Geistform", "Dornenharke", "Jagdinstinkt", "Tötender Biss", "Apex"],
+                        paragon: "Thorns Damage + Spirit Bond + Survivability",
+                        vitabloUrl: "https://vitablo.de/stachel-spiritborn-leveling-build/",
+                        skillTree: {
+                            id: "stachel",
+                            name: "Stachel",
+                            icon: "🌵",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Stachel",
+                            english: "Thorns",
+                            children: [
+                                { id: "geistform-stachel", name: "Geistform", icon: "👻", priority: 1, maxLevel: 5, german: "Geistform", english: "Spirit Form" },
+                                { id: "dornenharke-st", name: "Dornenharke", icon: "🌵", priority: 7, maxLevel: 3, german: "Dornenharke", english: "Thorn Scythe" },
+                                { id: "jagdinstinkt", name: "Jagdinstinkt", icon: "🎯", priority: 7, maxLevel: 5, german: "Jagdinstinkt", english: "Predatory Instinct" },
+                                { id: "toetender-biss", name: "Tötender Biss", icon: "🦷", priority: 12, maxLevel: 5, german: "Tötender Biss", english: "Killing Bite" },
+                                { id: "apex-st", name: "Apex", icon: "🦅", priority: 15, maxLevel: 5, german: "Apex", english: "Apex" }
+                            ]
+                        }
+                    },
+                    {
+                        id: "spiritborn-stachelsalve",
+                        name: "Stachelsalve (Thorn Volley)",
+                        tier: "S",
+                        hot: false,
+                        type: "Endgame",
+                        description: "Mächtiger Dornen-Build fürs Endgame mit hohem DoT-Schaden.",
+                        skills: ["Stachelsalve", "Dornenharke", "Geistform", "Apex", "Tötender Biss", "Überleben"],
+                        paragon: "Thorn Volley Damage + DoT Multipliers + Tankiness",
+                        vitabloUrl: "https://vitablo.de/stachelsalve-spiritborn-endgame-build/",
+                        skillTree: {
+                            id: "stachelsalve",
+                            name: "Stachelsalve",
+                            icon: "🌵",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Stachelsalve",
+                            english: "Thorn Volley",
+                            children: [
+                                { id: "dornenharke-sv", name: "Dornenharke", icon: "🌵", priority: 1, maxLevel: 5, german: "Dornenharke", english: "Thorn Scythe" },
+                                { id: "geistform-sv", name: "Geistform", icon: "👻", priority: 7, maxLevel: 3, german: "Geistform", english: "Spirit Form" },
+                                { id: "apex-sv", name: "Apex", icon: "🦅", priority: 7, maxLevel: 5, german: "Apex", english: "Apex" },
+                                { id: "toetender-biss-sv", name: "Tötender Biss", icon: "🦷", priority: 12, maxLevel: 5, german: "Tötender Biss", english: "Killing Bite" },
+                                { id: "ueberleben", name: "Überleben", icon: "❤️", priority: 15, maxLevel: 5, german: "Überleben", english: "Survival" }
+                            ]
+                        }
+                    },
+                    {
+                        id: "spiritborn-zerschmetternde-hand",
+                        name: "Zerschmetternde Hand (Crushing Hand)",
+                        tier: "A",
+                        hot: false,
+                        type: "Endgame",
+                        description: "Starker Single-Target Build mit Gorilla-Spirit.",
+                        skills: ["Zerschmetternde Hand", "Erdspieß", "Geistform", "Apex", "Standhaft", "Urtümliche Kraft"],
+                        paragon: "Crushing Hand Damage + Crowd Control + Survivability",
+                        vitabloUrl: "https://vitablo.de/zerschmetternde-hand-spiritborn-endgame-build/",
+                        skillTree: {
+                            id: "erdspiess",
+                            name: "Erdspieß",
+                            icon: "🌿",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Erdspieß",
+                            english: "Earthen Spike",
+                            children: [
+                                {
+                                    id: "ueberwaeltigung",
+                                    name: "Überwältigung",
+                                    icon: "💥",
+                                    priority: 1,
+                                    maxLevel: 5,
+                                    german: "Überwältigung",
+                                    english: "Overpower"
+                                },
+                                {
+                                    id: "seismische-verschiebung",
+                                    name: "Seismische Verschiebung",
+                                    icon: "🌋",
+                                    priority: 1,
+                                    maxLevel: 5,
+                                    german: "Seismische Verschiebung",
+                                    english: "Seismic Shift"
+                                },
+                                {
+                                    id: "steinsalve",
+                                    name: "Steinsalve",
+                                    icon: "🪨",
+                                    priority: 1,
+                                    maxLevel: 5,
+                                    german: "Steinsalve",
+                                    english: "Stone Volley"
+                                },
+                                {
+                                    id: "wachstumsgeschwindigkeit",
+                                    name: "Wachstumsgeschwindigkeit",
+                                    icon: "🌱",
+                                    priority: 7,
+                                    maxLevel: 3,
+                                    german: "Wachstumsgeschwindigkeit",
+                                    english: "Growth Speed"
+                                },
+                                {
+                                    id: "ruestung",
+                                    name: "Rüstung",
+                                    icon: "🛡️",
+                                    priority: 7,
+                                    maxLevel: 3,
+                                    german: "Rüstung",
+                                    english: "Armor"
+                                },
+                                {
+                                    id: "lebende-steine",
+                                    name: "Lebende Steine",
+                                    icon: "🗿",
+                                    priority: 7,
+                                    maxLevel: 1,
+                                    german: "Lebende Steine",
+                                    english: "Living Stones"
+                                },
+                                {
+                                    id: "irdenes-bollwerk",
+                                    name: "Irdenes Bollwerk",
+                                    icon: "🏰",
+                                    priority: 7,
+                                    maxLevel: 5,
+                                    german: "Irdenes Bollwerk",
+                                    english: "Earthen Bulwark"
+                                },
+                                {
+                                    id: "barrierebonus",
+                                    name: "Barrieredauer & -bonus",
+                                    icon: "🔷",
+                                    priority: 12,
+                                    maxLevel: 3,
+                                    german: "Barrieredauer & -bonus",
+                                    english: "Barrier Duration & Bonus"
+                                },
+                                {
+                                    id: "ueberwaeltigen",
+                                    name: "Überwältigen",
+                                    icon: "⚡",
+                                    priority: 12,
+                                    maxLevel: 3,
+                                    german: "Überwältigen",
+                                    english: "Overpower Chance"
+                                },
+                                {
+                                    id: "kalksteinbollwerk",
+                                    name: "Kalksteinbollwerk",
+                                    icon: "🧱",
+                                    priority: 12,
+                                    maxLevel: 3,
+                                    german: "Kalksteinbollwerk",
+                                    english: "Limestone Bulwark"
+                                },
+                                {
+                                    id: "zyklonruestung",
+                                    name: "Zyklonrüstung",
+                                    icon: "🌀",
+                                    priority: 12,
+                                    maxLevel: 5,
+                                    german: "Zyklonrüstung",
+                                    english: "Cyclone Armor"
+                                },
+                                {
+                                    id: "erhoehter-radius",
+                                    name: "Erhöhter Radius",
+                                    icon: "⭕",
+                                    priority: 15,
+                                    maxLevel: 3,
+                                    german: "Erhöhter Radius",
+                                    english: "Increased Radius"
+                                },
+                                {
+                                    id: "widerstand",
+                                    name: "Widerstand",
+                                    icon: "🔰",
+                                    priority: 15,
+                                    maxLevel: 3,
+                                    german: "Widerstand",
+                                    english: "Resistance"
+                                },
+                                {
+                                    id: "umkehrung",
+                                    name: "Umkehrung",
+                                    icon: "🔄",
+                                    priority: 15,
+                                    maxLevel: 1,
+                                    german: "Umkehrung",
+                                    english: "Reversal"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        id: "spiritborn-dornen",
+                        name: "Dornen (Thorns) Endgame",
+                        tier: "S",
+                        hot: false,
+                        type: "Endgame",
+                        description: "Der ultimative Dornen-Build fürs Endgame.",
+                        skills: ["Dornen", "Dornenharke", "Stachelsalve", "Geistform", "Apex", "Tötender Biss"],
+                        paragon: "Thorns Damage + Poison Synergy + Max Survivability",
+                        vitabloUrl: "https://vitablo.de/dornen-spiritborn-endgame-build/",
+                        skillTree: {
+                            id: "dornen",
+                            name: "Dornen",
+                            icon: "🌵",
+                            priority: 1,
+                            maxLevel: 15,
+                            german: "Dornen",
+                            english: "Thorns",
+                            children: [
+                                { id: "dornenharke-de", name: "Dornenharke", icon: "🌵", priority: 1, maxLevel: 5, german: "Dornenharke", english: "Thorn Scythe" },
+                                { id: "stachelsalve-de", name: "Stachelsalve", icon: "🌵", priority: 7, maxLevel: 3, german: "Stachelsalve", english: "Thorn Volley" },
+                                { id: "geistform-de", name: "Geistform", icon: "👻", priority: 7, maxLevel: 5, german: "Geistform", english: "Spirit Form" },
+                                { id: "apex-de", name: "Apex", icon: "🦅", priority: 12, maxLevel: 5, german: "Apex", english: "Apex" },
+                                { id: "toetender-biss-de", name: "Tötender Biss", icon: "🦷", priority: 15, maxLevel: 5, german: "Tötender Biss", english: "Killing Bite" }
+                            ]
+                        }
+                    }
+                ]
+            }
+        };
+
+        // Kriegspläne Daten (von vitablo.de)
+        const screenshots = [
+            "Screenshots/Screenshot 2026-05-23 221214.png",
+            "Screenshots/Screenshot 2026-05-23 221235.png",
+            "Screenshots/Screenshot 2026-05-23 221247.png",
+            "Screenshots/Screenshot 2026-05-23 221255.png",
+            "Screenshots/Screenshot 2026-05-23 221304.png",
+            "Screenshots/Screenshot 2026-05-23 221322.png",
+            "Screenshots/Screenshot 2026-05-23 221331.png"
+        ];
+
+        const warplansData = [
+            {
+                id: "fluesternder-baum",
+                name: "Flüsternder Baum",
+                icon: "🌳",
+                activity: "World Event",
+                screenshot: screenshots[0],
+                description: "Der Flüsternde Baum ist ein wiederkehrendes World Event mit wertvollen Belohnungen.",
+                sections: [
+                    {
+                        title: "Empfohlene Skillungen",
+                        items: [
+                            "<strong>Baum des Überflusses:</strong> Die 4. Auswahl ist sehr gut, da in den Flüsterbaum-Truhen viele starke Belohnungen enthalten sein können.",
+                            "<strong>Flüsternde Erkenntnis:</strong> Perfekt zum Leveln. Mehr Erfahrung ist unschlagbar.",
+                            "<strong>Gunst des Chaos:</strong> Für zusätzliche Chaos-Belohnungen.",
+                            "<strong>Glänzende Gunst:</strong> Die Chance auf prächtige Funken ist besser als die Alternativen am Rand.",
+                            "<strong>Die Verdorbenen Wurzeln:</strong> Sehr nützlich im Endgame für die neue Alptraum-Dungeon Farm-Methode."
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "alptraumdungeons",
+                name: "Alptraumdungeons",
+                icon: "👻",
+                activity: "Dungeon",
+                screenshot: screenshots[1],
+                description: "Alptraumdungeons sind eine der besten Loot-Quellen im Endgame.",
+                sections: [
+                    {
+                        title: "Empfohlene Skillungen",
+                        items: [
+                            "<strong>Erwachte Beute:</strong> Eine zusätzliche Belohnung am Ende, sodass du den Dungeon rushen kannst.",
+                            "<strong>Herausforderung:</strong> Für zusätzlichen Schwierigkeitsgrad und bessere Belohnungen.",
+                            "<strong>Erzfeind:</strong> Erzfeind-Mechanik für steigende Belohnungen.",
+                            "<strong>Furchtlose Hingabe:</strong> Zusammen mit Erzfeind sehr effektiv.",
+                            "<strong>Weitere Punkte im rechten Baum:</strong> Für die Chance aufs Goblin-Portal.",
+                            "<strong>Chance auf Eisbestie:</strong> Spezielle Belohnungen in Alptraum-Dungeons.",
+                            "<strong>Chance auf Astaroth Loot:</strong> Einzigartige Items von Astaroth."
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "hoellenflut",
+                name: "Höllenflut",
+                icon: "🔥",
+                activity: "Endgame",
+                screenshot: screenshots[2],
+                description: "Die Höllenflut bietet intensive Kämpfe mit hohen Belohnungen.",
+                sections: [
+                    {
+                        title: "Empfohlene Skillungen",
+                        items: [
+                            "<strong>Befleckte Schreine:</strong> Verstärkte Schreine für mehr Power.",
+                            "<strong>Verhasste Gegner:</strong> Identifiziere und fokussiere verhasste Ziele.",
+                            "<strong>Infernaler Ritus:</strong> Sehr wichtig, um Monsterstufe zu erhöhen und somit besseren Loot zu erhalten.",
+                            "<strong>Nachtangst:</strong> Zusätzliche Herausforderungen mit Belohnungen.",
+                            "<strong>Weitere Punkte im mittleren Strang:</strong> Für mehr Unterschlupfschlüssel und Bossmaterialien."
+                        ]
+                    },
+                    {
+                        title: "Tipps",
+                        items: [
+                            "Die Belohnungen von Preis der Hölle sind eher enttäuschend, daher gegen den rechten Strang entscheiden.",
+                            "In der Level-Phase könnte man auch Anomale Glut nehmen."
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "unterstadt-kurast",
+                name: "Unterstadt von Kurast",
+                icon: "🏛️",
+                activity: "Zone",
+                screenshot: screenshots[3],
+                description: "Die Unterstadt von Kurast ist eine wertvolle Farm-Zone mit Tribute-Mechanik.",
+                sections: [
+                    {
+                        title: "Empfohlene Skillungen",
+                        items: [
+                            "<strong>Jadene Erkenntnis:</strong> Mehr Erfahrung ist immer unschlagbar.",
+                            "<strong>Endloser Schwarm:</strong> Für mehr Gegner und Loot.",
+                            "<strong>Bedauernswerte Seelen:</strong> Zusätzliche Seelen für Tribute.",
+                            "<strong>Schmutz der Gosse:</strong> Streichbolde erhöhen die Belohnungen am Ende. Bei mythischen Tributen sehr wertvoll.",
+                            "<strong>Die letzten 3 Punkte im mittleren Baum:</strong> Für mehr Tribute der Kriegsausrüstung."
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "unterschlupf-bosse",
+                name: "Unterschlupf-Bosse",
+                icon: "👹",
+                activity: "Boss Content",
+                screenshot: screenshots[4],
+                description: "Unterschlupf-Bosse bieten die Chance auf einzigartige Belohnungen und mythische Items.",
+                sections: [
+                    {
+                        title: "Empfohlene Skillungen",
+                        items: [
+                            "<strong>Zwei und zwei:</strong> Mehr Erfahrung ist immer unschlagbar.",
+                            "<strong>Großer Erzfeind:</strong> Für die Erzfeind-Mechanik mit steigenden Belohnungen.",
+                            "<strong>Ultimativer Erzfeind:</strong> Die Erzfeind-Mechanik steigert sich immer mehr – mit immer besseren Belohnungen am Ende (auch mythische Items möglich).",
+                            "<strong>Erhöhte Monsterstufe:</strong> Für besseren Loot.",
+                            "<strong>Chance auf Eisbestie in Alptraum-Dungeons:</strong> Spezielle Belohnungen.",
+                            "<strong>Chance auf Astaroth Loot in Alptraum-Dungeons:</strong> Einzigartige Items."
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "hoellenhorden",
+                name: "Höllenhorden",
+                icon: "⚔️",
+                activity: "Horde Mode",
+                screenshot: screenshots[5],
+                description: "Der Höllenhorden-Modus ist kooperativ und bietet wertvolle Äther-Belohnungen.",
+                sections: [
+                    {
+                        title: "Empfohlene Skillungen",
+                        items: [
+                            "<strong>Methode und Wahnsinn:</strong> Steigert die Chance auf einen erfolgreichen Run enorm.",
+                            "<strong>Drohendes Unheil:</strong> Viel Bonus-Äther am Ende.",
+                            "<strong>Der schwarze Pakt:</strong> Ebenfalls hilfreich für einen erfolgreichen Run. Achte darauf, den ominösen Altar an einer sinnvollen Stelle zu benutzen.",
+                            "<strong>Anschließend rechter Baum:</strong> Für mehr Äther.",
+                            "<strong>Der 7. Punkt:</strong> Erhöht die Monsterstufe von Bartuc und dem grausamen Rat."
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "grube",
+                name: "Grube",
+                icon: "⏳",
+                activity: "Time Trial",
+                screenshot: screenshots[6],
+                description: "Die Grube ist ein Zeitrennen mit wertvollen Glyphenaufwertungen als Belohnung.",
+                sections: [
+                    {
+                        title: "Empfohlene Skillungen",
+                        items: [
+                            "<strong>Chorons Hast:</strong> Für schnellere Fortschrittskugeln.",
+                            "<strong>Herz aus Stein:</strong> Unbedingt als erstes skillen! Erhöht die Fortschrittskugeln, sodass du schneller fertig wirst und zusätzliche Glyphenaufwertungen erhältst.",
+                            "<strong>Chorons Segen:</strong> Zusätzliche Boni für die Grube.",
+                            "<strong>Grubenschlächter:</strong> Mehr Schaden in der Grube.",
+                            "<strong>Chorons Gunst:</strong> Weitere Verbesserungen.",
+                            "<strong>Chorons Seele:</strong> Noch mehr Bonus XP. Alternativ Chorons Fleisch für mehr Loot.",
+                            "<strong>Verdammte Diebe:</strong> Geben weitere Fortschrittskugeln."
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // localStorage laden
+        let savedData = JSON.parse(localStorage.getItem('d4Builds') || '{}');
+
+        // Extension-Status und Build-Daten
+        let extensionBuilds = null;
+        let extensionAvailable = false;
+
+        // Prüfen ob die Extension verfügbar ist und Daten laden
+        async function loadFromExtension() {
+            // Prüfen ob chrome API verfügbar ist
+            if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+                try {
+                    const result = await new Promise((resolve, reject) => {
+                        chrome.storage.local.get('vitabloBuilds', (data) => {
+                            if (chrome.runtime.lastError) {
+                                reject(chrome.runtime.lastError);
+                            } else {
+                                resolve(data);
+                            }
+                        });
+                    });
+
+                    if (result.vitabloBuilds && result.vitabloBuilds.builds) {
+                        extensionBuilds = result.vitabloBuilds.builds;
+                        extensionAvailable = true;
+                        mergeExtensionBuilds();
+                        showExtensionNotification();
+                    }
+                } catch (error) {
+                    console.log('Keine Extension-Daten verfügbar:', error);
+                }
+            }
+        }
+
+        // Erstelle einen Skill-Baum aus Extension-Skills mit Priority-Daten
+        function createSkillTreeFromExtension(skills, buildName) {
+            // Finde den Root-Skill (niedrigste Priority oder erster Skill)
+            const sortedSkills = [...skills].sort((a, b) => (a.priority || 99) - (b.priority || 99));
+            const rootSkill = sortedSkills[0];
+
+            if (!rootSkill) return null;
+
+            const skillTree = {
+                id: rootSkill.german?.toLowerCase().replace(/\s+/g, '-') || 'root',
+                name: rootSkill.german || rootSkill.name || 'Unknown',
+                icon: extractSkillIcon(rootSkill),
+                priority: rootSkill.priority || 1,
+                maxLevel: rootSkill.maxLevel || 15,
+                german: rootSkill.german || rootSkill.name || '',
+                english: rootSkill.english || '',
+                children: []
+            };
+
+            // Füge die restlichen Skills als Children hinzu
+            sortedSkills.slice(1).forEach(skill => {
+                skillTree.children.push({
+                    id: skill.german?.toLowerCase().replace(/\s+/g, '-') || Math.random().toString(36).substr(2, 9),
+                    name: skill.german || skill.name || 'Unknown',
+                    icon: extractSkillIcon(skill),
+                    priority: skill.priority || 1,
+                    maxLevel: skill.maxLevel || 15,
+                    german: skill.german || skill.name || '',
+                    english: skill.english || ''
+                });
+            });
+
+            return skillTree;
+        }
+
+        // Deutsche zu englische Skill-Namen Mapping
+        const skillNameMapping = {
+            // Spiritborn
+            'erdspieß': 'earth-spike',
+            'zer-schmetternde-hand': 'crushing-hand',
+            'stachelsalve': 'quill-volley',
+            'stachel': 'rock-splitter',
+            'uberwaeltigung': 'overpower',
+            'seismische-verschiebung': 'earth-spike',
+            'steinsalve': 'quill-volley',
+            'wachstumsgeschwindigkeit': 'vigorous',
+            'ruestung': 'protective',
+            'lebende-steine': 'earthen',
+            'irdenes-bollwerk': 'earthen-bulwark',
+            'barrierebonus': 'barrier',
+            'uberwaeltigen': 'overpower',
+            'kalksteinbollwerk': 'earthen-bulwark',
+            'zyklonruestung': 'cyclone-armor',
+            'erhoehter-radius': 'range',
+            'widerstand': 'resistance',
+            'umkehrung': 'reversal',
+            'toetender-biss': 'rake',
+            'uberleben': 'survival',
+
+            // Hexenmeister / Warlock
+            'grauensklauen': 'razor-claws',
+            'schattenblitz': 'shadow-bolt',
+            'daemonische-geschwindigkeit': 'demonic-speed',
+            'schattenform': 'shadow-form',
+            'todesfuhle': 'death-embrace',
+            'klingensturm': 'blade-storm',
+            'hoellenbruch': 'hell-rift',
+            'feuerregen': 'fire-rain',
+            'schutzgeist': 'guardian-spirit',
+            'inferno': 'inferno',
+            'phasenverschiebung': 'phase-shift',
+            'daemonenpakt': 'demon-pact',
+            'ausweiden': 'eviscerate',
+            'nahkampfmastery': 'melee-mastery',
+            'blutdurst': 'blood-thirst',
+            'todeshauch': 'death-breath',
+            'schleichen': 'stealth',
+            'mehrfachschlag': 'multi-strike',
+            'daemonenbeschworung': 'demon-summoning',
+            'diener-mastery': 'minion-mastery',
+            'daemonenjaeger': 'demon-hunter',
+            'hordenruf': 'horde-call',
+            'opferung': 'sacrifice',
+            'daemonenlord': 'demon-lord',
+
+            // Zauberin / Sorceress
+            'gefrorene-kugel': 'frozen-orb',
+            'eislanze': 'ice-spear',
+            'frostnova': 'frost-nova',
+            'eisruestung': 'ice-armor',
+            'teleport': 'teleport',
+            'blizzard': 'blizzard',
+            'comboblitze': 'charged-bolts',
+            'blitzfokus': 'lightning-focus',
+            'kettenblitz': 'chain-lightning',
+            'elektroschock': 'electro-shock',
+            'mana-schild': 'mana-shield',
+            'blitzschlag': 'lightning-strike',
+            'orbital-kugelblitz': 'ball-lightning',
+            'unwetter': 'storm',
+            'blitzmastery': 'lightning-mastery',
+            'uberladen': 'overcharge',
+            'bouncy-feuerball': 'fireball',
+            'feuerregen': 'fire-rain',
+            'flammenschlag': 'flame-slash',
+            'feuerruestung': 'fire-armor',
+            'meteor': 'meteor',
+
+            // Jägerin / Rogue
+            'tanz-der-messer': 'dance-of-knives',
+            'messerwerfen': 'knife-throw',
+            'schatten-schritt': 'shadow-step',
+            'ausweichen': 'evasion',
+            'giftwolke': 'poison-cloud',
+            'schattenmacht': 'shadow-power',
+            'sperrfeuer': 'barrage',
+            'pfeilhagel': 'arrow-volley',
+            'kugelfest': 'bulletproof',
+            'falle': 'trap',
+            'praezision': 'precision',
+
+            // Paladin
+            'richturteil': 'judgement',
+            'heiliger-schlag': 'holy-strike',
+            'schildwurf': 'shield-throw',
+            'fluegelschlag': 'wing-strike',
+            'heilige-aura': 'holy-aura',
+            'goettlicher-schutz': 'divine-protection',
+            'gesegneter-hammer': 'blessed-hammer',
+            'heiliger-zorn': 'holy-wrath',
+            'schild-des-glaubens': 'shield-of-faith',
+            'konzentration': 'concentration',
+
+            // Druide / Druid
+            'pulverisieren': 'pulverize',
+            'baergestalt': 'werebear',
+            'erdspalte': 'earth-rupture',
+            'tornado': 'tornado',
+            'griff': 'rake',
+            'natur-resistenz': 'nature-resistance',
+
+            // Barbar / Barbarian
+            'hand-des-allerhoechsten': 'hammer-of-the-ancients',
+            'kampfgeschrei': 'war-cry',
+            'sprunghieb': 'leap',
+            'wut': 'fury',
+            'unbesiegbar': 'unconquerable',
+            'raserei': 'frenzy',
+            'wirbelwind': 'whirlwind',
+            'blutrausch': 'blood-frenzy',
+            'waffenwechsel': 'weapon-swap',
+            'todeskuss': 'death-kiss',
+            'uberrennen': 'charge',
+            'kampfrausch': 'battle-rage',
+            'grimmige-tollkuehnheit': 'ferocity',
+            'stampfer': 'stomp',
+
+            // Totenbeschwörer / Necromancer
+            'skelett-erwecken': 'raise-skeleton',
+            'skelettmagie': 'skeletal-magic',
+            'knochenruestung': 'bone-armor',
+            'knochengeist': 'bone-spirit',
+            'golem-beschwoeren': 'raise-golem',
+            'leichenexplosion': 'corpse-explosion'
+        };
+
+        // Klasse zu Icon-Ordner Mapping
+        const classIconFolderMap = {
+            'hexenmeister': 'spiritborn',
+            'totenbeschwoerer': 'necromancer',
+            'zauberin': 'sorcerer',
+            'jaegerin': 'rogue',
+            'paladin': 'paladin',
+            'druide': 'druid',
+            'barbar': 'barbarian',
+            'spiritborn': 'spiritborn'
+        };
+
+        // Skill-Kategorie basierend auf Skill-Namen ermitteln
+        function getSkillCategory(skillName) {
+            const name = skillName.toLowerCase();
+            if (name.includes('volley') || name.includes('salve') || name.includes('quill')) return 'core';
+            if (name.includes('hand') || name.includes('claws') || name.includes('fist')) return 'core';
+            if (name.includes('spike') || name.includes('spieß')) return 'basic';
+            if (name.includes('orb') || name.includes('bolt') || name.includes('ball')) return 'core';
+            if (name.includes('nova') || name.includes('armor') || name.includes('shield')) return 'defensive';
+            if (name.includes('step') || name.includes('dash') || name.includes('leap')) return 'defensive';
+            if (name.includes('raven') || name.includes('wolf') || name.includes('bear')) return 'potency';
+            return 'basic';
+        }
+
+        // Deutscher Skill-Name zu Dateiname konvertieren
+        function germanToFilename(germanName) {
+            const normalized = germanName.toLowerCase()
+                .replace(/ä/g, 'ae')
+                .replace(/ö/g, 'oe')
+                .replace(/ü/g, 'ue')
+                .replace(/ß/g, 'ss')
+                .replace(/\s+/g, '-')
+                .replace(/[^a-z0-9-]/g, '');
+            return normalized;
+        }
+
+        // Skill-Icon-Pfad generieren
+        function getSkillIconPath(classKey, skillName, skillType = 'basic') {
+            const folder = classIconFolderMap[classKey] || classKey;
+            const filename = germanToFilename(skillName);
+            const basePath = `icons/diablo4_icon_pack_template/icons/${folder}`;
+
+            // Verschiedene Kategorien versuchen
+            const categories = ['core', 'basic', 'defensive', 'potency', 'ultimate', 'focus'];
+
+            for (const cat of categories) {
+                const path = `${basePath}/${cat}/${filename}.svg`;
+                return path; // Wir geben den Pfad zurück, das onerror im img-Tag handled das Fallback
+            }
+
+            return `${basePath}/basic/${filename}.svg`;
+        }
+
+        // Extrahiere ein Icon für den Skill (mit SVG-Fallback)
+        function getSkillIconWithFallback(classKey, skill) {
+            const svgPath = getSkillIconPath(classKey, skill.german || skill.name);
+
+            // Emoji-Fallback für verschiedene Skill-Typen
+            const emojiFallback = getEmojiForSkill(skill);
+
+            return {
+                svg: svgPath,
+                emoji: emojiFallback,
+                useSvg: true // Standardmäßig SVG versuchen
+            };
+        }
+
+        // Emoji-Fallback für Skills
+        function getEmojiForSkill(skill) {
+            const name = skill.german?.toLowerCase() || skill.name?.toLowerCase() || '';
+            const iconMap = {
+                'erdspieß': '🌿', 'earth': '🌿',
+                'uberwaeltigung': '💥', 'overpower': '💥',
+                'seismische': '🌋', 'seismic': '🌋',
+                'steinsalve': '🪨', 'stone': '🪨',
+                'raben': '🦅', 'raven': '🦅',
+                'giftranke': '☠️', 'poison': '☠️',
+                'wolfe': '🐺', 'wolv': '🐺',
+                'grizzly': '🐻', 'bear': '🐻',
+                'stachel': '🌵', 'thorn': '🌵',
+                'dornen': '🌵', 'thorns': '🌵',
+                'geist': '👻', 'spirit': '👻',
+                'feuer': '🔥', 'fire': '🔥',
+                'eis': '❄️', 'ice': '❄️',
+                'blitz': '⚡', 'lightning': '⚡',
+                'gift': '☠️', 'toxic': '☠️'
+            };
+
+            for (const [key, icon] of Object.entries(iconMap)) {
+                if (name.includes(key)) return icon;
+            }
+
+            return '⚔️';
+        }
+
+        // Extrahiere ein Icon für den Skill (Basierend auf Namen oder Standard) - Legacy
+        function extractSkillIcon(skill) {
+            return getEmojiForSkill(skill);
+        }
+
+        // Extension-Builds mit den statischen Daten zusammenführen
+        function mergeExtensionBuilds() {
+            if (!extensionBuilds || extensionBuilds.length === 0) return;
+
+            extensionBuilds.forEach(extBuild => {
+                // Versuche, den Build in den vorhandenen Daten zu finden
+                let found = false;
+
+                Object.entries(buildsData).forEach(([classKey, classData]) => {
+                    const existingBuild = classData.builds.find(b =>
+                        b.vitabloUrl === extBuild.url ||
+                        b.name.toLowerCase().includes(extBuild.name?.toLowerCase()) ||
+                        extBuild.name?.toLowerCase().includes(b.name.toLowerCase())
+                    );
+
+                    if (existingBuild) {
+                        // Erweitere den existierenden Build mit Extension-Daten
+                        if (extBuild.skills && extBuild.skills.length > 0) {
+                            existingBuild.extensionSkills = extBuild.skills;
+
+                            // Erstelle automatisch einen Skill-Baum wenn Priority-Daten vorhanden sind
+                            const skillsWithPriority = extBuild.skills.filter(s => s.priority);
+                            if (skillsWithPriority.length > 0 && !existingBuild.skillTree) {
+                                existingBuild.skillTree = createSkillTreeFromExtension(skillsWithPriority, existingBuild.name);
+                            }
+                        }
+                        if (extBuild.aspects) {
+                            existingBuild.aspects = extBuild.aspects;
+                        }
+                        if (extBuild.legendaryAspects) {
+                            existingBuild.legendaryAspects = extBuild.legendaryAspects;
+                        }
+                        if (extBuild.items) {
+                            existingBuild.items = extBuild.items;
+                        }
+                        if (extBuild.talisman) {
+                            existingBuild.talisman = extBuild.talisman;
+                        }
+                        if (extBuild.paragon) {
+                            existingBuild.extensionParagon = extBuild.paragon;
+                        }
+                        if (extBuild.soulbearer) {
+                            existingBuild.soulbearer = extBuild.soulbearer;
+                        }
+                        if (extBuild.mercenary) {
+                            existingBuild.mercenary = extBuild.mercenary;
+                        }
+                        existingBuild.fromExtension = true;
+                        found = true;
+                    }
+                });
+
+                // Wenn nicht gefunden, als neuen Build hinzufügen
+                if (!found && extBuild.name) {
+                    const classKey = mapClassToKey(extBuild.class);
+                    if (classKey && buildsData[classKey]) {
+                        buildsData[classKey].builds.push({
+                            id: `ext-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                            name: extBuild.name,
+                            tier: 'B',
+                            hot: false,
+                            type: 'Von Vitablo extrahiert',
+                            description: 'Automatisch von der Vitablo Extension extrahiert.',
+                            skills: extBuild.skills || [],
+                            vitabloUrl: extBuild.url,
+                            fromExtension: true,
+                            aspects: extBuild.aspects,
+                            legendaryAspects: extBuild.legendaryAspects,
+                            items: extBuild.items,
+                            talisman: extBuild.talisman,
+                            paragon: extBuild.paragon,
+                            soulbearer: extBuild.soulbearer,
+                            mercenary: extBuild.mercenary
+                        });
+                    }
+                }
+            });
+
+            // UI aktualisieren
+            renderClassGrid();
+            updateStats();
+        }
+
+        // Klassen-Namen von Extension auf unsere Keys mappen
+        function mapClassToKey(className) {
+            const mapping = {
+                'Warlock': 'hexenmeister',
+                'Hexenmeister': 'hexenmeister',
+                'Paladin': 'paladin',
+                'Barbarian': 'barbar',
+                'Barbar': 'barbar',
+                'Sorceress': 'zauberin',
+                'Zauberin': 'zauberin',
+                'Rogue': 'jaegerin',
+                'Jägerin': 'jaegerin',
+                'Druid': 'druide',
+                'Druide': 'druide',
+                'Necromancer': 'totenbeschwoerer',
+                'Totenbeschwörer': 'totenbeschwoerer',
+                'Spiritborn': 'spiritborn',
+                'Geistgeborener': 'spiritborn'
+            };
+            return mapping[className] || null;
+        }
+
+        // Extension-Status-Benachrichtigung
+        function showExtensionNotification() {
+            const container = document.querySelector('.container');
+            const notification = document.createElement('div');
+            notification.id = 'extension-notification';
+            notification.style.cssText = `
+                position: fixed;
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, #4CAF50, #45a049);
+                color: white;
+                padding: 12px 24px;
+                border-radius: 25px;
+                z-index: 10000;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                font-family: 'Cinzel', serif;
+                font-weight: 600;
+                animation: slideDown 0.5s ease;
+            `;
+            notification.innerHTML = `✅ ${extensionBuilds.length} Builds aus Vitablo Extension geladen!`;
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideDown {
+                    from { top: -50px; opacity: 0; }
+                    to { top: 10px; opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+
+            container.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideDown 0.5s ease reverse';
+                setTimeout(() => notification.remove(), 500);
+            }, 4000);
+        }
+
+        // Extension-Daten manuell neu laden
+        function reloadExtensionData() {
+            loadFromExtension().then(() => {
+                if (extensionAvailable) {
+                    alert(`${extensionBuilds.length} Builds aus der Extension geladen!`);
+                } else {
+                    alert('Keine Vitablo Extension gefunden. Installiere die Extension um Builds automatisch zu extrahieren.');
+                }
+            });
+        }
+
+        // UI initialisieren
+        function init() {
+            renderClassGrid();
+            renderWarplans();
+            updateStats();
+            setupEventListeners();
+
+            // Extension-Daten laden
+            loadFromExtension();
+
+            // Extension-Reload-Button zur Export-Sektion hinzufügen
+            const exportSection = document.querySelector('.export-section');
+            const reloadBtn = document.createElement('button');
+            reloadBtn.className = 'btn export-btn';
+            reloadBtn.innerHTML = '🔄 Extension neu laden';
+            reloadBtn.onclick = reloadExtensionData;
+            reloadBtn.id = 'reload-extension-btn';
+            reloadBtn.style.display = 'none'; // Wird angezeigt wenn Extension verfügbar
+            exportSection.appendChild(reloadBtn);
+        }
+
+        // Haupt-Tab wechseln
+        function switchMainTab(tab) {
+            document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+            if (tab === 'builds') {
+                document.querySelector('.main-tab:nth-child(1)').classList.add('active');
+                document.getElementById('tab-builds').classList.add('active');
+            } else {
+                document.querySelector('.main-tab:nth-child(2)').classList.add('active');
+                document.getElementById('tab-warplans').classList.add('active');
+            }
+        }
+
+        // Klassen-Grid rendern
+        function renderClassGrid() {
+            const grid = document.getElementById('class-grid');
+            grid.innerHTML = '';
+
+            Object.entries(buildsData).forEach(([key, classData]) => {
+                const card = document.createElement('div');
+                card.className = 'class-card';
+                card.dataset.class = key;
+
+                // Versuche, das Klassen-Icon zu laden
+                const iconHtml = getClassIconHtml(classData);
+
+                card.innerHTML = `
+                    <div class="icon">${iconHtml}</div>
+                    <h3>${classData.name}</h3>
+                    <div class="count">${classData.builds.length} Builds</div>
+                `;
+                card.onclick = () => showBuilds(key);
+                grid.appendChild(card);
+            });
+        }
+
+        // Hilfsfunktion für Klassen-Icons mit Bild-Loading
+        function getClassIconHtml(classData) {
+            if (classData.iconPath) {
+                return `<img src="${classData.iconPath}" alt="${classData.name}" class="class-icon-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><span style="display:none;">${classData.icon}</span>`;
+            }
+            return classData.icon;
+        }
+
+        // Kriegspläne rendern
+        function renderWarplans() {
+            const container = document.getElementById('warplans-container');
+            container.innerHTML = '';
+
+            warplansData.forEach((warplan, index) => {
+                const savedNote = savedData[`warplan-${warplan.id}`]?.note || '';
+
+                const card = document.createElement('div');
+                card.className = 'warplan-card';
+                card.innerHTML = `
+                    <div class="warplan-header">
+                        <div class="warplan-icon">${warplan.icon}</div>
+                        <div>
+                            <div class="warplan-title">${warplan.name}</div>
+                            <span class="activity-tag">${warplan.activity}</span>
+                        </div>
+                    </div>
+                    <p style="color: #aaa; margin-bottom: 15px;">${warplan.description}</p>
+
+                    <div class="screenshot-container">
+                        <img src="${warplan.screenshot}"
+                             alt="${warplan.name} Screenshot"
+                             class="screenshot-thumbnail"
+                             onclick="openLightbox(${index})">
+                        <div class="screenshot-label">🖼️ Klick für Vollbildansicht</div>
+                    </div>
+                    ${warplan.sections.map(section => `
+                        <div class="warplan-section">
+                            <h4>${section.title}</h4>
+                            <ul>
+                                ${section.items.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `).join('')}
+                    <div class="build-notes">
+                        <textarea id="note-warplan-${warplan.id}" placeholder="Deine eigenen Notizen zu diesem Kriegsplan...">${savedNote}</textarea>
+                    </div>
+                    <div class="build-actions">
+                        <button class="btn btn-save" onclick="saveWarplanNote('${warplan.id}')">💾 Notiz speichern</button>
+                        <span class="saved-indicator" id="saved-warplan-${warplan.id}" style="display: none;">✓ Gespeichert!</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Lightbox Funktionen
+        let currentLightboxIndex = 0;
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const counter = document.getElementById('lightbox-counter');
+
+            lightboxImage.src = screenshots[index];
+            counter.textContent = `${index + 1} / ${screenshots.length}`;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        function navigateLightbox(direction) {
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = screenshots.length - 1;
+            if (currentLightboxIndex >= screenshots.length) currentLightboxIndex = 0;
+
+            document.getElementById('lightbox-image').src = screenshots[currentLightboxIndex];
+            document.getElementById('lightbox-counter').textContent = `${currentLightboxIndex + 1} / ${screenshots.length}`;
+        }
+
+        // Lightbox mit ESC schließen und Pfeiltasten navigieren
+        document.addEventListener('keydown', function(e) {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigateLightbox(-1);
+            if (e.key === 'ArrowRight') navigateLightbox(1);
+        });
+
+        // Lightbox schließen wenn außerhalb des Bildes geklickt wird
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+
+        // Builds anzeigen
+        function showBuilds(classKey) {
+            document.querySelectorAll('.class-card').forEach(card => {
+                card.classList.toggle('active', card.dataset.class === classKey);
+            });
+
+            const classData = buildsData[classKey];
+            const container = document.getElementById('builds-container');
+
+            container.innerHTML = `
+                <div class="builds-section active">
+                    <h2 class="section-title">${classData.icon} ${classData.name} Builds</h2>
+                    <div id="builds-list"></div>
+                </div>
+            `;
+
+            renderBuilds(classKey);
+        }
+
+        // Build-Liste rendern
+        function renderBuilds(classKey) {
+            const classData = buildsData[classKey];
+            const list = document.getElementById('builds-list');
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const activeFilter = document.querySelector('.filter-tab.active').dataset.filter;
+
+            list.innerHTML = '';
+
+            classData.builds.forEach(build => {
+                if (searchTerm && !build.name.toLowerCase().includes(searchTerm)) return;
+                if (activeFilter === 's-tier' && build.tier !== 'S') return;
+                if (activeFilter === 'a-tier' && build.tier !== 'A') return;
+                if (activeFilter === 'hot' && !build.hot) return;
+
+                const savedNote = savedData[build.id]?.note || '';
+                const savedWarplan = savedData[build.id]?.warplan || '';
+
+                const buildEl = document.createElement('div');
+                buildEl.className = 'build-card';
+                buildEl.dataset.tier = build.tier;
+                buildEl.dataset.hot = build.hot;
+                buildEl.innerHTML = `
+                    <div class="build-header">
+                        <div class="build-title">
+                            ${build.hot ? '<span class="hot-badge">HOT</span>' : ''}
+                            ${build.name}
+                        </div>
+                        <div class="build-tier tier-${build.tier.toLowerCase()}">${build.tier}-Tier</div>
+                    </div>
+                    <div class="build-meta">
+                        <span>📋 ${build.type}</span>
+                        <span>🔗 <a href="${build.vitabloUrl}" target="_blank" class="vitalo-link">vitablo.de</a></span>
+                        <button class="btn btn-copy" onclick="copyBuildLink('${build.vitabloUrl}')">📋 Link kopieren</button>
+                    </div>
+                    <p style="color: #aaa; margin-bottom: 10px;">${build.description}</p>
+                    <button class="btn btn-expand" onclick="toggleBuild('${build.id}')">▼ Details anzeigen</button>
+                    <div class="build-content" id="content-${build.id}">
+                        ${build.skillTree ? `
+                        <div class="skill-tree-container">
+                            <div class="skill-tree-header">
+                                <h4>🌳 Skill-Baum</h4>
+                                <button class="skill-tree-toggle" id="skill-tree-toggle-${build.id}" onclick="toggleSkillTree('${build.id}')">🌳 Skill-Baum anzeigen</button>
+                            </div>
+                            <div class="skill-tree" id="skill-tree-${build.id}"></div>
+                        </div>
+                        ` : ''}
+                        <h4>⚔️ Skills</h4>
+                        <div class="skill-list">
+                            ${build.extensionSkills ?
+                                build.extensionSkills.map(skill => `
+                                    <div class="skill-item">
+                                        ${skill.imageUrl ? `<img src="${skill.imageUrl}" style="width:24px;height:24px;margin-right:5px;vertical-align:middle;">` : ''}
+                                        ${skill.german || skill.name}${skill.english ? `<br><small style="color:#888;">${skill.english}</small>` : ''}
+                                    </div>
+                                `).join('') :
+                                build.skills.map(skill => `<div class="skill-item">${skill}</div>`).join('')
+                            }
+                        </div>
+
+                        ${build.aspects || build.legendaryAspects ? `
+                        <h4>🔮 Aspekte</h4>
+                        <div class="skill-list">
+                            ${build.aspects ? build.aspects.map(a => `<div class="skill-item">${a.name}</div>`).join('') : ''}
+                            ${build.legendaryAspects ? build.legendaryAspects.map(a => `<div class="skill-item">⭐ ${a.name}</div>`).join('') : ''}
+                        </div>
+                        ` : ''}
+
+                        ${build.items ? `
+                        <h4>🎒 Items</h4>
+                        <div class="skill-list">
+                            ${build.items.map(item => `
+                                <div class="skill-item" style="border-left-color: ${
+                                    item.rarity === 'unique' ? '#ffaa00' :
+                                    item.rarity === 'mythic' ? '#ff00ff' :
+                                    item.rarity === 'legendary' ? '#ff6600' : '#5a0000'
+                                };">
+                                    ${item.name}
+                                </div>
+                            `).join('')}
+                        </div>
+                        ` : ''}
+
+                        ${build.talisman && (build.talisman.items || build.talisman.runes) ? `
+                        <h4>📿 Talisman & Runen</h4>
+                        <div class="skill-list">
+                            ${build.talisman.items ? build.talisman.items.map(t => `<div class="skill-item">${t}</div>`).join('') : ''}
+                            ${build.talisman.runes ? build.talisman.runes.map(r => `<div class="skill-item">🔷 ${r}</div>`).join('') : ''}
+                        </div>
+                        ` : ''}
+
+                        ${build.soulbearer && build.soulbearer.active ? `
+                        <h4>👻 Seelenträger</h4>
+                        <div class="skill-item">${build.soulbearer.name || 'Aktiv'}</div>
+                        ` : ''}
+
+                        ${build.mercenary && build.mercenary.active ? `
+                        <h4>🤝 Söldner</h4>
+                        <div class="skill-item">${build.mercenary.name || 'Aktiv'}</div>
+                        ${build.mercenary.skills ? `
+                        <div class="skill-list" style="margin-top:10px;">
+                            ${build.mercenary.skills.map(s => `<div class="skill-item">${s}</div>`).join('')}
+                        </div>
+                        ` : ''}
+                        ` : ''}
+
+                        <h4>📊 Paragon / Kriegsplan</h4>
+                        <div class="warplan-section">
+                            <p style="color: #888; margin-bottom: 10px; font-size: 0.9rem;">${build.paragon}</p>
+                            <textarea class="warplan-textarea" id="warplan-${build.id}" placeholder="Deine eigenen Kriegspläne hier notieren...">${savedWarplan}</textarea>
+                        </div>
+
+                        <h4>📝 Deine Notizen</h4>
+                        <div class="build-notes">
+                            <textarea id="note-${build.id}" placeholder="Tipps, Verbesserungen, Item-Notizen...">${savedNote}</textarea>
+                        </div>
+
+                        <div class="build-actions">
+                            <button class="btn btn-save" onclick="saveBuildData('${build.id}')">💾 Speichern</button>
+                            ${build.fromExtension ? '<span style="color:#4CAF50;font-size:0.75rem;margin-left:auto;">🔄 Von Extension</span>' : ''}
+                            <span class="saved-indicator" id="saved-${build.id}" style="display: none;">✓ Gespeichert!</span>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(buildEl);
+            });
+        }
+
+        // Build ein-/ausblenden
+        function toggleBuild(buildId) {
+            const content = document.getElementById(`content-${buildId}`);
+            const btn = content.previousElementSibling;
+
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                btn.textContent = '▼ Details anzeigen';
+            } else {
+                content.classList.add('expanded');
+                btn.textContent = '▲ Details ausblenden';
+
+                // Skill-Baum rendern wenn vorhanden
+                const activeClass = document.querySelector('.class-card.active');
+                if (activeClass) {
+                    const classKey = activeClass.dataset.class;
+                    const classData = buildsData[classKey];
+                    const build = classData.builds.find(b => b.id === buildId);
+                    if (build && build.skillTree) {
+                        setTimeout(() => {
+                            renderSkillTree(build.skillTree, `skill-tree-${buildId}`, classKey);
+                        }, 100);
+                    }
+                }
+            }
+        }
+
+        // Build-Daten speichern
+        function saveBuildData(buildId) {
+            const note = document.getElementById(`note-${buildId}`).value;
+            const warplan = document.getElementById(`warplan-${buildId}`).value;
+
+            if (!savedData[buildId]) {
+                savedData[buildId] = {};
+            }
+
+            savedData[buildId].note = note;
+            savedData[buildId].warplan = warplan;
+            savedData[buildId].updatedAt = new Date().toISOString();
+
+            localStorage.setItem('d4Builds', JSON.stringify(savedData));
+
+            const indicator = document.getElementById(`saved-${buildId}`);
+            indicator.style.display = 'inline';
+            setTimeout(() => {
+                indicator.style.display = 'none';
+            }, 2000);
+
+            updateStats();
+        }
+
+        // Kriegsplan-Notiz speichern
+        function saveWarplanNote(warplanId) {
+            const note = document.getElementById(`note-warplan-${warplanId}`).value;
+
+            if (!savedData[`warplan-${warplanId}`]) {
+                savedData[`warplan-${warplanId}`] = {};
+            }
+
+            savedData[`warplan-${warplanId}`].note = note;
+            savedData[`warplan-${warplanId}`].updatedAt = new Date().toISOString();
+
+            localStorage.setItem('d4Builds', JSON.stringify(savedData));
+
+            const indicator = document.getElementById(`saved-warplan-${warplanId}`);
+            indicator.style.display = 'inline';
+            setTimeout(() => {
+                indicator.style.display = 'none';
+            }, 2000);
+
+            updateStats();
+        }
+
+        // Skill-Baum rendern
+        function renderSkillTree(skillTree, containerId, classKey = 'spiritborn') {
+            if (!skillTree || !skillTree.children) return;
+
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            // Root-Node
+            const rootNode = createSkillNode(skillTree, true, classKey);
+            container.appendChild(rootNode);
+
+            // Child-Nodes gruppieren nach Priority
+            const grouped = {
+                early: skillTree.children.filter(s => s.priority <= 5),
+                mid: skillTree.children.filter(s => s.priority > 5 && s.priority <= 12),
+                late: skillTree.children.filter(s => s.priority > 12)
+            };
+
+            // Child-Nodes hinzufügen
+            skillTree.children.forEach(skill => {
+                const childNode = createSkillNode(skill, false, classKey);
+                container.appendChild(childNode);
+            });
+        }
+
+        function createSkillNode(skill, isRoot, classKey = 'spiritborn') {
+            const node = document.createElement('div');
+            node.className = `skill-node ${isRoot ? 'root-node' : 'child-node'}`;
+
+            // Priority-Klasse bestimmen
+            let priorityClass = 'priority-early';
+            if (skill.priority > 5 && skill.priority <= 12) priorityClass = 'priority-mid';
+            if (skill.priority > 12) priorityClass = 'priority-late';
+
+            // Icon mit SVG-Fallback generieren
+            const iconHtml = generateSkillIconHtml(classKey, skill);
+
+            node.innerHTML = `
+                <div class="skill-icon">${iconHtml}</div>
+                <div class="skill-info">
+                    <div class="skill-name">${skill.name}</div>
+                    ${skill.english ? `<div class="skill-name-english">${skill.english}</div>` : ''}
+                </div>
+                <div class="skill-level-badge">
+                    <div class="level-priority ${priorityClass}">${skill.priority}</div>
+                    ${skill.maxLevel ? `<div class="level-max">/${skill.maxLevel}</div>` : ''}
+                </div>
+            `;
+
+            // Click-Handler für Editor
+            node.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openSkillEditor(skill, isRoot);
+            });
+
+            // Hover-Tooltip
+            node.addEventListener('mouseenter', (e) => {
+                showSkillTooltip(e, skill);
+            });
+
+            node.addEventListener('mouseleave', () => {
+                hideSkillTooltip();
+            });
+
+            return node;
+        }
+
+        // Generiere Icon-HTML mit SVG-Fallback
+        function generateSkillIconHtml(classKey, skill) {
+            const emoji = getEmojiForSkill(skill);
+            const svgPath = getSkillIconPath(classKey, skill.german || skill.name);
+
+            return `<img src="${svgPath}" alt="${skill.name}" class="skill-icon-svg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><span style="display:none;">${emoji}</span>`;
+        }
+
+        function showSkillTooltip(e, skill) {
+            let tooltip = document.getElementById('skill-tree-tooltip');
+            if (!tooltip) {
+                tooltip = document.createElement('div');
+                tooltip.id = 'skill-tree-tooltip';
+                tooltip.className = 'skill-tree-tooltip';
+                document.body.appendChild(tooltip);
+            }
+
+            let priorityPhase = 'Early Game';
+            if (skill.priority > 5 && skill.priority <= 12) priorityPhase = 'Mid Game';
+            if (skill.priority > 12) priorityPhase = 'Late Game';
+
+            tooltip.innerHTML = `
+                <div class="tooltip-header">
+                    <div class="tooltip-icon">${skill.icon || '⚔️'}</div>
+                    <div>
+                        <div class="tooltip-title">${skill.name}</div>
+                        <div class="tooltip-subtitle">${skill.english || ''}</div>
+                    </div>
+                </div>
+                <div class="tooltip-info">
+                    <span class="tooltip-label">Priority Level:</span>
+                    <span class="tooltip-value">${skill.priority}</span>
+                    <span class="tooltip-label">Phase:</span>
+                    <span class="tooltip-value">${priorityPhase}</span>
+                    ${skill.maxLevel ? `
+                    <span class="tooltip-label">Max Level:</span>
+                    <span class="tooltip-value">${skill.maxLevel}</span>
+                    ` : ''}
+                </div>
+            `;
+
+            // Position
+            const rect = e.target.getBoundingClientRect();
+            tooltip.style.left = rect.right + 10 + 'px';
+            tooltip.style.top = rect.top + 'px';
+
+            tooltip.classList.add('active');
+        }
+
+        function hideSkillTooltip() {
+            const tooltip = document.getElementById('skill-tree-tooltip');
+            if (tooltip) {
+                tooltip.classList.remove('active');
+            }
+        }
+
+        // Skill-Baum umschalten
+        function toggleSkillTree(buildId) {
+            const tree = document.getElementById(`skill-tree-${buildId}`);
+            const btn = document.getElementById(`skill-tree-toggle-${buildId}`);
+
+            if (tree.classList.contains('active')) {
+                tree.classList.remove('active');
+                btn.textContent = '🌳 Skill-Baum anzeigen';
+            } else {
+                tree.classList.add('active');
+                btn.textContent = '🌳 Skill-Baum ausblenden';
+            }
+        }
+
+        // Skill-Editor öffnen
+        function openSkillEditor(skill, isRoot) {
+            const modal = document.getElementById('skill-editor-modal');
+            if (!modal) {
+                console.error('Skill-Editor Modal nicht gefunden!');
+                return;
+            }
+
+            document.getElementById('edit-skill-icon').value = skill.icon || '';
+            document.getElementById('edit-skill-name').value = skill.name || '';
+            document.getElementById('edit-skill-english').value = skill.english || '';
+            document.getElementById('edit-skill-priority').value = skill.priority || 1;
+            document.getElementById('edit-skill-maxLevel').value = skill.maxLevel || 15;
+
+            modal.classList.add('active');
+            modal.dataset.skillId = skill.id;
+            modal.dataset.isRoot = isRoot;
+        }
+
+        // Skill-Editor schließen
+        function closeSkillEditor() {
+            const modal = document.getElementById('skill-editor-modal');
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        // Skill-Editor speichern
+        function saveSkillEditor() {
+            const modal = document.getElementById('skill-editor-modal');
+            if (!modal) return;
+
+            const skillId = modal.dataset.skillId;
+            const isRoot = modal.dataset.isRoot === 'true';
+
+            const updatedSkill = {
+                id: skillId,
+                icon: document.getElementById('edit-skill-icon').value,
+                name: document.getElementById('edit-skill-name').value,
+                english: document.getElementById('edit-skill-english').value,
+                priority: parseInt(document.getElementById('edit-skill-priority').value),
+                maxLevel: parseInt(document.getElementById('edit-skill-maxLevel').value)
+            };
+
+            // In savedData speichern
+            if (!savedData['skill-edits']) {
+                savedData['skill-edits'] = {};
+            }
+            savedData['skill-edits'][skillId] = updatedSkill;
+
+            localStorage.setItem('d4Builds', JSON.stringify(savedData));
+
+            closeSkillEditor();
+
+            // Neu rendern
+            const activeClass = document.querySelector('.class-card.active');
+            if (activeClass) {
+                renderBuilds(activeClass.dataset.class);
+            }
+        }
+
+        // Quick-Priority setzen
+        function setPriority(priority) {
+            document.getElementById('edit-skill-priority').value = priority;
+        }
+
+        // Link kopieren
+        function copyBuildLink(url) {
+            navigator.clipboard.writeText(url).then(() => {
+                alert('Link in die Zwischenablage kopiert!');
+            });
+        }
+
+        // Statistiken aktualisieren
+        function updateStats() {
+            let totalBuilds = 0;
+            let sTierCount = 0;
+            let savedNotes = 0;
+
+            Object.values(buildsData).forEach(classData => {
+                classData.builds.forEach(build => {
+                    totalBuilds++;
+                    if (build.tier === 'S') sTierCount++;
+                });
+            });
+
+            // Kriegspläne mitzählen
+            totalBuilds += warplansData.length;
+
+            savedNotes = Object.values(savedData).filter(data => data.note).length;
+
+            document.getElementById('total-builds').textContent = totalBuilds;
+            document.getElementById('s-tier-count').textContent = sTierCount;
+            document.getElementById('saved-notes').textContent = savedNotes;
+        }
+
+        // Event Listener
+        function setupEventListeners() {
+            document.getElementById('search-input').addEventListener('input', () => {
+                const activeClass = document.querySelector('.class-card.active');
+                if (activeClass) {
+                    renderBuilds(activeClass.dataset.class);
+                }
+            });
+
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const activeClass = document.querySelector('.class-card.active');
+                    if (activeClass) {
+                        renderBuilds(activeClass.dataset.class);
+                    }
+                });
+            });
+        }
+
+        // Export
+        function exportData() {
+            const dataStr = JSON.stringify(savedData, null, 2);
+            const blob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `d4-builds-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+        }
+
+        // Import
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const imported = JSON.parse(event.target.result);
+                        savedData = {...savedData, ...imported};
+                        localStorage.setItem('d4Builds', JSON.stringify(savedData));
+                        alert('Daten erfolgreich importiert!');
+                        updateStats();
+                    } catch (err) {
+                        alert('Fehler beim Importieren der Datei.');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        // Clear
+        function clearData() {
+            if (confirm('Möchtest du wirklich alle gespeicherten Daten löschen?')) {
+                savedData = {};
+                localStorage.removeItem('d4Builds');
+                updateStats();
+                alert('Alle Daten gelöscht!');
+            }
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>
