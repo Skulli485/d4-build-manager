@@ -1,7 +1,9 @@
 [README.md](https://github.com/user-attachments/files/28183140/README.md)
 # ⚔️ D4 Build Manager
 
-Eine lokale Web-App zur Verwaltung von Diablo 4 Builds und Kriegsplänen basierend auf [vitablo.de](https://vitablo.de).
+> **⚠️ Quellenhinweis:** Alle in dieser App enthaltenen Informationen (Builds, Kriegspläne, Skillungen, etc.) stammen von [vitablo.de](https://vitablo.de). Dies ist ein privates Projekt zur besseren Übersicht und lokalen Verwaltung dieser Informationen.
+
+Eine lokale Web-App zur Verwaltung von Diablo 4 Builds und Kriegsplänen.
 
 ## 🎮 Features
 
