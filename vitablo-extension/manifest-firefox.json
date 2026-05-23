@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Vitablo D4 Build Extractor",
+  "version": "1.0.0",
+  "description": "Extrahiert D4 Build-Daten von Vitablo.de",
+
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Vitablo D4 Extractor"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://vitablo.de/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

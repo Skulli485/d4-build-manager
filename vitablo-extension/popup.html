@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitablo D4 Build Extractor</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 380px;
+      min-height: 450px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #eee;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .header h1 {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .header p {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      padding: 15px;
+      background: rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: #4CAF50;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      opacity: 0.7;
+      text-transform: uppercase;
+    }
+
+    .content {
+      padding: 15px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .build-list {
+      list-style: none;
+    }
+
+    .build-item {
+      background: rgba(255,255,255,0.05);
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .build-item:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: #667eea;
+    }
+
+    .build-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+
+    .build-class {
+      font-size: 12px;
+      color: #aaa;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .build-class .icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #667eea;
+    }
+
+    .build-actions {
+      margin-top: 8px;
+      display: flex;
+      gap: 5px;
+    }
+
+    .build-actions button {
+      padding: 4px 8px;
+      font-size: 11px;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .build-actions button:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .actions {
+      padding: 15px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .actions button {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 13px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .btn-danger {
+      background: #f44336;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #d32f2f;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 30px 20px;
+      color: #888;
+    }
+
+    .empty-state svg {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 15px;
+      opacity: 0.5;
+    }
+
+    .empty-state p {
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .empty-state a {
+      color: #667eea;
+      text-decoration: none;
+    }
+
+    .last-update {
+      padding: 10px 15px;
+      background: rgba(255,255,255,0.03);
+      text-align: center;
+      font-size: 11px;
+      color: #666;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.05);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🎮 Vitablo D4 Extractor</h1>
+    <p>Build-Daten automatisch extrahieren</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-value" id="build-count">0</div>
+      <div class="stat-label">Builds</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="class-count">0</div>
+      <div class="stat-label">Klassen</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="skill-count">0</div>
+      <div class="stat-label">Skills</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <ul class="build-list" id="build-list">
+      <!-- Builds werden hier dynamisch eingefügt -->
+    </ul>
+    <div class="empty-state" id="empty-state">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l4.59-4.58L18 11l-6 6z"/>
+      </svg>
+      <p>Noch keine Builds gespeichert!</p>
+      <p style="margin-top: 10px;">
+        Besuche <a href="https://vitablo.de/diablo-4-build/" target="_blank">vitablo.de</a>
+        und klicke auf den "Extrahieren" Button.
+      </p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-primary" id="open-manager">🚀 Build Manager</button>
+    <button class="btn-secondary" id="export-builds">📤 Export</button>
+    <button class="btn-secondary" id="import-builds">📥 Import</button>
+    <button class="btn-danger" id="clear-builds">🗑️ Löschen</button>
+  </div>
+
+  <div class="last-update" id="last-update">
+    Noch nie aktualisiert
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -34,6 +34,7 @@ Eine lokale Web-App zur Verwaltung von Diablo 4 Builds und Kriegsplänen.
 - 💾 Lokale Speicherung (localStorage)
 - 📤 Daten Export/Import
 - 🖼️ Screenshots mit Lightbox-Vollbildansicht
+- 🔌 **Chrome Extension für automatische Vitablo-Sync**
 
 ## 🚀 Installation & Nutzung
 
@@ -41,6 +42,29 @@ Eine lokale Web-App zur Verwaltung von Diablo 4 Builds und Kriegsplänen.
 1. Lade die Datei `d4-build-manager.html` herunter
 2. Stelle sicher, dass der `Screenshots/` Ordner im gleichen Verzeichnis liegt
 3. Öffne die HTML-Datei in deinem Browser (Chrome, Firefox, Edge)
+
+### 🔌 Chrome Extension (Optional)
+Mit der Vitablo D4 Build Extractor Extension kannst du Builds automatisch von vitablo.de importieren:
+
+**Installation:**
+1. Öffne Chrome → `chrome://extensions/`
+2. Aktiviere "Entwicklermodus"
+3. Klicke "Entpackte Extension laden"
+4. Wähle den `vitablo-extension/` Ordner
+
+**Verwendung:**
+1. Öffne [vitablo.de/diablo-4-build/](https://vitablo.de/diablo-4-build/)
+2. Besuche einen Build
+3. Klicke auf "📥 Build extrahieren"
+4. Öffne den D4 Build Manager - die Daten sind automatisch da!
+
+Die Extension extrahiert:
+- Skills (deutsch + englisch)
+- Aspekte (ordinär + legendär)
+- Items mit Seltenheit
+- Paragon-Daten
+- Talisman & Runen
+- Seelenträger & Söldner
 
 ### Online Hosting
 Diese App kann kostenlos auf folgenden Plattformen gehostet werden:

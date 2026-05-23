@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Vitablo D4 Build Extractor",
+  "version": "1.0.0",
+  "description": "Extrahiert D4 Build-Daten von Vitablo.de für den D4 Build Manager",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://vitablo.de/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://vitablo.de/diablo-4-build/*", "https://vitablo.de/diablo-4-guide/kriegsplaene/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["content.js"],
+      "matches": ["https://vitablo.de/*"]
+    }
+  ]
+}

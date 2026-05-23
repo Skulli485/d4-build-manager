@@ -1571,12 +1571,205 @@
         // localStorage laden
         let savedData = JSON.parse(localStorage.getItem('d4Builds') || '{}');
 
+        // Extension-Status und Build-Daten
+        let extensionBuilds = null;
+        let extensionAvailable = false;
+
+        // Prüfen ob die Extension verfügbar ist und Daten laden
+        async function loadFromExtension() {
+            // Prüfen ob chrome API verfügbar ist
+            if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+                try {
+                    const result = await new Promise((resolve, reject) => {
+                        chrome.storage.local.get('vitabloBuilds', (data) => {
+                            if (chrome.runtime.lastError) {
+                                reject(chrome.runtime.lastError);
+                            } else {
+                                resolve(data);
+                            }
+                        });
+                    });
+
+                    if (result.vitabloBuilds && result.vitabloBuilds.builds) {
+                        extensionBuilds = result.vitabloBuilds.builds;
+                        extensionAvailable = true;
+                        mergeExtensionBuilds();
+                        showExtensionNotification();
+                    }
+                } catch (error) {
+                    console.log('Keine Extension-Daten verfügbar:', error);
+                }
+            }
+        }
+
+        // Extension-Builds mit den statischen Daten zusammenführen
+        function mergeExtensionBuilds() {
+            if (!extensionBuilds || extensionBuilds.length === 0) return;
+
+            extensionBuilds.forEach(extBuild => {
+                // Versuche, den Build in den vorhandenen Daten zu finden
+                let found = false;
+
+                Object.entries(buildsData).forEach(([classKey, classData]) => {
+                    const existingBuild = classData.builds.find(b =>
+                        b.vitabloUrl === extBuild.url ||
+                        b.name.toLowerCase().includes(extBuild.name?.toLowerCase()) ||
+                        extBuild.name?.toLowerCase().includes(b.name.toLowerCase())
+                    );
+
+                    if (existingBuild) {
+                        // Erweitere den existierenden Build mit Extension-Daten
+                        if (extBuild.skills && extBuild.skills.length > 0) {
+                            existingBuild.extensionSkills = extBuild.skills;
+                        }
+                        if (extBuild.aspects) {
+                            existingBuild.aspects = extBuild.aspects;
+                        }
+                        if (extBuild.legendaryAspects) {
+                            existingBuild.legendaryAspects = extBuild.legendaryAspects;
+                        }
+                        if (extBuild.items) {
+                            existingBuild.items = extBuild.items;
+                        }
+                        if (extBuild.talisman) {
+                            existingBuild.talisman = extBuild.talisman;
+                        }
+                        if (extBuild.paragon) {
+                            existingBuild.extensionParagon = extBuild.paragon;
+                        }
+                        if (extBuild.soulbearer) {
+                            existingBuild.soulbearer = extBuild.soulbearer;
+                        }
+                        if (extBuild.mercenary) {
+                            existingBuild.mercenary = extBuild.mercenary;
+                        }
+                        existingBuild.fromExtension = true;
+                        found = true;
+                    }
+                });
+
+                // Wenn nicht gefunden, als neuen Build hinzufügen
+                if (!found && extBuild.name) {
+                    const classKey = mapClassToKey(extBuild.class);
+                    if (classKey && buildsData[classKey]) {
+                        buildsData[classKey].builds.push({
+                            id: `ext-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                            name: extBuild.name,
+                            tier: 'B',
+                            hot: false,
+                            type: 'Von Vitablo extrahiert',
+                            description: 'Automatisch von der Vitablo Extension extrahiert.',
+                            skills: extBuild.skills || [],
+                            vitabloUrl: extBuild.url,
+                            fromExtension: true,
+                            aspects: extBuild.aspects,
+                            legendaryAspects: extBuild.legendaryAspects,
+                            items: extBuild.items,
+                            talisman: extBuild.talisman,
+                            paragon: extBuild.paragon,
+                            soulbearer: extBuild.soulbearer,
+                            mercenary: extBuild.mercenary
+                        });
+                    }
+                }
+            });
+
+            // UI aktualisieren
+            renderClassGrid();
+            updateStats();
+        }
+
+        // Klassen-Namen von Extension auf unsere Keys mappen
+        function mapClassToKey(className) {
+            const mapping = {
+                'Warlock': 'hexenmeister',
+                'Hexenmeister': 'hexenmeister',
+                'Paladin': 'paladin',
+                'Barbarian': 'barbar',
+                'Barbar': 'barbar',
+                'Sorceress': 'zauberin',
+                'Zauberin': 'zauberin',
+                'Rogue': 'jaegerin',
+                'Jägerin': 'jaegerin',
+                'Druid': 'druide',
+                'Druide': 'druide',
+                'Necromancer': 'totenbeschwoerer',
+                'Totenbeschwörer': 'totenbeschwoerer',
+                'Spiritborn': 'spiritborn',
+                'Geistgeborener': 'spiritborn'
+            };
+            return mapping[className] || null;
+        }
+
+        // Extension-Status-Benachrichtigung
+        function showExtensionNotification() {
+            const container = document.querySelector('.container');
+            const notification = document.createElement('div');
+            notification.id = 'extension-notification';
+            notification.style.cssText = `
+                position: fixed;
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, #4CAF50, #45a049);
+                color: white;
+                padding: 12px 24px;
+                border-radius: 25px;
+                z-index: 10000;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                font-family: 'Cinzel', serif;
+                font-weight: 600;
+                animation: slideDown 0.5s ease;
+            `;
+            notification.innerHTML = `✅ ${extensionBuilds.length} Builds aus Vitablo Extension geladen!`;
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideDown {
+                    from { top: -50px; opacity: 0; }
+                    to { top: 10px; opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+
+            container.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideDown 0.5s ease reverse';
+                setTimeout(() => notification.remove(), 500);
+            }, 4000);
+        }
+
+        // Extension-Daten manuell neu laden
+        function reloadExtensionData() {
+            loadFromExtension().then(() => {
+                if (extensionAvailable) {
+                    alert(`${extensionBuilds.length} Builds aus der Extension geladen!`);
+                } else {
+                    alert('Keine Vitablo Extension gefunden. Installiere die Extension um Builds automatisch zu extrahieren.');
+                }
+            });
+        }
+
         // UI initialisieren
         function init() {
             renderClassGrid();
             renderWarplans();
             updateStats();
             setupEventListeners();
+
+            // Extension-Daten laden
+            loadFromExtension();
+
+            // Extension-Reload-Button zur Export-Sektion hinzufügen
+            const exportSection = document.querySelector('.export-section');
+            const reloadBtn = document.createElement('button');
+            reloadBtn.className = 'btn export-btn';
+            reloadBtn.innerHTML = '🔄 Extension neu laden';
+            reloadBtn.onclick = reloadExtensionData;
+            reloadBtn.id = 'reload-extension-btn';
+            reloadBtn.style.display = 'none'; // Wird angezeigt wenn Extension verfügbar
+            exportSection.appendChild(reloadBtn);
         }
 
         // Haupt-Tab wechseln
@@ -1760,8 +1953,62 @@
                     <div class="build-content" id="content-${build.id}">
                         <h4>⚔️ Skills</h4>
                         <div class="skill-list">
-                            ${build.skills.map(skill => `<div class="skill-item">${skill}</div>`).join('')}
+                            ${build.extensionSkills ?
+                                build.extensionSkills.map(skill => `
+                                    <div class="skill-item">
+                                        ${skill.imageUrl ? `<img src="${skill.imageUrl}" style="width:24px;height:24px;margin-right:5px;vertical-align:middle;">` : ''}
+                                        ${skill.german || skill.name}${skill.english ? `<br><small style="color:#888;">${skill.english}</small>` : ''}
+                                    </div>
+                                `).join('') :
+                                build.skills.map(skill => `<div class="skill-item">${skill}</div>`).join('')
+                            }
                         </div>
+
+                        ${build.aspects || build.legendaryAspects ? `
+                        <h4>🔮 Aspekte</h4>
+                        <div class="skill-list">
+                            ${build.aspects ? build.aspects.map(a => `<div class="skill-item">${a.name}</div>`).join('') : ''}
+                            ${build.legendaryAspects ? build.legendaryAspects.map(a => `<div class="skill-item">⭐ ${a.name}</div>`).join('') : ''}
+                        </div>
+                        ` : ''}
+
+                        ${build.items ? `
+                        <h4>🎒 Items</h4>
+                        <div class="skill-list">
+                            ${build.items.map(item => `
+                                <div class="skill-item" style="border-left-color: ${
+                                    item.rarity === 'unique' ? '#ffaa00' :
+                                    item.rarity === 'mythic' ? '#ff00ff' :
+                                    item.rarity === 'legendary' ? '#ff6600' : '#5a0000'
+                                };">
+                                    ${item.name}
+                                </div>
+                            `).join('')}
+                        </div>
+                        ` : ''}
+
+                        ${build.talisman && (build.talisman.items || build.talisman.runes) ? `
+                        <h4>📿 Talisman & Runen</h4>
+                        <div class="skill-list">
+                            ${build.talisman.items ? build.talisman.items.map(t => `<div class="skill-item">${t}</div>`).join('') : ''}
+                            ${build.talisman.runes ? build.talisman.runes.map(r => `<div class="skill-item">🔷 ${r}</div>`).join('') : ''}
+                        </div>
+                        ` : ''}
+
+                        ${build.soulbearer && build.soulbearer.active ? `
+                        <h4>👻 Seelenträger</h4>
+                        <div class="skill-item">${build.soulbearer.name || 'Aktiv'}</div>
+                        ` : ''}
+
+                        ${build.mercenary && build.mercenary.active ? `
+                        <h4>🤝 Söldner</h4>
+                        <div class="skill-item">${build.mercenary.name || 'Aktiv'}</div>
+                        ${build.mercenary.skills ? `
+                        <div class="skill-list" style="margin-top:10px;">
+                            ${build.mercenary.skills.map(s => `<div class="skill-item">${s}</div>`).join('')}
+                        </div>
+                        ` : ''}
+                        ` : ''}
 
                         <h4>📊 Paragon / Kriegsplan</h4>
                         <div class="warplan-section">
@@ -1776,6 +2023,7 @@
 
                         <div class="build-actions">
                             <button class="btn btn-save" onclick="saveBuildData('${build.id}')">💾 Speichern</button>
+                            ${build.fromExtension ? '<span style="color:#4CAF50;font-size:0.75rem;margin-left:auto;">🔄 Von Extension</span>' : ''}
                             <span class="saved-indicator" id="saved-${build.id}" style="display: none;">✓ Gespeichert!</span>
                         </div>
                     </div>

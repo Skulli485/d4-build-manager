@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="128" height="128" rx="20" fill="url(#bg)"/>
+
+  <!-- D4 Logo Style -->
+  <g transform="translate(64, 64)">
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="40" fill="none" stroke="#ff3300" stroke-width="4"/>
+    <circle cx="0" cy="0" r="32" fill="none" stroke="#ff3300" stroke-width="2" opacity="0.6"/>
+
+    <!-- Center symbol - Diablo style horns -->
+    <path d="M-15,-10 Q-25,0 -15,10 Q0,20 15,10 Q25,0 15,-10 Q0,-20 -15,-10" fill="#ff3300"/>
+    <path d="M-10,-5 L0,5 L10,-5" fill="none" stroke="#1a1a2e" stroke-width="3"/>
+    <circle cx="0" cy="0" r="8" fill="#1a1a2e"/>
+    <circle cx="0" cy="0" r="4" fill="#ff3300"/>
+
+    <!-- Horns -->
+    <path d="M-35,-20 Q-20,-10 -25,0" fill="none" stroke="#ff3300" stroke-width="4" stroke-linecap="round"/>
+    <path d="M35,-20 Q20,-10 25,0" fill="none" stroke="#ff3300" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Fire effect -->
+    <g opacity="0.8">
+      <path d="M-5,25 Q0,15 5,25 Q0,30 -5,25" fill="#ff6600"/>
+      <path d="M-12,22 Q-7,12 -2,22 Q-7,27 -12,22" fill="#ff4400"/>
+      <path d="M2,22 Q7,12 12,22 Q7,27 2,22" fill="#ff4400"/>
+    </g>
+  </g>
+
+  <!-- "V" for Vitablo -->
+  <text x="64" y="115" text-anchor="middle" font-family="serif" font-size="24" font-weight="bold" fill="#ffffff" opacity="0.9">V</text>
+</svg>
