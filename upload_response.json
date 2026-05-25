@@ -1,0 +1,24 @@
+{
+    "slug": "golden-huckle-ztp9",
+    "siteUrl": "https://golden-huckle-ztp9.here.now/",
+    "status": "pending",
+    "isLive": false,
+    "requiresFinalize": true,
+    "note": "A new version is pending. The current live version (if any) stays live until you upload all files and POST upload.finalizeUrl with {\"versionId\":\"...\"}.",
+    "upload": {
+        "versionId": "01KSBKX5JWNDK9W88P2R6NNJQD",
+        "uploads": [
+            {
+                "path": "index.html",
+                "method": "PUT",
+                "url": "https://263414d00e3a6cea35ccd465d3093cb3.r2.cloudflarestorage.com/herenow/acct/5fa9748a-ff32-4110-9ee2-85d53f789726/golden-huckle-ztp9/v/01KSBKX5JWNDK9W88P2R6NNJQD/index.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=d7fdf6383ddf00248853e04458a5553b%2F20260523%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260523T234940Z&X-Amz-Expires=3600&X-Amz-Signature=80f3fdfee636356c8fd48f535a81a1be25b1fe8425c592c17e16d84b8c4e16f0&X-Amz-SignedHeaders=host&x-amz-checksum-crc32=AAAAAA%3D%3D&x-amz-sdk-checksum-algorithm=CRC32&x-id=PutObject",
+                "headers": {
+                    "Content-Type": "text/html"
+                }
+            }
+        ],
+        "skipped": [],
+        "finalizeUrl": "https://here.now/api/v1/publish/golden-huckle-ztp9/finalize",
+        "expiresInSeconds": 3600
+    }
+}

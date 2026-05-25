@@ -4,7 +4,15 @@
       "Bash(curl -L https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-windows-amd64.exe -o /c/Users/Mandy/AppData/Local/Programs/jq.exe)",
       "Bash(chmod +x /c/Users/Mandy/AppData/Local/Programs/jq.exe)",
       "Bash(/c/Users/Mandy/AppData/Local/Programs/jq.exe --version)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git config *)",
+      "Bash(start \"\" \"c:\\\\Users\\\\Mandy\\\\Documents\\\\d4-build-manager\\\\d4-build-manager.html\")",
+      "Read(//tmp/**)",
+      "Bash(curl -v -X POST https://here.now/api/v1/publish/__TRACKED_VAR__ -H 'authorization: Bearer __TRACKED_VAR__' -H 'content-type: application/json' -H 'x-herenow-client: claude-code/publish' -d @/tmp/manifest.json)",
+      "Bash(cd \"C:/Users/Mandy/.claude/skills/here-now\" && grep -A5 -B5 \"PUT\\\\|POST\" scripts/publish.sh | grep -A10 \"METHOD=\")",
+      "Read(//c/Users/Mandy/.agents/skills/here-now/**)",
+      "Bash(python3)"
     ]
   }
 }
